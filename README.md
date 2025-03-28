@@ -1,2 +1,2 @@
 # cm.core.lang
-namspace core.lang
+namespace core.lang
