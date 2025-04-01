@@ -1,0 +1,26 @@
+python # type: ignore
+
+""" 
+
+
+
+"""
+
+import sys
+import os
+
+thisFile = __file__
+
+if sys.platform == "win32" and '\\' in thisFile:
+    thisFile = thisFile.replace('\\', '/')
+
+while '//' in thisFile:
+    thisFile = thisFile.replace('//', '/')
+
+path = '/'.join(thisFile.split('/')[:-2])
+
+sys.path.append(path)
+
+import Main
+
+Main.registration()

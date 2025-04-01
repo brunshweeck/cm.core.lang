@@ -211,7 +211,7 @@ function(CreateStaticLibrary libraryName libraryFlags)
     CreateLibrary(${libraryName} SHARED ${libraryFlags} ${ARGN})
 endfunction()
 
-function(CreateTest classToTest testDir namespace dependencies)
+function(CreateTestFor classToTest testDir namespace)
     if(NOT EXISTS ${testDir})
         message(WARNING "Creating of test location")
         make_directory(${testDir})
@@ -222,6 +222,75 @@ function(CreateTest classToTest testDir namespace dependencies)
             "
 //
 // This File has been Created by CMake For Testing of Class ${classToTest}
+// Please include this file in your test into api/Main.cpp to execute it
+//
+
+#pragma once
+
+#include <core/lang/Object.h>
+#include <api/Test.h>
+#include <gtest/gtest.h>
+
+using namespace core::lang;
+
+namespace ${namespace} {
+
+    using namespace core::lang;
+    using namespace core::util;
+    using namespace core::regex;
+    using namespace core::text;
+    using namespace core::time;
+    using namespace core::function;
+    using namespace core::concurrent;
+
+    /**
+     * The class defined to test ${classToTest} class
+     */
+    class ${classToTest}Test: public testing::Test, public Object {
+
+        void $before() final {
+            // code...
+        }
+
+        
+        void $after() final {
+            // code...
+        }
+
+    public:
+
+        void $test() override = 0;
+    };
+
+
+    TEST_F(${classToTest}, test1) {
+        // code...
+    }
+
+
+    TEST_F(${classToTest}, test2) {
+        // code...
+    }
+}
+")
+    endif()
+
+    write_file(api/Main.cpp "#include \"${testDir}/${classToTest}Test.h\"" APPEND)
+
+endfunction()
+
+function(CreateTest classToTest testDir namespace testFlags dependencies)
+if(NOT EXISTS ${testDir})
+        message(WARNING "Creating of test location")
+        make_directory(${testDir})
+    endif()
+
+    if(NOT EXISTS "${testDir}/${classToTest}Test.h")
+        write_file("${testDir}/${classToTest}Test.h"
+            "
+//
+// This File has been Created by CMake For Testing of Class ${classToTest}
+// Please include this file in your test main source file
 //
 
 #pragma once
@@ -229,35 +298,75 @@ function(CreateTest classToTest testDir namespace dependencies)
 #include <core/lang/Object.h>
 #include <gtest/gtest.h>
 
-using namespace core::lang;
-
 namespace ${namespace} {
 
     /**
-    class ${classToTest}Test: public testing::Test {
+     * The class defined to test ${classToTest} class
+     */
+    class ${classToTest}Test: public testing::Test, public core::Object {
 
-        $before()
-        void SetUp() final {
-            // code...
-        }
+        void $before() final;
 
-        $after()
-        void TearDown() {
-            // code...
-        }
+        void $after();
 
     public:
 
         $test()
         void TestBody() override = 0;
     };
+}
+")
+    endif()
+
+    if(NOT EXISTS "${testDir}/${classToTest}Test.cpp")
+        write_file("${testDir}/${classToTest}Test.cpp"
+            "
+//
+// This File has been Created by CMake For Testing of Class ${classToTest}
+// Please include this file in your test main source file
+//
+
+#pragma once
+
+#include "${classToTest}Test.h"
+
+#include <core/lang/Object.h>
+#include <api/Test.h>
+#include <gtest/gtest.h>
 
 
-    TEST_F(${classToTest}, testSubClass) {
+namespace ${namespace} {
+
+    using namespace core::lang;
+    using namespace core::util;
+    using namespace core::regex;
+    using namespace core::text;
+    using namespace core::time;
+    using namespace core::function;
+    using namespace core::concurrent;
+
+    void ${classToTest}Test::$before() {
+        // code...
+    }
+
+    void ${classToTest}Test::$after() {
+        // code...
+    }
+
+
+    TEST_F(${classToTest}, test1) {
+        // code...
+    }
+
+
+    TEST_F(${classToTest}, test2) {
         // code...
     }
 }
 ")
     endif()
 
+    CreateExe(${classToTest}Test ${testFlags})
+
+    
 endfunction()

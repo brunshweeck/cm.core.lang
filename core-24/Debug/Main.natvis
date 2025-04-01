@@ -1,0 +1,88 @@
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+<Type Name="Linear" Inheritable='true'>
+    <DisplayString Optional='true' Condition=''> {value} </DisplayString>
+    <DisplayString Optional='true' Condition=''> {value, s} </DisplayString> <!-- ansi string -->
+    <DisplayString Optional='true' Condition=''> {value, su} </DisplayString> <!-- unicode string -->
+    <DisplayString Optional='true'> {value} </DisplayString>
+    <AlternativeType Name="OtherLinear" Inheritable="true"/>
+</Type>
+
+<Type Name="Expensible" Inheritable='true'>
+    <DisplayString Optional='true'> {value} </DisplayString>
+    <AlternativeType Name="OtherExpensible" Inheritable="true"/>
+    <Expand HideRawView='true'>
+        <Item Name='field_1' Optional='true'>this.field_1</Item>
+        <Item Name='field_2' Optional='true' Condition=''>this.field_2</Item>
+    </Expand>
+</Type>
+
+<Type Name="Array" Inheritable='true'>
+    <DisplayString Optional='true'> size={this.size} </DisplayString>
+    <AlternativeType Name="OtherType" Inheritable="true"/>
+    <Expand HideRawView='true'>
+        <ArrayItems Optional='true' Condition=''>
+            <Size>this.size</Size>
+            <ValuePointer>this.ptr</Size>
+        </ArrayItems>
+    </Expand>
+</Type>
+
+<Type Name="List" Inheritable='true'>
+    <DisplayString Optional='true'> size={this.size} </DisplayString>
+    <AlternativeType Name="OtherType" Inheritable="true"/>
+    <Expand HideRawView='true'>
+        <IndexListItems Optional='true' Condition=''>
+            <Size>this.size</Size>
+            <ValueNode Condition=''>this.ptr[$i]</Size>
+        </IndexListItems>
+    </Expand>
+</Type>
+
+<Type Name="Map" Inheritable='true'>
+    <DisplayString Optional='true'> size={this.size} </DisplayString>
+    <AlternativeType Name="OtherType" Inheritable="true"/>
+    <Expand HideRawView='true'>
+        <TreeItems Optional='true' Condition=''>
+            <HeadPointer Condition = ''>this.root</HeadPointer>
+            <LeftPointer Condition = ''>this.left</LeftPointer>
+            <RightPointer Condition = ''>this.right</RightPointer>
+            <ValueNode Condition = ''>this</ValueNode>
+        </TreeItems>
+    </Expand>
+</Type>
+
+<Type Name="CustomExpensible" Inheritable='true'>
+    <DisplayString Optional='true'> size={this.size} </DisplayString>
+    <AlternativeType Name="OtherType" Inheritable="true"/>
+    <Expand HideRawView='true'>
+        <CustomListItems Optional='true' Condition=''>
+            <!-- initialisation -->
+            <Variable Name='var_1' InitialValue='0' />
+            <Variable Name='var_2' InitialValue='0' />
+            <!-- each all items -->
+            <Loop Condition=''>
+                <!-- printing -->
+                <Item>var_1[var_2]</Item>
+                <!-- exec -->
+                <Exec>var_2 = var_2 + 1</Exec>
+            </Loop>
+            <!-- exec -->
+            <Exec>var_2 = 0</Exec>
+        </CustomListItems>
+    </Expand>
+</Type>
+
+<Type Name="Template&lt;*&gt;" Inheritable='true'>
+    <DisplayString Optional='true' Condition=''> {this.field_2} </DisplayString>
+    <DisplayString Optional='true'> {value} </DisplayString>
+    <AlternativeType Name="OtherType" Inheritable="true"/>
+</Type>
+
+<Type Name="MultiTemplate&lt;*,*&gt;" Inheritable='true'>
+    <DisplayString Optional='true'> {value} </DisplayString>
+    <AlternativeType Name="OtherType" Inheritable="true"/>
+</Type>
+
+
+</AutoVisualizer>

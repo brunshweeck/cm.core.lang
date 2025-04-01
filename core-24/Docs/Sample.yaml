@@ -1,0 +1,63 @@
+
+project:
+  namespace:
+    name: "core.lang"
+    description: ""
+    references:
+      - ref1
+      - ref2
+    class:
+      Class_1:
+        type: "class"
+        description: ""
+        parents:
+          - base1
+          - base2
+        references: ""
+        methods:
+          Method_1:
+            description: ""
+            returnType: ""
+            parameters:
+              Param_1:
+                type: "int"
+                description: ""
+              Param_2:
+                type: "int"
+                defaultValue: "0"
+                description: ""
+          Method_2:
+            description: ""
+            type: "static"
+            returnType: ""
+            parameters:
+              Param_1:
+                type: "int"
+                description: ""
+              Param_2:
+                type: "int"
+                defaultValue: "0"
+                description: ""
+          Method_3:
+            description: ""
+            type: "friend"
+            returnType: ""
+            parameters:
+              Param_1:
+                type: "int"
+                description: ""
+              Param_2:
+                type: "int"
+                defaultValue: "0"
+                description: ""
+      Enum_1:
+        type: "enum"
+        items:
+        - item_1
+        - item_2
+      Enum_1:
+        type: "enum"
+        items:
+          item_1: 12
+          item_2: 5
+      
