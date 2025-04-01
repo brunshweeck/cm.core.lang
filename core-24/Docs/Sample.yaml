@@ -55,7 +55,7 @@ project:
         items:
         - item_1
         - item_2
-      Enum_1:
+      Enum_2:
         type: "enum"
         items:
           item_1: 12
