@@ -208,7 +208,7 @@ endfunction()
 
 function(CreateTestFor classToTest testDir namespace)
     if (NOT EXISTS ${testDir})
-        message(WARNING "Creating of test location")
+        message(TRACE "Creating of test location")
         make_directory(${testDir})
     endif ()
 

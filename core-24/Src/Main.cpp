@@ -1,6 +1,10 @@
 #include <cstdio>
 #include <cstdlib>
 
+#include "../Lib/core/lang/Class.h"
+
+using namespace core::lang::spi;
+
 int main() {
-    // code...
+    return 0;
 }
