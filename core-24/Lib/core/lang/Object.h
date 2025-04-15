@@ -4,7 +4,8 @@
 
 #ifndef CORE_LANG_OBJECT_H
 #define CORE_LANG_OBJECT_H
-#include "Class.h"
+
+#include "spi/Literals.h"
 
 namespace core
 {
@@ -28,7 +29,7 @@ namespace core
          * @param other The object to be compared with this object
          * @return The value @c true if this instance equals to given object.
          */
-        virtual gboolean equals(Object const& other) const = 0;
+        virtual gboolean equals(Object const& other) const;
 
         /**
          *  Returns a hash code value for the object. This method is supported for the benefit of hash tables such as those provided by  @c core::util::HashTable
@@ -39,15 +40,16 @@ namespace core
          * @return  The hash code value for this object
          * @note  As far as is reasonably practical, the @c hash method defined by class @c Object returns distinct integers for distinct objects.
          */
-        virtual gint hash() const = 0;
+        virtual gint hash() const;
 
         /**
          *  Returns a string representation of the object.
          *  In general, the @c toString method returns a string that @c "textually represents" this object. The result should be a concise but informative representation that is easy for a person to read.
          * @return A string representation of the object.
          * @note It is recommended that all subclasses override this method.
+         * todo: uncomment and implement method toString
          */
-        virtual String toString() const = 0;
+        // virtual String toString() const = 0;
 
         /**
          *  Create and return the shadow and dynamic copy of this object.
@@ -58,8 +60,9 @@ namespace core
          *  @return The shadow copy of this object.
          *  @note By convention, the returned object should be independent for this object (which is being cloned)
          *  @throws CloneNotSupportedException If the object's class does not support the @c clone operation. Subclasses that override the @c clone method can also throw this exception to indicate that an instance cannot be cloned.
+         *  todo: uncomment and implement method clone
          */
-        virtual Object& clone() const = 0;
+        // virtual Object& clone() const = 0;
     };
 } // core
 

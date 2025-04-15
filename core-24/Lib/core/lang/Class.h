@@ -5,12 +5,12 @@
 #ifndef CORE_LANG_CLASS_H
 #define CORE_LANG_CLASS_H
 
-#include "spi/Literals.h"
+#include "Object.h"
 
 namespace core
 {
     template <class T>
-    class Class $final
+    class Class $final: public Object
     {
         CORE_FAST Class() = default;
 
@@ -233,7 +233,7 @@ namespace core
         template <class... U>
         static CORE_FAST gboolean isSameToAny()
         {
-            return lang::spi::__Any<lang::spi::__TypeTesting<__IS_SAME_TYPE, T, U>>::value;;
+            return lang::spi::__Any<lang::spi::__TypeTesting<__IS_SAME_TYPE, T, U>...>::value;
         }
 
         /// Return @c true if T has @c const qualifier
@@ -418,5 +418,66 @@ namespace core
         }
     };
 } // core
+
+#undef __DELETE_QUALIFIER
+#undef __CONST_QUALIFIER
+#undef __VOLATILE_QUALIFIER
+#undef __REFERENCE_QUALIFIER
+#undef __POINTER_QUALIFIER
+#undef __ARRAY_QUALIFIER
+#undef __IS_FUNCTION_TYPE
+#undef __IS_CLASS_TYPE
+#undef __IS_ENUM_TYPE
+#undef __IS_UNION_TYPE
+#undef __IS_PRIMITIVE_TYPE
+#undef __TO_CLASS_TYPE
+#undef __TO_PRIMITIVE_TYPE
+#undef __IS_SAME_TYPE
+#undef __IS_TEMPLATE_TYPE
+#undef __IS_FUNCTION_MEMBER_TYPE
+#undef __IS_ABSTRACT_TYPE
+#undef __IS_ARRAY_TYPE
+#undef __IS_SUPER_TYPE
+#undef __IS_FINAL_TYPE
+#undef __IS_SIZEABLE_TYPE
+#undef __IS_INTEGER_TYPE
+#undef __IS_FLOAT_TYPE
+#undef __IS_VOID_TYPE
+#undef __IS_BOOLEAN_TYPE
+#undef __IS_CHARACTER_TYPE
+#undef __IS_STRING_TYPE
+#undef __IS_CALLABLE_TYPE
+#undef __IS_EMPTY_TYPE
+#undef __IS_TRIVIAL_TYPE
+#undef __IS_POLYMORPHIC_TYPE
+#undef __IS_LITERAL_TYPE
+#undef __IS_SLIMMED_TYPE
+#undef __IS_CONVERTIBLE_TYPE
+#undef __IS_CONSTRUCTIBLE_TYPE
+#undef __IS_ASSIGNABLE_TYPE
+#undef __IS_DESTRUCTIBLE_TYPE
+#undef __IS_COPYABLE_TYPE
+#undef __IS_LESS_THAN_COMPARABLE_TYPE
+#undef __IS_EQUAL_TO_COMPARABLE_TYPE
+#undef __IS_GREATER_THAN_COMPARABLE_TYPE
+#undef __IS_GREATER_THAN_OR_EQUAL_TO_COMPARABLE_TYPE
+#undef __IS_NOT_EQUAL_TO_COMPARABLE_TYPE
+#undef __IS_LESS_THAN_OR_EQUAL_TO_COMPARABLE_TYPE
+#undef __IS_CONSTANT_TYPE
+#undef __IS_REFERENCE_TYPE
+#undef __IS_POINTER_TYPE
+#undef __IS_VOLATILE_TYPE
+#undef __LVALUE_QUALIFIER
+#undef __RVALUE_QUALIFIER
+#undef __IS_MEMBER_TYPE
+#undef __TO_SLIMMED_TYPE
+#undef __IS_INSTANCE_OF_TYPE
+#undef __IS_RVALUE_TYPE
+
+#ifdef ClassOf
+#undef ClassOf
+#endif // ClassOf
+
+#define ClassOf(expr) Class<decltype(expr)>
 
 #endif // CORE_LANG_CLASS_H

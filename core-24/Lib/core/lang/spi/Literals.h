@@ -74,10 +74,10 @@
     __BINARY_OPERATOR_DECL2(!=, String const&, Object const&, gboolean)
 
 #define __STRING_LITERAL_OPERATORS_DECL(String, Suffix) \
-    __UNARY_OPERATOR_DECL($concat("", Suffix), lang::spi::__literal_char8, String) \
-    __UNARY_OPERATOR_DECL($concat("", Suffix), lang::spi::__literal_char16, String) \
-    __UNARY_OPERATOR_DECL($concat("", Suffix), lang::spi::__literal_char32, String) \
-    __UNARY_OPERATOR_DECL($concat("", Suffix), lang::spi::__literal_varchar, String)
+    __BINARY_OPERATOR_DECL($concat("", Suffix), lang::spi::__literal_char8 const[], lang::spi::__uint64, String) \
+    __BINARY_OPERATOR_DECL($concat("", Suffix), lang::spi::__literal_char16 const[], lang::spi::__uint64, String) \
+    __BINARY_OPERATOR_DECL($concat("", Suffix), lang::spi::__literal_char32 const[], lang::spi::__uint64, String) \
+    __BINARY_OPERATOR_DECL($concat("", Suffix), lang::spi::__literal_varchar const[], lang::spi::__uint64, String)
 
 /*
         Objects operations
@@ -134,6 +134,11 @@
 #define __FLOATING_LITERAL_OPERATORS_DECL(Number, Suffix) \
     __UNARY_OPERATOR_DECL($concat("", Suffix), lang::spi::__literal_float64, Number)
 
+#define __NULL_OPERATION_DECL(Null) \
+    __OBJECT_OPERATION_DECL(Null)\
+    __BINARY_OPERATOR_DECL2(==, Null const&, void*, gboolean) \
+    __BINARY_OPERATOR_DECL2(!=, Null const&, void*, gboolean)
+
 namespace core
 {
     inline namespace literals
@@ -151,10 +156,12 @@ namespace core
         CORE_WARNING_POP
         __INTEGER_LITERAL_OPERATORS_DECL(Complex, _i)
         __INTEGER_LITERAL_OPERATORS_DECL(Complex, _j)
+        __NULL_OPERATION_DECL(lang::Null)
     } // literals
 } // core
 
 #undef __BINARY_OPERATOR_DECL
+#undef __BINARY_OPERATOR_DECL2
 #undef __UNARY_OPERATOR_DECL
 #undef __NUMBER_OPERATION_FOR_OPERATOR_DECL
 #endif // CORE_LANG_LITERALS_H

@@ -134,6 +134,13 @@ namespace core
         } // namespace spi
 
         class Null;
+        class Appendable;
+        template <class T>
+        class Comparable;
+        class CharSequence;
+        class Number;
+        template <class T>
+        class Iterable;
     } // namespace lang
 
     class Object;
