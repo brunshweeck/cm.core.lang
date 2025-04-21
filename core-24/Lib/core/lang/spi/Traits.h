@@ -374,6 +374,43 @@ namespace core::lang::spi
         CORE_FAST_ASSERT(dimension > 1L);
     };
 
+    template <class T>
+    class __TypeTransform<__ARRAY_QUALIFIER | __DELETE_QUALIFIER, T[]> : public __AlwaysTrueType<T>
+    {
+    };
+
+    template <class T, glong numberOfElements>
+    class __TypeTransform<__ARRAY_QUALIFIER | __DELETE_QUALIFIER, T[numberOfElements]> : public __AlwaysTrueType<T>
+    {
+    };
+
+    template <class T>
+    class __TypeTransform<__ARRAY_QUALIFIER | __DELETE_QUALIFIER, T[], -1, 0> : public __AlwaysFalseType<T[]>
+    {
+    };
+
+    template <class T, glong numberOfElements>
+    class __TypeTransform<__ARRAY_QUALIFIER | __DELETE_QUALIFIER, T[numberOfElements], -1, 0>
+        : public __AlwaysFalseType<T[numberOfElements]>
+    {
+        CORE_FAST_ASSERT(numberOfElements >= 0L);
+    };
+
+    template <class T, glong dimension>
+    class __TypeTransform<__ARRAY_QUALIFIER | __DELETE_QUALIFIER, T[], dimension>
+        : public __TypeTransform<__ARRAY_QUALIFIER | __DELETE_QUALIFIER, T, -1, dimension - 1>
+    {
+        CORE_FAST_ASSERT(dimension > 1L);
+    };
+
+    template <class T, glong numberOfElements, glong dimension>
+    class __TypeTransform<__ARRAY_QUALIFIER | __DELETE_QUALIFIER, T[numberOfElements], -1, dimension>
+        : public __TypeTransform<__ARRAY_QUALIFIER | __DELETE_QUALIFIER, T, -1, dimension - 1>
+    {
+        CORE_FAST_ASSERT(dimension > 1L);
+        CORE_FAST_ASSERT(numberOfElements >= 0L);
+    };
+
     // Function Pointer types
     template <class T, class... U>
     class __TypeTesting<__IS_FUNCTION_TYPE, T(U...)> : public __AlwaysTrue
@@ -485,21 +522,31 @@ namespace core::lang::spi
     template <class T>
     class __TypeTesting<__IS_SIZEABLE_TYPE, T> : public __AlwaysFalse
     {
-        template <class __T, glong sizeInBytes>
+        template <class __T>
         class __TypeSizeable : public __AlwaysTrueType<__T>
         {
         public:
-            static CORE_FAST glong size = sizeInBytes;
+            static CORE_FAST glong size = sizeof(__T);
+            static CORE_FAST glong count = -1L;
+        };
+
+        template <class __T, glong numberOfElements>
+        class __TypeSizeable<__T[numberOfElements]>
+        {
+        public:
+            static CORE_FAST glong size = sizeof(__T) * numberOfElements;
+            static CORE_FAST glong count = numberOfElements;
         };
 
         class __TypeIncomplete : public __AlwaysFalse
         {
         public:
             static CORE_FAST glong size = -1L;
+            static CORE_FAST glong count = -1L;
         };
 
         template <class __T, glong sizeInBytes = sizeof(__T)>
-        static __TypeSizeable<__T, sizeInBytes> tryCalculateSize(gint) { CORE_UNREACHABLE(); }
+        static __TypeSizeable<__T> tryCalculateSize(gint) { CORE_UNREACHABLE(); }
 
         template <class...>
         static __TypeIncomplete tryCalculateSize(...) { CORE_UNREACHABLE(); }
@@ -507,6 +554,7 @@ namespace core::lang::spi
     public:
         static CORE_FAST gboolean value = decltype(tryCalculateSize<T>(0))::value;
         static CORE_FAST glong size = decltype(tryCalculateSize<T>(0))::size;
+        static CORE_FAST glong count = decltype(tryCalculateSize<T>(0))::count;
     };
 
     // Integer types

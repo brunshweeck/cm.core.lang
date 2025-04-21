@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="BackendCodeEditorMiscSettings">
-    <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
-    <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
+    <option name="/Default/CodeEditing/CppDocumentationComment/CommentStyle/@EntryValue" value="Eol" type="string" />
     <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
-    <option name="/Default/Housekeeping/OptionsDialog/SelectedPageId/@EntryValue" value="CppFormatterOtherPage" type="string" />
-    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexRemoved" />
+    <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
+    <option name="/Default/Housekeeping/LiveTemplatesHousekeeping/HotspotSessionHintIsShown/@EntryValue" value="true" type="bool" />
+    <option name="/Default/Housekeeping/OptionsDialog/SelectedPageId/@EntryValue" value="CppCodeGeneration" type="string" />
+    <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
   </component>
   <component name="CMakePresetLoader">{
   &quot;useNewFormat&quot;: true
@@ -34,27 +35,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c5a85a7e-6835-4457-963c-8b08f2b881fd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Appendable.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Appendable.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/CharSequence.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/CharSequence.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Comparable.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Comparable.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Iterable.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Iterable.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Null.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Null.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Number.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Number.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Boolean.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Boolean.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Boolean.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Boolean.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Byte.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Byte.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Byte.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Byte.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Class.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Class.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Double.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Double.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Double.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Double.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Float.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Float.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Float.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Float.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Integer.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Integer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Long.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Long.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Object.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Object.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Object.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Object.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Short.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Short.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Short.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Short.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/String.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/String.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Literals.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Literals.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Types.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Types.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Traits.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Traits.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Src/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-24/Src/Main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Src/Main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,19 +107,10 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/brunshweeck/CLionProjects/cm.core.lang/.idea/fileTemplates/internal/C Header File.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/brunshweeck/CLionProjects/cm.core.lang/.idea/fileTemplates/internal/C++ Class Header.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/brunshweeck/CLionProjects/cm.core.lang/core-24/Lib/core/lang/Object.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/core-24/Lib/core/lang/Object.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/core-24/Lib/core/lang/Object.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/core-24/Lib/core/lang/String.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/core-24/Src/Main.cpp" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -129,31 +123,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "CMake Application.SampleExecutable.executor": "Debug",
-    "CMake Debug.Project.executor": "Debug",
-    "RunOnceActivity.RadMigrateCodeStyle": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "RunOnceActivity.west.config.association.type.startup.service": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "/home/brunshweeck/CLionProjects/cm.core.v24",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "fileTemplates",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;CMake Application.SampleExecutable.executor&quot;: &quot;Debug&quot;,
+    &quot;CMake Debug.Project.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;working/core.lang-1&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/brunshweeck/CLionProjects/cm.core.v24&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.C/C++&quot;,
+    &quot;settings.editor.splitter.proportion&quot;: &quot;0.18869829&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="CMake Application.SampleExecutable">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Project" type="CMakeListConfigurationType" factoryName="CMakeListConfigurationFactory" temporary="true">
       <method v="2" />
     </configuration>
@@ -172,21 +172,16 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="core-lang-0.0.1-SNAPSHOT" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="core-lang" TARGET_NAME="core-lang-0.0.1-SNAPSHOT" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="CMake Application.SampleExecutable" />
       <item itemvalue="CMake Application.Core-24-0.0.1-SNAPSHOT" />
-      <item itemvalue="CMake Application.core-lang-0.0.1-SNAPSHOT" />
       <item itemvalue="CMake Application.Main" />
+      <item itemvalue="CMake Application.SampleExecutable" />
+      <item itemvalue="CMake Application.core-lang-0.0.1-SNAPSHOT" />
       <item itemvalue="CMake Debug.Project" />
     </list>
     <recent_temporary>
@@ -208,7 +203,14 @@
       <workItem from="1743497515525" duration="3029000" />
       <workItem from="1744465722624" duration="9611000" />
       <workItem from="1744534092616" duration="38707000" />
-      <workItem from="1744750756756" duration="9606000" />
+      <workItem from="1744750756756" duration="10046000" />
+      <workItem from="1744867346321" duration="9220000" />
+      <workItem from="1744877065090" duration="72000" />
+      <workItem from="1744877326640" duration="115000" />
+      <workItem from="1745029645313" duration="14114000" />
+      <workItem from="1745078027961" duration="5578000" />
+      <workItem from="1745125647309" duration="8652000" />
+      <workItem from="1745202040934" duration="12965000" />
     </task>
     <servers />
   </component>

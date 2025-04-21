@@ -49,7 +49,7 @@ namespace core
          * @note It is recommended that all subclasses override this method.
          * todo: uncomment and implement method toString
          */
-        // virtual String toString() const = 0;
+        virtual String toString() const;
 
         /**
          *  Create and return the shadow and dynamic copy of this object.

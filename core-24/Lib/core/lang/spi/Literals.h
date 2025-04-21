@@ -69,9 +69,11 @@
     \
     __BINARY_OPERATOR_DECL(==, String const&, String const&, gboolean)      \
     __BINARY_OPERATOR_DECL2(==, String const&, Object const&, gboolean)      \
+    __BINARY_OPERATOR_DECL2(==, String const&, lang::Null const&, gboolean)      \
     \
     __BINARY_OPERATOR_DECL(!=, String const&, String const&, gboolean)      \
-    __BINARY_OPERATOR_DECL2(!=, String const&, Object const&, gboolean)
+    __BINARY_OPERATOR_DECL2(!=, String const&, Object const&, gboolean) \
+    __BINARY_OPERATOR_DECL2(!=, String const&, lang::Null const&, gboolean)
 
 #define __STRING_LITERAL_OPERATORS_DECL(String, Suffix) \
     __BINARY_OPERATOR_DECL($concat("", Suffix), lang::spi::__literal_char8 const[], lang::spi::__uint64, String) \
@@ -138,6 +140,31 @@
     __OBJECT_OPERATION_DECL(Null)\
     __BINARY_OPERATOR_DECL2(==, Null const&, void*, gboolean) \
     __BINARY_OPERATOR_DECL2(!=, Null const&, void*, gboolean)
+
+#define CORE_INTRINSIC_ACCESS_DECL(ValueType) \
+        operator ValueType const () const; \
+        operator ValueType volatile () volatile; \
+        operator ValueType const volatile () const volatile; \
+        operator ValueType& () &; \
+        operator ValueType const& () const&; \
+        operator ValueType volatile& () volatile&; \
+        operator ValueType const volatile& () const volatile&; \
+        operator ValueType&& () &&; \
+        operator ValueType const&& () const&&; \
+        operator ValueType volatile&& () volatile&&; \
+        operator ValueType const volatile&& () const volatile&&;
+#define CORE_INTRINSIC_ACCESS_IMPL(ValueType, ClassType, FieldName) \
+        ClassType::operator ValueType const () const { return FieldName; } \
+        ClassType::operator ValueType volatile () volatile { return FieldName; } \
+        ClassType::operator ValueType const volatile () const volatile { return FieldName; } \
+        ClassType::operator ValueType& () & { return FieldName; } \
+        ClassType::operator ValueType const& () const& { return FieldName; } \
+        ClassType::operator ValueType volatile& () volatile& { return FieldName; } \
+        ClassType::operator ValueType const volatile& () const volatile& { return FieldName; } \
+        ClassType::operator ValueType&& () && { return (ValueType&&) FieldName; } \
+        ClassType::operator ValueType const&& () const&& { return (ValueType const&&) FieldName; } \
+        ClassType::operator ValueType volatile&& () volatile&& { return (ValueType volatile&&) FieldName; } \
+        ClassType::operator ValueType const volatile&& () const volatile&& { return (ValueType const volatile &&) FieldName; }
 
 namespace core
 {

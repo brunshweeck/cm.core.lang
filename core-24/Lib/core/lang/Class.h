@@ -206,22 +206,20 @@ namespace core
         $alias(Identity, T);
 
         /// Class version of T
-        $alias(ClassType, typename lang::spi::__TypeTransform<__TO_CLASS_TYPE, T>::type);
+        $alias(ClassType, typename lang::spi::__TypeTransform<__TO_CLASS_TYPE, Slimmed>::type);
 
         /// Primitive version of T
-        $alias(Primitive, typename lang::spi::__TypeTransform<__TO_PRIMITIVE_TYPE, T>::type);
+        $alias(Primitive, typename lang::spi::__TypeTransform<__TO_PRIMITIVE_TYPE, Slimmed>::type);
 
         /// Return type of instance of T called with given arguments types
         template <class... Args>
         $alias(ReturnType, typename lang::spi::__TypeTesting<__IS_CALLABLE_TYPE, T, Args...>::optionalType::type);
 
         /// Size of T in bytes
-        static CORE_FAST glong SIZE = lang::spi::__TypeTesting<__IS_SIZEABLE_TYPE, T>::size;
+        static CORE_FAST glong SIZE = lang::spi::__TypeTesting<__IS_SIZEABLE_TYPE, Slimmed>::size;
 
         /// Number of Elements in any instance of T
-        static CORE_FAST glong COUNT = lang::spi::__TypeTesting<__IS_ARRAY_TYPE, T>::value && SIZE > 1
-                                           ? 1L
-                                           : SIZE / lang::spi::__TypeTesting<__IS_SIZEABLE_TYPE, NoArray>::size;
+        static CORE_FAST glong COUNT = lang::spi::__TypeTesting<__IS_SIZEABLE_TYPE, Slimmed>::count;
 
         /*
               The Properties checker of T
@@ -282,6 +280,12 @@ namespace core
 
         /// Return @c true if T is class or struct type
         static CORE_FAST gboolean isClass() { return lang::spi::__TypeTesting<__IS_CLASS_TYPE, T>::value; }
+
+        /// Return @c true if T is class or struct type
+        static CORE_FAST gboolean isPrimitive()
+        {
+            return isVoid() || isIntegral() || isFunction() || isEnum();
+        }
 
         /// Return @c true if T is union type
         static CORE_FAST gboolean isUnion() { return lang::spi::__TypeTesting<__IS_UNION_TYPE, T>::value; }
@@ -371,7 +375,7 @@ namespace core
         }
 
         /// Return @c true if instance  of typeT can be constructed with arguments types
-        ///  @tparam Args The arguments types
+        ///  @tparam Args The arguments type
         template <class... Args>
         static CORE_FAST gboolean isConstructible()
         {
@@ -401,7 +405,7 @@ namespace core
 
         /// Return @c true if any instance of type T support or implement @c operator() with
         /// given arguments type
-        /// @tparam Args The arguments types
+        /// @tparam Args The arguments type
         template <class... Args>
         static CORE_FAST gboolean isCallable()
         {
