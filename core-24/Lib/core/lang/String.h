@@ -12,6 +12,45 @@
 
 namespace core
 {
+    /// The @c String class represents character strings.
+    /// All string literals in C++ programs suffixed by @c _S, @c _Su and @c _Sl, such as @c "abc"_Su, are implemented as instances of this class.
+    /// Strings are constant; their values cannot be changed after they are created.
+    /// String buffers support mutable strings.
+    /// Because String objects are immutable, they can be shared.
+    /// For example,
+    /// @code
+    ///      String str = "abc"_Su;
+    /// @endcode
+    /// is equivalent to:
+    ///  @code
+    ///      CharArray data = {'a', 'b', 'c'};
+    ///      String str = String(data);
+    ///  @endcode
+    /// Here are some more examples of how strings can be used:
+    /// @code
+    ///     Console::out.writeLine("abc"_Su);
+    ///     String cde = "cde";
+    ///     Console::out.writeLine("abc"_Su + cde);
+    ///     String c = "abc".substring(2, 3);
+    ///     String d = cde.substring(1, 2);
+    /// @endcode
+    /// The class @c String includes methods for examining individual characters of the sequence, for comparing strings, for searching strings, for extracting substrings, and for creating a copy of a string with all characters translated to uppercase or to lowercase.
+    /// Case mapping is based on the Unicode Standard version specified by the @b core::Character class.
+    /// The C++ language provides special support for the string concatenation operator (&nbsp;+&nbsp;), and for conversion of other objects to strings.
+    /// For additional information on string concatenation and conversion, see <i>The C++&trade; Language Specification</i>.
+    ///
+    /// A @c String represents a string in the UTF-16 format in which <em>supplementary characters</em> are represented by <em>surrogate pairs</em> (see the section <a href="Character.html#unicode">Unicode Character Representations</a> in the @c Character class for more information).
+    /// Index values refer to @c char code units, so a supplementary character uses two positions in a @c String.
+    ///
+    /// The @c String class provides methods for dealing with Unicode code points (i.e., characters), in addition to those for dealing with Unicode code units (i.e., @c char values).
+    ///
+    /// Unless otherwise noted, methods for comparing Strings do not take locale into account.
+    /// The @b core.text::Collator class provides methods for finer-grain, locale-sensitive String comparison.
+    /// @note The implementation of the string concatenation operator is left to the discretion of a C++ compiler, as long as the compiler ultimately conforms to <i>The Java&trade; Language Specification</i>.
+    /// The implementation of string conversion is typically through the method @c toString, defined by @c Object and inherited by all classes in C++.
+    /// @see     core::Object.toString()
+    /// @see     core::XString
+    /// @see     core.charset::Charset
     class String $final : public lang::CharSequence, public lang::Comparable<String>
     {
         $alias(Bytes, Class<gbyte>::Pointer);
@@ -52,7 +91,7 @@ namespace core
         CORE_EXPLICIT String(const CharArray& chars);
 
         /// Allocates a new @c String that contains characters from a subarray of the character array argument.
-        /// The @c offset argument is the index of the first character of the subarray and the @c count argument specifies the length of the subarray.
+        /// The @c offset argument is the index of the first character of the subarray, and the @c count argument specifies the length of the subarray.
         /// The contents of the subarray are copied; subsequent modification of the character array does not affect the newly created string.
         /// @param chars Array that is the source of characters
         /// @param offset The Initial offset
@@ -61,7 +100,7 @@ namespace core
         CORE_EXPLICIT String(const CharArray& chars, gint offset, gint count);
 
         /// Allocates a new @c String that contains characters from a subarray of the <em>Unicode code point</em> array argument.
-        /// The @c offset argument is the index of the first code point of the subarray and the @c count argument specifies the length of the subarray.
+        /// The @c offset argument is the index of the first code point of the subarray, and the @c count argument specifies the length of the subarray.
         /// The contents of the subarray are converted to characters; subsequent modification of the int array does not affect the newly created string.
         /// @param codePoints Array that is the source of Unicode code points
         /// @param offset The initial offset
@@ -83,7 +122,7 @@ namespace core
         CORE_EXPLICIT String(const ByteArray& ascii, gint hiByte, gint offset, gint count);
 
         /// Allocates a new @c String containing characters constructed from an array of 8-bit integer values.
-        /// Each character @c c in the resulting string is constructed from the corresponding component @c b in the byte array such that: @code c = (hiByte & 0xFF) << 8 | (b & 0xFF) @endcode .
+        /// Each character @c c in the resulting string is constructed from the corresponding component @c b in the byte array such that: @code c = (hiByte & 0xFF) << 8 | (b & 0xFF)@endcode.
         /// @note This method does not properly convert bytes into characters.
         ///     The recommended way to do this is via the @c String constructors that take a @c Charset, <em>charset name</em>, or that use the <em>default charset</em>.
         ///  @param ascii The bytes to be converted to characters.
@@ -146,20 +185,20 @@ namespace core
 
         ~String() override;
 
-        /// Replace the character sequence of this string with character sequence of @c other string.
+        /// Replace the character sequence of this string with a character sequence of @c other string.
         /// The contents of the string are unspecified if the other string is modified during string construction.
         /// @param other A String
         /// @return itself
         String& operator=(const String& other);
 
-        /// Replace the character sequence of this string with character sequence of @c other string.
+        /// Replace the character sequence of this string with a character sequence of @c other string.
         /// The contents of the string are unspecified if the other string is modified during string construction.
         /// @param other A String
         /// @return itself
         String& operator=(String&& other) CORE_NOTHROW;
 
         /// Return the length of this string.
-        /// The length is equal to the number of Unicode code unit in this string.
+        /// The length is equal to the number of Unicode code units in this string.
         /// @return The length of character sequence represented by this string
         gint length() const override;
 
@@ -186,7 +225,7 @@ namespace core
 
         /// Returns the number of Unicode code points in the specified text range of this @c String.
         /// The text range begins at the specified @c start index and extends to the @c char at index @code end - 1 @endcode .
-        /// Thus, the length (in @c chars) of the text range is @code end - start @endcode .
+        /// Thus, the length (in @c chars) of the text range is @code end - start@endcode.
         /// Unpaired surrogates within the text range count as one code point each.
         /// @param start The index to the first @c char of the text range.
         /// @param end The index after the last @c char of the text range.
@@ -194,7 +233,7 @@ namespace core
         gint codePointCount(gint start, gint end) const;
 
         ///  Copies characters from this string into the destination character array.
-        ///  The first character to be copied is at index @c start index; the last character to be copied is at index @code end -1 @endcode (thus the total number of characters to be copied is @code end - start @endcode).
+        ///  The first character to be copied is at index @c start index; the last character to be copied is at index @code end -1 @endcode (thus the total number of characters to be copied is @code end - start@endcode).
         ///  The characters are copied into the subarray of @c dest starting at index @c offset and ending at index: @code offset + (end - start) - 1 @endcode
         /// @param start The index of the first character in the string to copy.
         /// @param end The index after the last character in the string to copy.
@@ -212,8 +251,8 @@ namespace core
         ///  Each byte receives the 8 low-order bits of the corresponding character.
         ///  The eight high-order bits of each character are not copied and do not participate in the transfer in any way.
         ///  The first character to be copied is at index @c start index; the last character to be copied is at index @code end - 1 @endcode .
-        ///  The total number of characters to be copied is @code end - start @endcode .
-        ///  The characters, converted to bytes, are copied into the subarray of @c dest starting at index @c offset and ending at index @code offset + (end - start) -1 @endcode .
+        ///  The total number of characters to be copied is @code end - start@endcode.
+        ///  The characters, converted to bytes, are copied into the subarray of @c dest starting at index @c offset and ending at index @code offset + (end - start) -1@endcode.
         ///  @note This method does not properly convert characters into bytes.
         ///         The recommended way to do this is via the @c toBytes() method, which uses the default charset.
         /// @param start The index of the first character in the string to copy.
@@ -257,7 +296,7 @@ namespace core
         gboolean contentEquals(const CharSequence& csq) const;
 
         /// Compares this @c String to another @c String, ignoring case considerations.
-        /// Two strings are considered equal ignoring case if they are of the same length and corresponding Unicode code points in the two strings are equal ignoring case.
+        /// Two strings are considered equal ignoring case if they are of the same length, and corresponding Unicode code points in the two strings are equal ignoring case.
         /// Two Unicode code points are considered the same ignoring case if at least one of the following is true:
         /// - The two Unicode code points are the same (as compared by the @c == operator);
         /// - Calling @code Character::toLowerCase(Character::toUpperCase(gint)) @endcode on each Unicode code point produces the same result.
@@ -275,11 +314,11 @@ namespace core
         /// This is the definition of lexicographic ordering.
         /// If two strings are different, then either they have different characters at some index that is a valid index for both strings, or their lengths are different, or both.
         /// If they have different characters at one or more index positions, let @a k be the smallest such index; then the string whose character at position @a k has the smaller value, as determined by using the @c < operator, lexicographically precedes the other string.
-        /// In this case, @c compareTo returns the difference of the two character values at position @c k in the two string -- that is, the value: @code this.charAt(k) - other.charAt(k) @endcode.
+        /// In this case, @c compareTo returns the difference of the two character values at position @c k in the two strings -- that is, the value: @code this.charAt(k) - other.charAt(k)@endcode.
         /// If there is no index position at which they differ, then the shorter string lexicographically precedes the longer string. In this case, @c compareTo returns the difference of the lengths of the strings -- that is, the value: @code this.length() - other.length() @endcode
         /// For finer-grained String comparison, refer to @c core.text::Collator.
         /// @param other the @c String to be compared.
-        /// @return The value @c 0 if the argument string is equal to this string; a value less than @c 0 if this string is lexicographically less than the string argument; and a value greater than @c 0 if this string is lexicographically greater than the string argument.
+        /// @return Value @c 0 if the argument string is equal to this string; a value less than @c 0 if this string is lexicographically less than the string argument; and a value greater than @c 0 if this string is lexicographically greater than the string argument.
         gint compareTo(const String& other) const override;
 
         /// Compares two strings lexicographically, ignoring case differences.
@@ -292,9 +331,9 @@ namespace core
 
         /// Tests if the substring of this string beginning at the specified index starts with the specified prefix.
         /// @param prefix The prefix
-        /// @param offset The index where to begin looking in this string. By default, is equals to zero
+        /// @param offset The index where to begin looking in this string. By default, it is equals to zero
         /// @return The value @c true if the character sequence represented by the argument is a prefix of the substring of this object starting at index @c offset; @c false otherwise.
-        ///                The result is @c false if @c offset is  negative or greater than the length of this @c String object; otherwise the result is the same as the result of the expression @code this.substring(offset).startsWith(prefix) @endcode .
+        ///                The result is @c false if @c offset is  negative or greater than the length of this @c String object; otherwise the result is the same as the result of the expression @code this.substring(offset).startsWith(prefix)@endcode .
         gboolean startsWith(const String& prefix, gint offset = 0) const;
 
         /// Tests if this string ends with the specified suffix.
@@ -318,7 +357,7 @@ namespace core
         /// If it is greater than the length of this string, it has the same effect as if it were equal to the length of this string: @c -1 is returned.
         /// All indices are specified in characters values (Unicode code units).
         /// @param ch A character (Unicode code point).
-        /// @param from The index to start the search from. By default, is equals to zero
+        /// @param from The index to start the search from. By default, it is equals to zero
         /// @return The index of the first occurrence of the character in the character sequence represented by this object that is greater than or equal to @c from, or @c -1 if the character does not occur.
         gint indexOf(gint ch, gint from = 0) const;
 
@@ -336,7 +375,7 @@ namespace core
         gint lastIndexOf(gint ch, gint from = Integer::MAX_VALUE) const;
 
         /// Returns the index within this string of the first occurrence of the specified substring, starting at the specified index.
-        /// The returned index is the smallest value @c k for which @code k >= Math.min(from, this.length()) && this.startsWith(str, k) @endcode .
+        /// The returned index is the smallest value @c k for which @code k >= Math.min(from, this.length()) && this.startsWith(str, k)@endcode .
         /// If no such value of @c k exists, then @c -1 is returned.
         /// @param str The substring to search for.
         /// @param offset the index from which to start the search. By default, is equals to zero
@@ -429,6 +468,8 @@ namespace core
         /// @param obj An object
         /// @return if the argument is @c null, then a string equal to @c "null"; otherwise, the value of @c obj.toString() is returned.
         static String valueOf(const Object& obj);
+
+        Object& clone() const override;
 
     private:
         /// Initialise this string with primal string (pointer).

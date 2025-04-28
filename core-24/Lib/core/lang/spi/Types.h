@@ -2,8 +2,11 @@
 // Created by brunshweeck on 03/04/25.
 //
 
+
 #ifndef CORE_LANG_TYPES_H
 #define CORE_LANG_TYPES_H
+
+#include <exception>
 
 #ifndef CORE_ALIAS
 #define CORE_ALIAS(A, ...) using A = __VA_ARGS__
@@ -40,30 +43,74 @@
 #define $toString(...) $concat($text(__VA_ARGS__), _Su)
 #define $cast(T, ...) ($reverse((__VA_ARGS__), dynamic_cast<T>))
 #define $alias(A, ...) CORE_ALIAS(A, __VA_ARGS__)
-#define $file __FILE_NAME__
-#define $line __LINE__
+
+#ifndef CORE_FILE
+#define CORE_FILE __FILE__
+#endif // CORE_FILE
+#define $file CORE_FILE
+
+#ifndef CORE_FILENAME
+#define CORE_FILENAME __FILE_NAME__
+#endif // CORE_FILENAME
+#define $filename CORE_FILENAME
+
+#ifndef CORE_LINE
+#define CORE_LINE __LINE__
+#endif // CORE_LINE
+#define $line CORE_LINE
+
+#ifdef $func
+#undef $func
+#endif // $func
 #define $func CORE_FUNCTION
+
+#ifdef $function
+#undef $function
+#endif // $function
 #define $function CORE_FUNCTION_SIGNATURE
-#define $module $toString()
-#define $trace(...) Trace($module, $func, $file, $line)
-#define $ftrace(...) Trace($module, $function, $file, $line)
+
+#ifndef CORE_MODULE_NAME
+#define CORE_MODULE_NAME $toString()
+#endif // CORE_MODULE_NAME
+
+#ifndef CORE_MODULE_VERSION
+#define CORE_MODULE_VERSION $toString()
+#endif // CORE_MODULE_VERSION
+
+#ifdef $trace
+#undef $trace
+#endif // $trace
+#define $trace(...) ::core::lang::Trace::getInstance(CORE_MODULE_NAME, CORE_MODULE_VERSION, $toString(), $func, $file, $line)
+
+#ifdef $ftrace
+#undef $ftrace
+#endif // $ftrace
+#define $ftrace(...) ::core::lang::Trace::getInstance(CORE_MODULE_NAME, CORE_MODULE_VERSION, $toString(), $function, $file, $line)
+
+#ifdef $final
+#undef $final
+#endif // $final
 #define $final CORE_FINAL
 
 #if __has_builtin(__builtin_nanf)
-#define __builtin_nan(...) __builtin_nanf($stringify())
+#define __builtin_nan(...) (gdouble) (__builtin_nanf($stringify()))
 #else
-#define __builtin_nan(...) (gdouble)($reverse(1.0E300, (gfloat)) * 0.0f)
+#define __builtin_nan(...) (gdouble) ($reverse(1.0E300, (gfloat)) * 0.0f)
 #endif
 
 #if __has_builtin(__builtin_inff)
-#define __builtin_infinity(...) __builtin_inff($stringify())
+#define __builtin_infinity(...) (gdouble) (__builtin_inff())
 #else
-#define __builtin_infinity(...) (gdouble)($reverse(1.0E300, (gfloat)) * 1.0f)
+#define __builtin_infinity(...) (gdouble) ($reverse(1.0E300, (gfloat)) * 1.0f)
 #endif
 
 #ifdef BIG_ENDIAN
 #undef BIG_ENDIAN // for Unsafe::BIG_ENDIAN
 #endif
+
+#ifndef _Complex
+#define _Complex _Complex
+#endif // _Complex
 
 namespace core
 {
@@ -141,6 +188,11 @@ namespace core
         class Number;
         template <class T>
         class Iterable;
+
+        using namespace ::core;
+        class Throwable;
+        class Exception;
+        class Error;
     } // namespace lang
 
     class Object;
@@ -155,10 +207,6 @@ namespace core
     class Character;
     class Complex;
     class Void;
-
-    class Throwable;
-    class Exception;
-    class Error;
 
     class Math;
 

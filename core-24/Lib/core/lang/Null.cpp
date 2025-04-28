@@ -13,6 +13,11 @@ namespace core
             static Null instance;
             return instance;
         }
+
+        Null& Null::clone() const
+        {
+            return getInstance();
+        }
     } // lang
 
     lang::Null& null = lang::Null::getInstance();

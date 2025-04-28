@@ -32,6 +32,8 @@ namespace core
 
             template <class T>
             CORE_FAST operator T*() const { return {}; }
+
+            Null& clone() const override;
         };
     } // lang
 

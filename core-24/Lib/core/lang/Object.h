@@ -62,7 +62,7 @@ namespace core
          *  @throws CloneNotSupportedException If the object's class does not support the @c clone operation. Subclasses that override the @c clone method can also throw this exception to indicate that an instance cannot be cloned.
          *  todo: uncomment and implement method clone
          */
-        // virtual Object& clone() const = 0;
+        virtual Object& clone() const = 0;
     };
 } // core
 

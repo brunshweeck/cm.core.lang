@@ -123,9 +123,9 @@ namespace core
         /// @param b The second operand.
         /// @return The logical XOR of @c a and @c b.
         static gboolean logicalXor(gboolean a, gboolean b);
+
+        Boolean& clone() const override;
     };
-
-
 } // core
 
 #endif // CORE_LANG_BOOLEAN_H

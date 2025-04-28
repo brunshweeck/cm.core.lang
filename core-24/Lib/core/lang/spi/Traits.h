@@ -624,6 +624,35 @@ namespace core::lang::spi
     {
     };
 
+#ifdef __STDCPP_FLOAT16_T__
+    template <>
+    class __TypeTesting<__IS_FLOAT_TYPE, _Float16> : public __AlwaysTrue
+    {
+    };
+#endif // __STDCPP_FLOAT16_T__
+
+#ifdef __STDCPP_FLOAT32_T__
+    template <>
+    class __TypeTesting<__IS_FLOAT_TYPE, _Float32> : public __AlwaysTrue
+    {
+    };
+#endif // __STDCPP_FLOAT32_T__
+
+#ifdef __STDCPP_FLOAT64_T__
+    template <>
+    class __TypeTesting<__IS_FLOAT_TYPE, _Float64> : public __AlwaysTrue
+    {
+    };
+#endif // __STDCPP_FLOAT64_T__
+
+#ifdef __STDCPP_FLOAT128_T__
+    template <>
+    class __TypeTesting<__IS_FLOAT_TYPE, _Float128> : public __AlwaysTrue
+    {
+    };
+#endif // __STDCPP_FLOAT128_T__
+
+
     //  Character types
     template <>
     class __TypeTesting<__IS_CHARACTER_TYPE, __int8> : public __AlwaysTrue
@@ -947,6 +976,20 @@ namespace core::lang::spi
     {
     };
 
+#ifdef __STDCPP_FLOAT16_T__
+    template <>
+    class __TypeTransform<__TO_CLASS_TYPE, _Float16> : public __AlwaysTrueType<Float>
+    {
+    };
+#endif // __STDCPP_FLOAT16_T__
+
+#ifdef __STDCPP_FLOAT32_T__
+    template <>
+    class __TypeTransform<__TO_CLASS_TYPE, _Float32> : public __AlwaysTrueType<Float>
+    {
+    };
+#endif // __STDCPP_FLOAT32_T__
+
     template <>
     class __TypeTransform<__TO_CLASS_TYPE, __float64> : public __AlwaysTrueType<Double>
     {
@@ -956,6 +999,20 @@ namespace core::lang::spi
     class __TypeTransform<__TO_CLASS_TYPE, __literal_float64> : public __AlwaysTrueType<Double>
     {
     };
+
+#ifdef __STDCPP_FLOAT64_T__
+    template <>
+    class __TypeTransform<__TO_CLASS_TYPE, _Float64> : public __AlwaysTrueType<Double>
+    {
+    };
+#endif // __STDCPP_FLOAT64_T__
+
+#ifdef __STDCPP_FLOAT128_T__
+    template <>
+    class __TypeTransform<__TO_CLASS_TYPE, _Float128> : public __AlwaysTrueType<Double>
+    {
+    };
+#endif // __STDCPP_FLOAT128_T__
 
     template <>
     class __TypeTransform<__TO_CLASS_TYPE, __literal_char8> : public __AlwaysTrueType<Character>

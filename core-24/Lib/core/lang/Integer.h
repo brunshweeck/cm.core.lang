@@ -322,6 +322,8 @@ namespace core
         static gint min(gint a, gint b);
 
         CORE_INTRINSIC_ACCESS_DECL(gint)
+
+        Integer& clone() const override;
     };
 } // core
 

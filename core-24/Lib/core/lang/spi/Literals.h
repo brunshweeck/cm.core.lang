@@ -166,6 +166,13 @@
         ClassType::operator ValueType volatile&& () volatile&& { return (ValueType volatile&&) FieldName; } \
         ClassType::operator ValueType const volatile&& () const volatile&& { return (ValueType const volatile &&) FieldName; }
 
+#define CORE_SET_AS_NON_COPYABLE_CLASS(ClassType) \
+       ClassType (const ClassType&  ) = delete;  \
+       ClassType (const ClassType&&) = delete; \
+       ClassType& operator=(const ClassType&  ) = delete; \
+       ClassType& operator=(const ClassType&&) CORE_NOTHROW = delete; \
+
+
 namespace core
 {
     inline namespace literals

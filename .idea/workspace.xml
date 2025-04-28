@@ -5,10 +5,12 @@
   </component>
   <component name="BackendCodeEditorMiscSettings">
     <option name="/Default/CodeEditing/CppDocumentationComment/CommentStyle/@EntryValue" value="Eol" type="string" />
+    <option name="/Default/Environment/UserInterface/HierarchyView/ViewStyle/@EntryValue" value="SuperTypes" type="string" />
     <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
     <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
     <option name="/Default/Housekeeping/LiveTemplatesHousekeeping/HotspotSessionHintIsShown/@EntryValue" value="true" type="bool" />
-    <option name="/Default/Housekeeping/OptionsDialog/SelectedPageId/@EntryValue" value="CppCodeGeneration" type="string" />
+    <option name="/Default/Housekeeping/OptionsDialog/SelectedPageId/@EntryValue" value="RiderCppLiveTemplatesSettings" type="string" />
+    <option name="/Default/Housekeeping/RefactoringsMru/RenameRefactoring/DoSearchForTextInStrings/@EntryValue" value="true" type="bool" />
     <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
   </component>
   <component name="CMakePresetLoader">{
@@ -35,29 +37,72 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c5a85a7e-6835-4457-963c-8b08f2b881fd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/ArithmeticException.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/ArithmeticException.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Array.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Array.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/AssertionError.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/AssertionError.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Character.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Character.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/ClassCastException.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/ClassCastException.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/CloneNotSupportedException.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/CloneNotSupportedException.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Error.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Error.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Exception.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Exception.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/IllegalArgumentException.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/IllegalArgumentException.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/IllegalStateException.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/IllegalStateException.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/IndexOutOfBoundsException.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/IndexOutOfBoundsException.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/NumberFormatException.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/NumberFormatException.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/OutOfMemoryError.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/OutOfMemoryError.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/RuntimeException.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/RuntimeException.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/SecurityException.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/SecurityException.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Throwable.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Throwable.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/TraceInfo.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/TraceInfo.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/UnsupportedOperationException.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/UnsupportedOperationException.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Void.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Void.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/AbstractArray.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/AbstractArray.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/AbstractObjectArray.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/AbstractObjectArray.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/AbstractPrimitiveArray.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/AbstractPrimitiveArray.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/AbstractValueArray.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/AbstractValueArray.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/meta/lang/StringIndexOutOfBoundsException.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/meta/lang/StringIndexOutOfBoundsException.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Boolean.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Boolean.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Boolean.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Boolean.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Byte.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Byte.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Byte.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Byte.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Class.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Class.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Double.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Double.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Double.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Double.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Float.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Float.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Float.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Float.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Integer.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Integer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Iterable.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Iterable.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Long.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Long.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Object.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Object.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Null.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Null.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Null.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Null.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Number.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Number.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Object.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Object.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Short.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Short.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Short.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Short.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/String.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/String.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Literals.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Literals.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Traits.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Traits.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Types.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Types.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Src/Main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Src/Main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +116,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="working/2025-W2" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -112,6 +157,9 @@
     <setting file="file://$PROJECT_DIR$/core-24/Lib/core/lang/String.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/core-24/Src/Main.cpp" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -143,17 +191,12 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.C/C++&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor.code.editing&quot;,
     &quot;settings.editor.splitter.proportion&quot;: &quot;0.18869829&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RunManager" selected="CMake Application.SampleExecutable">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Project" type="CMakeListConfigurationType" factoryName="CMakeListConfigurationFactory" temporary="true">
       <method v="2" />
     </configuration>
@@ -168,6 +211,11 @@
       </method>
     </configuration>
     <configuration name="SampleExecutable" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="core-lang" TARGET_NAME="SampleExecutable" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="core-lang" RUN_TARGET_NAME="SampleExecutable">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -211,6 +259,13 @@
       <workItem from="1745078027961" duration="5578000" />
       <workItem from="1745125647309" duration="8652000" />
       <workItem from="1745202040934" duration="12965000" />
+      <workItem from="1745467495174" duration="301000" />
+      <workItem from="1745467865672" duration="12924000" />
+      <workItem from="1745642310187" duration="5568000" />
+      <workItem from="1745675331287" duration="8866000" />
+      <workItem from="1745723433079" duration="12854000" />
+      <workItem from="1745743724486" duration="5475000" />
+      <workItem from="1745806873600" duration="3321000" />
     </task>
     <servers />
   </component>

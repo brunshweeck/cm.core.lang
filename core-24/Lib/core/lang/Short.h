@@ -175,6 +175,8 @@ namespace core
         /// @param value The value whose bytes are to be reversed.
         /// @return The value obtained by reversing (or, equivalently, swapping) the bytes in the specified @c short value.
         static gshort reverseBytes(gshort value);
+
+        Short& clone() const override;
     };
 } // core
 

@@ -166,10 +166,9 @@ namespace core
         static Byte decode(const String& nm);
 
         CORE_INTRINSIC_ACCESS_DECL(gbyte)
-    };
 
-    const volatile Byte b = 123;
-    gbyte&& bb = b;
+        Byte& clone() const override;
+    };
 } // core
 
 #endif // CORE_LANG_BYTE_H

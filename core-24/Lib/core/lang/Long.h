@@ -314,6 +314,8 @@ namespace core
         static gint min(glong a, glong b);
 
         CORE_INTRINSIC_ACCESS_DECL(glong)
+
+        Long& clone() const override;
     };
 } // core
 
