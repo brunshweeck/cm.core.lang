@@ -351,7 +351,7 @@ namespace core
         /// @param a the first @c double to compare.
         /// @param b the second @c double to compare.
         /// @return the value @c 0 if @c an is numerically equal to @c b; a value less than @c 0 if @c an is numerically less than @c b; and a value greater than @c 0 if @c an is numerically greater than @c b.
-        gint compare(gdouble a, gdouble b);
+        static gint compare(gdouble a, gdouble b);
 
         /// Adds two @c double values together as per the + operator.
         /// @param a the first operand

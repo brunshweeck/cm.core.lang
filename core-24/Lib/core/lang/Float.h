@@ -303,7 +303,7 @@ namespace core
         /// @param a the first @c float to compare.
         /// @param b the second @c float to compare.
         /// @return the value @c 0 if @c a is numerically equal to @c b; a value less than @c 0 if @c a is numerically less than @c b; and a value greater than @c 0 if @c a is numerically greater than @c b.
-        gint compare(gfloat a, gfloat b);
+        static gint compare(gfloat a, gfloat b);
 
         /// Adds two @c float values together as per the + operator.
         /// @param a the first operand

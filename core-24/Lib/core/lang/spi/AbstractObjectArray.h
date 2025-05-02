@@ -5,7 +5,7 @@
 #ifndef CORE_LANG_ABSTRACTOBJECTARRAY_H
 #define CORE_LANG_ABSTRACTOBJECTARRAY_H
 #include "AbstractArray.h"
-#include "../Class.h"
+#include <core/lang/Class.h>
 
 namespace core::lang::spi
 {
@@ -14,9 +14,10 @@ namespace core::lang::spi
         $alias(Values, Class<Object>::Pointer);
 
         Values mutable values;
+        gint count;
 
     protected:
-        CORE_EXPLICIT AbstractObjectArray(gint length = 0);
+        AbstractObjectArray(gint length, Object& initialRef);
         Object& getObject(gint index);
         const Object& getObject(gint index) const;
         gboolean checkObject(gint index) const;
@@ -33,9 +34,6 @@ namespace core::lang::spi
         gint hash() const override;
         String toString() const override;
         AbstractObjectArray& clone() const override;
-
-    private:
-        gint reservePlaces(gint length) $final;
     };
 } // core::lang::spi
 

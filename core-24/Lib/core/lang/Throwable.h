@@ -261,11 +261,11 @@ namespace core
 
             /// Thrown or rethrow this throwable at the specified execution point (if backtrace access failed).
             /// @param currentExecutionPoint the current execution point
-            void throws(const TraceInfo& currentExecutionPoint) const;
+            CORE_NORETURN void throws(const TraceInfo& currentExecutionPoint) const CORE_THROW;
 
             /// Thrown this throwable again with ignoring the current execution point.
             /// @throws IllegalStateException if this method is not called after one first call of @c throws method
-            void throws() const;
+            CORE_NORETURN void throws() const CORE_THROW;
 
             Throwable& clone() const override = 0;
 

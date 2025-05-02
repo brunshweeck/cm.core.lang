@@ -4,16 +4,21 @@
 
 #include "AbstractArray.h"
 
-namespace core
+#include <core/lang/CloneNotSupportedException.h>
+
+namespace core::lang::spi
 {
-    namespace lang
-    {
-        namespace spi
-        {
-            gint AbstractArray::reservePlaces(gint length)
-            {
-                count = length;
-            }
-        } // spi
-    } // lang
-} // core
+    AbstractArray::AbstractIteratorStep& AbstractArray::AbstractIteratorStep::operator++() { return next(); }
+
+    AbstractArray::AbstractIteratorStep& AbstractArray::AbstractIteratorStep::clone() const {
+        CloneNotSupportedException($toString()).throws($ftrace());
+    }
+
+    gboolean AbstractArray::AbstractIteratorStep::equals(const Object& other) const {
+        if (this == &other)
+            return true;
+        const AbstractIteratorStep& otherStep = $cast(const AbstractIteratorStep&, other);
+        if (isDone()) return otherStep.isDone();
+        return &target() == &otherStep.target() && position() == otherStep.position();
+    }
+}

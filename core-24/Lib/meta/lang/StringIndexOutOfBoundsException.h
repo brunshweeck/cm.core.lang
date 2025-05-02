@@ -5,7 +5,7 @@
 #ifndef CORE_LANG_STRINGINDEXOUTOFBOUNDSEXCEPTION_H
 #define CORE_LANG_STRINGINDEXOUTOFBOUNDSEXCEPTION_H
 
-#include "../../core/lang/IndexOutOfBoundsException.h"
+#include <core/lang/IndexOutOfBoundsException.h>
 
 namespace core
 {

@@ -82,4 +82,26 @@ add_executable("SampleExecutable" "Main.cpp"
         ../Lib/core/lang/Array.cpp
         ../Lib/core/lang/Array.h
         ../Lib/core/lang/spi/AbstractValueArray.cpp
-        ../Lib/core/lang/spi/AbstractValueArray.h)
+        ../Lib/core/lang/spi/AbstractValueArray.h
+        ../Lib/core/lang/BooleanArray.cpp
+        ../Lib/core/lang/BooleanArray.h
+        ../Lib/core/lang/FloatArray.cpp
+        ../Lib/core/lang/FloatArray.h
+        ../Lib/meta/lang/ArrayIndexOutOfBoundsException.cpp
+        ../Lib/meta/lang/ArrayIndexOutOfBoundsException.h
+        ../Lib/core/lang/ByteArray.cpp
+        ../Lib/core/lang/ByteArray.h
+        ../Lib/core/lang/DoubleArray.cpp
+        ../Lib/core/lang/DoubleArray.h
+        ../Lib/core/lang/ShortArray.cpp
+        ../Lib/core/lang/ShortArray.h
+        ../Lib/core/lang/CharArray.cpp
+        ../Lib/core/lang/CharArray.h
+        ../Lib/core/lang/IntArray.cpp
+        ../Lib/core/lang/IntArray.h
+        ../Lib/core/lang/LongArray.cpp
+        ../Lib/core/lang/LongArray.h
+        ../Lib/meta/lang/Strings.cpp
+        ../Lib/meta/lang/Strings.h)
+
+include_directories("../Lib")

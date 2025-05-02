@@ -5,29 +5,42 @@
 #ifndef CORE_LANG_ABSTRACTARRAY_H
 #define CORE_LANG_ABSTRACTARRAY_H
 
-#include "../Object.h"
 #include <initializer_list>
+#include <core/lang/Object.h>
 
 namespace core::lang::spi
 {
     class AbstractArray : public Object
     {
-        gint count;
-
     protected:
-        CORE_EXPLICIT AbstractArray(gint length = 0);
+        AbstractArray() = default;
 
     public:
         ~AbstractArray() override = default;
-
         CORE_SET_AS_NON_COPYABLE_CLASS(AbstractArray);
-
         virtual gint length() const = 0;
         virtual gboolean isEmpty() const = 0;
-        AbstractArray& clone() const override;
+        Object& clone() const override = 0;
 
-    private:
-        virtual gint reservePlaces(gint length);
+    protected:
+        class AbstractIteratorStep : public Object
+        {
+        protected:
+            AbstractIteratorStep() = default;
+
+        public:
+            ~AbstractIteratorStep() override = default;
+            virtual AbstractIteratorStep& next() = 0;
+            virtual gboolean isDone() const = 0;
+            AbstractIteratorStep& operator++();
+            AbstractIteratorStep& clone() const $final;
+
+            gboolean equals(const Object& other) const override;
+
+        private:
+            virtual gint position() const = 0;
+            virtual const Object& target() const = 0;
+        };
     };
 } // core::lang::spi
 

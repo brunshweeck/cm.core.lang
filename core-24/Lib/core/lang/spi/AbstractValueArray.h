@@ -6,34 +6,28 @@
 #define CORE_LANG_ABSTRACTVALUEARRAY_H
 #include "AbstractArray.h"
 
-namespace core
+namespace core::lang::spi
 {
-    namespace lang
+    template <class Element, class Array>
+    class AbstractValueArray : public AbstractArray
     {
-        namespace spi
-        {
-            template <class Element, class ValueArray>
-            class AbstractValueArray : public AbstractArray
-            {
-                friend ValueArray;
-                $alias(Values, typename Class<Element>::Pointer);
+        friend Array;
+        $alias(Values, typename Class<Element>::Pointer);
 
-                Values values;
+        Values values;
 
-            protected:
-                AbstractValueArray() = default;
+    protected:
+        AbstractValueArray() = default;
 
-            public:
-                ~AbstractValueArray() override = default;
-                gint length() const override;
-                gboolean isEmpty() const override;
-                virtual Element& get(gint index) = 0;
-                virtual const Element& get(gint index) const;
-                virtual void set(gint index, const Element &value);
+    public:
+        ~AbstractValueArray() override = default;
+        gint length() const override;
+        gboolean isEmpty() const override;
+        virtual Element& get(gint index) = 0;
+        virtual const Element& get(gint index) const;
+        virtual void set(gint index, const Element &value);
 
-            };
-        } // spi
-    } // lang
-} // core
+    };
+} // core::lang::spi
 
 #endif // CORE_LANG_ABSTRACTVALUEARRAY_H

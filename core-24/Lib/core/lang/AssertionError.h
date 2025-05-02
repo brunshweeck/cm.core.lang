@@ -13,6 +13,11 @@ namespace core
     {
     public:
         CORE_EXPLICIT AssertionError(const String& message);
+        CORE_EXPLICIT AssertionError(const Object& message);
+        CORE_EXPLICIT AssertionError(gboolean message);
+        CORE_EXPLICIT AssertionError(gchar message);
+        CORE_EXPLICIT AssertionError(glong message);
+        CORE_EXPLICIT AssertionError(gdouble message);
         ~AssertionError() override = default;
         Error& clone() const override;
 

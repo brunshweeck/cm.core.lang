@@ -142,35 +142,55 @@
     __BINARY_OPERATOR_DECL2(!=, Null const&, void*, gboolean)
 
 #define CORE_INTRINSIC_ACCESS_DECL(ValueType) \
-        operator ValueType const () const; \
-        operator ValueType volatile () volatile; \
-        operator ValueType const volatile () const volatile; \
-        operator ValueType& () &; \
-        operator ValueType const& () const&; \
-        operator ValueType volatile& () volatile&; \
-        operator ValueType const volatile& () const volatile&; \
-        operator ValueType&& () &&; \
-        operator ValueType const&& () const&&; \
-        operator ValueType volatile&& () volatile&&; \
-        operator ValueType const volatile&& () const volatile&&;
+        operator ValueType const () const CORE_NOTHROW; \
+        operator ValueType () volatile CORE_NOTHROW; \
+        operator ValueType const () const volatile CORE_NOTHROW; \
+        operator ValueType& () & CORE_NOTHROW; \
+        operator ValueType const& () const& CORE_NOTHROW; \
+        operator ValueType volatile& () volatile& CORE_NOTHROW; \
+        operator ValueType const volatile& () const volatile& CORE_NOTHROW; \
+        operator ValueType&& () && CORE_NOTHROW; \
+        operator ValueType const&& () const&& CORE_NOTHROW; \
+        operator ValueType volatile&& () volatile&& CORE_NOTHROW; \
+        operator ValueType const volatile&& () const volatile&& CORE_NOTHROW;
+
 #define CORE_INTRINSIC_ACCESS_IMPL(ValueType, ClassType, FieldName) \
-        ClassType::operator ValueType const () const { return FieldName; } \
-        ClassType::operator ValueType volatile () volatile { return FieldName; } \
-        ClassType::operator ValueType const volatile () const volatile { return FieldName; } \
-        ClassType::operator ValueType& () & { return FieldName; } \
-        ClassType::operator ValueType const& () const& { return FieldName; } \
-        ClassType::operator ValueType volatile& () volatile& { return FieldName; } \
-        ClassType::operator ValueType const volatile& () const volatile& { return FieldName; } \
-        ClassType::operator ValueType&& () && { return (ValueType&&) FieldName; } \
-        ClassType::operator ValueType const&& () const&& { return (ValueType const&&) FieldName; } \
-        ClassType::operator ValueType volatile&& () volatile&& { return (ValueType volatile&&) FieldName; } \
-        ClassType::operator ValueType const volatile&& () const volatile&& { return (ValueType const volatile &&) FieldName; }
+        ClassType::operator ValueType const () const CORE_NOTHROW { return FieldName; } \
+        ClassType::operator ValueType () volatile CORE_NOTHROW { return FieldName; } \
+        ClassType::operator ValueType const () const volatile CORE_NOTHROW { return FieldName; } \
+        ClassType::operator ValueType& () & CORE_NOTHROW { return FieldName; } \
+        ClassType::operator ValueType const& () const& CORE_NOTHROW { return FieldName; } \
+        ClassType::operator ValueType volatile& () volatile& CORE_NOTHROW { return FieldName; } \
+        ClassType::operator ValueType const volatile& () const volatile& CORE_NOTHROW { return FieldName; } \
+        ClassType::operator ValueType&& () && CORE_NOTHROW { return (ValueType&&) FieldName; } \
+        ClassType::operator ValueType const&& () const&& CORE_NOTHROW { return (ValueType const&&) FieldName; } \
+        ClassType::operator ValueType volatile&& () volatile&& CORE_NOTHROW { return (ValueType volatile&&) FieldName; } \
+        ClassType::operator ValueType const volatile&& () const volatile&& CORE_NOTHROW { return (ValueType const volatile &&) FieldName; }
 
 #define CORE_SET_AS_NON_COPYABLE_CLASS(ClassType) \
        ClassType (const ClassType&  ) = delete;  \
        ClassType (const ClassType&&) = delete; \
        ClassType& operator=(const ClassType&  ) = delete; \
-       ClassType& operator=(const ClassType&&) CORE_NOTHROW = delete; \
+       ClassType& operator=(const ClassType&&) CORE_NOTHROW = delete;
+#define CORE_INTRINSIC_INDEXED_ITEM_ACCESS_DECL(ValueType, IndexType, ...) \
+    virtual ValueType& operator[](IndexType) CORE_NOTHROW; \
+    virtual const ValueType& operator[](IndexType) const CORE_NOTHROW;
+
+#define CORE_INTRINSIC_INDEXED_ITEM_ACCESS_IMPL(ValueType, IndexType, ClassType, GetterName, TemplateDeclaration) \
+    TemplateDeclaration ValueType& ClassType::operator[](IndexType index) CORE_NOTHROW { return GetterName(index); } \
+    TemplateDeclaration const ValueType& ClassType::operator[](IndexType index) const CORE_NOTHROW { return GetterName(index); }
+
+#define CORE_INTRINSIC_FOR_EACH_DECL(ForEachClassType, ForEachRefClassType) \
+    ForEachClassType begin() const CORE_NOTHROW; \
+    ForEachClassType end() const CORE_NOTHROW; \
+    ForEachRefClassType begin() CORE_NOTHROW;\
+    ForEachRefClassType end() CORE_NOTHROW;
+
+#define CORE_INTRINSIC_FOR_EACH_IMPL(ForEachClassType, ForEachRefClassType, ClassType, startCtorArgs, endCtorArgs, TemplateDeclaration) \
+    TemplateDeclaration ForEachClassType ClassType::begin() const CORE_NOTHROW { return ForEachClassType startCtorArgs; } \
+    TemplateDeclaration ForEachClassType ClassType::end() const CORE_NOTHROW { return ForEachClassType endCtorArgs; }  \
+    TemplateDeclaration ForEachRefClassType ClassType::begin() CORE_NOTHROW { return ForEachRefClassType startCtorArgs; } \
+    TemplateDeclaration ForEachRefClassType ClassType::end() CORE_NOTHROW { return ForEachRefClassType endCtorArgs; } \
 
 
 namespace core
@@ -186,10 +206,10 @@ namespace core
         CORE_WARNING_PUSH
         CORE_WARNING_DISABLE_UDL
         __INTEGER_LITERAL_OPERATORS_DECL(Complex, i)
-        __INTEGER_LITERAL_OPERATORS_DECL(Complex, j)
+//        __INTEGER_LITERAL_OPERATORS_DECL(Complex, j)
         CORE_WARNING_POP
         __INTEGER_LITERAL_OPERATORS_DECL(Complex, _i)
-        __INTEGER_LITERAL_OPERATORS_DECL(Complex, _j)
+//        __INTEGER_LITERAL_OPERATORS_DECL(Complex, _j)
         __NULL_OPERATION_DECL(lang::Null)
     } // literals
 } // core

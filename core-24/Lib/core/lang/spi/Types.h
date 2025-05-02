@@ -38,9 +38,9 @@
 #define $reverse(a, ...) CORE_REVERSE(a, __VA_ARGS__)
 #define $concat(a, ...) CORE_CONCAT(a, __VA_ARGS__)
 #define $decimal(a,...) $concat(a,$concat(., __VA_ARGS__))
-#define $stringify(a, ...) CORE_STRINGIFY(a, __VA_ARGS__)
-#define $text(...) $concat(u, $stringify(__VA_ARGS__))
-#define $toString(...) $concat($text(__VA_ARGS__), _Su)
+#define $stringify(a, ...) CORE_STRINGIFY(a __VA_ARGS__)
+#define $text(a) $concat(u, $stringify(a))
+#define $toString(a) $concat($text(a), _Su)
 #define $cast(T, ...) ($reverse((__VA_ARGS__), dynamic_cast<T>))
 #define $alias(A, ...) CORE_ALIAS(A, __VA_ARGS__)
 
@@ -85,7 +85,7 @@
 #ifdef $ftrace
 #undef $ftrace
 #endif // $ftrace
-#define $ftrace(...) ::core::lang::Trace::getInstance(CORE_MODULE_NAME, CORE_MODULE_VERSION, $toString(), $function, $file, $line)
+#define $ftrace(...) ::core::lang::TraceInfo::getInstance(CORE_MODULE_NAME, CORE_MODULE_VERSION, $toString(), $function, $file, $line)
 
 #ifdef $final
 #undef $final

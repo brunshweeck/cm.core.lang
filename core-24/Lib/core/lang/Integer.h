@@ -220,7 +220,7 @@ namespace core
         /// @param nm the @c String to decode.
         /// @return an @c Integer object holding the @c int value represented by @c nm
         /// @exception NumberFormatException  if the @c String does not contain a parsable integer.
-        static String decode(const String& nm);
+        static Integer decode(const String& nm);
 
         /// Returns the unsigned quotient of dividing the first argument by the second where each argument and the result is interpreted as an unsigned value.
         /// Note that in two's complement arithmetic, the three other basic arithmetic operations of add, subtract, and multiply are bit-wise identical if the two operands are regarded as both being signed or both being unsigned.

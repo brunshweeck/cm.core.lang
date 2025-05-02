@@ -47,10 +47,6 @@ namespace core
         template <class Arr>
         static Array copyOf(const Arr& a);
     };
-
-    Array<Integer> a;
-    auto b = Array<Integer>(23, 45);
-    auto c = Array<Integer>(23);
 } // core
 
 #endif // CORE_LANG_ARRAY_H

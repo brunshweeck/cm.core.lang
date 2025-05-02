@@ -57,12 +57,12 @@ namespace core::lang::spi
     class __StrictCondition;
 
     template <class T>
-    class __StrictCondition<true, T> : __AlwaysTrueType<T>
+    class __StrictCondition<true, T> : public __AlwaysTrueType<T>
     {
     };
 
     template <class T>
-    class __StrictCondition<false, T> : __AlwaysFalseType<T>
+    class __StrictCondition<false, T> : public __AlwaysFalseType<T>
     {
     };
 
@@ -101,7 +101,7 @@ namespace core::lang::spi
     class __Any;
 
     template <>
-    class __Any<> : public __AlwaysTrue
+    class __Any<> : public __AlwaysFalse
     {
     };
 
@@ -116,7 +116,7 @@ namespace core::lang::spi
     };
 
     template <class T>
-    class __Not : public __Always<~T::value>
+    class __Not : public __Always<~T::value != 0 ? 1 : 0>
     {
     };
 
@@ -152,60 +152,60 @@ namespace core::lang::spi
     template <class T>
     static decltype(tryDeclare0<T>(0)) tryDeclare() { CORE_UNREACHABLE(); }
 
-#define __DELETE_QUALIFIER                   1L << 0x00
-#define __CONST_QUALIFIER                      1L << 0x01
-#define __VOLATILE_QUALIFIER                   1L << 0x02
-#define __REFERENCE_QUALIFIER                1L << 0x03
-#define __POINTER_QUALIFIER                    1L << 0x04
-#define __ARRAY_QUALIFIER                       1L << 0x05
-#define __IS_FUNCTION_TYPE                    1L << 0x06
-#define __IS_CLASS_TYPE                        1L << 0x07
-#define __IS_ENUM_TYPE                          1L << 0x08
-#define __IS_UNION_TYPE                          1L << 0x09
-#define __IS_PRIMITIVE_TYPE                     1L << 0x0A
-#define __TO_CLASS_TYPE                            1L << 0x0B
-#define __TO_PRIMITIVE_TYPE                         1L << 0x0C
-#define __IS_SAME_TYPE                  1L << 0x0D
-#define __IS_TEMPLATE_TYPE         1L << 0x0E
-#define __IS_FUNCTION_MEMBER_TYPE   1L << 0x0F
-#define __IS_ABSTRACT_TYPE  1L << 0x10
-#define __IS_ARRAY_TYPE    1L << 0x11
-#define __IS_SUPER_TYPE   1L << 0x12
-#define __IS_FINAL_TYPE    1L << 0x13
-#define __IS_SIZEABLE_TYPE  1L << 0x14
-#define __IS_INTEGER_TYPE  1L << 0x15
-#define __IS_FLOAT_TYPE    1L << 0x16
-#define __IS_VOID_TYPE     1L << 0x17
-#define __IS_BOOLEAN_TYPE  1L << 0x18
-#define __IS_CHARACTER_TYPE  1L << 0x19
-#define __IS_STRING_TYPE    1L << 0x1A
-#define __IS_CALLABLE_TYPE  1L << 0x1B
-#define __IS_EMPTY_TYPE    1L << 0x1C
-#define __IS_TRIVIAL_TYPE  1L << 0x1D
-#define __IS_POLYMORPHIC_TYPE  1L << 0x1E
-#define __IS_LITERAL_TYPE    1L << 0x1F
-#define __IS_SLIMMED_TYPE    1L << 0x20
-#define __IS_CONVERTIBLE_TYPE  1L << 0x21
-#define __IS_CONSTRUCTIBLE_TYPE  1L << 0x22
-#define __IS_ASSIGNABLE_TYPE    1L << 0x23
-#define __IS_DESTRUCTIBLE_TYPE  1L << 0x24
-#define __IS_COPYABLE_TYPE       1L << 0x25
-#define __IS_LESS_THAN_COMPARABLE_TYPE  1L << 0x26
-#define __IS_EQUAL_TO_COMPARABLE_TYPE  1L << 0x27
-#define __IS_GREATER_THAN_COMPARABLE_TYPE  1L << 0x28
-#define __IS_GREATER_THAN_OR_EQUAL_TO_COMPARABLE_TYPE  1L << 0x29
-#define __IS_NOT_EQUAL_TO_COMPARABLE_TYPE  1L << 0x2A
-#define __IS_LESS_THAN_OR_EQUAL_TO_COMPARABLE_TYPE  1L << 0x2B
-#define __IS_CONSTANT_TYPE  1L << 0x2C
-#define __IS_REFERENCE_TYPE  1L << 0x2D
-#define __IS_POINTER_TYPE  1L << 0x2E
-#define __IS_VOLATILE_TYPE  1L << 0x2F
-#define __LVALUE_QUALIFIER   1L << 0x30
-#define __RVALUE_QUALIFIER    1L << 0x31
-#define __IS_MEMBER_TYPE  1L << 0x32
-#define __TO_SLIMMED_TYPE  1L << 0x33
-#define __IS_INSTANCE_OF_TYPE  1L << 0x34
-#define __IS_RVALUE_TYPE  1L << 0x35
+    #define __DELETE_QUALIFIER                   1L << 0x00
+    #define __CONST_QUALIFIER                      1L << 0x01
+    #define __VOLATILE_QUALIFIER                   1L << 0x02
+    #define __REFERENCE_QUALIFIER                1L << 0x03
+    #define __POINTER_QUALIFIER                    1L << 0x04
+    #define __ARRAY_QUALIFIER                       1L << 0x05
+    #define __IS_FUNCTION_TYPE                    1L << 0x06
+    #define __IS_CLASS_TYPE                        1L << 0x07
+    #define __IS_ENUM_TYPE                          1L << 0x08
+    #define __IS_UNION_TYPE                          1L << 0x09
+    #define __IS_PRIMITIVE_TYPE                     1L << 0x0A
+    #define __TO_CLASS_TYPE                            1L << 0x0B
+    #define __TO_PRIMITIVE_TYPE                         1L << 0x0C
+    #define __IS_SAME_TYPE                  1L << 0x0D
+    #define __IS_TEMPLATE_TYPE         1L << 0x0E
+    #define __IS_FUNCTION_MEMBER_TYPE   1L << 0x0F
+    #define __IS_ABSTRACT_TYPE  1L << 0x10
+    #define __IS_ARRAY_TYPE    1L << 0x11
+    #define __IS_SUPER_TYPE   1L << 0x12
+    #define __IS_FINAL_TYPE    1L << 0x13
+    #define __IS_SIZEABLE_TYPE  1L << 0x14
+    #define __IS_INTEGER_TYPE  1L << 0x15
+    #define __IS_FLOAT_TYPE    1L << 0x16
+    #define __IS_VOID_TYPE     1L << 0x17
+    #define __IS_BOOLEAN_TYPE  1L << 0x18
+    #define __IS_CHARACTER_TYPE  1L << 0x19
+    #define __IS_STRING_TYPE    1L << 0x1A
+    #define __IS_CALLABLE_TYPE  1L << 0x1B
+    #define __IS_EMPTY_TYPE    1L << 0x1C
+    #define __IS_TRIVIAL_TYPE  1L << 0x1D
+    #define __IS_POLYMORPHIC_TYPE  1L << 0x1E
+    #define __IS_LITERAL_TYPE    1L << 0x1F
+    #define __IS_SLIMMED_TYPE    1L << 0x20
+    #define __IS_CONVERTIBLE_TYPE  1L << 0x21
+    #define __IS_CONSTRUCTIBLE_TYPE  1L << 0x22
+    #define __IS_ASSIGNABLE_TYPE    1L << 0x23
+    #define __IS_DESTRUCTIBLE_TYPE  1L << 0x24
+    #define __IS_COPYABLE_TYPE       1L << 0x25
+    #define __IS_LESS_THAN_COMPARABLE_TYPE  1L << 0x26
+    #define __IS_EQUAL_TO_COMPARABLE_TYPE  1L << 0x27
+    #define __IS_GREATER_THAN_COMPARABLE_TYPE  1L << 0x28
+    #define __IS_GREATER_THAN_OR_EQUAL_TO_COMPARABLE_TYPE  1L << 0x29
+    #define __IS_NOT_EQUAL_TO_COMPARABLE_TYPE  1L << 0x2A
+    #define __IS_LESS_THAN_OR_EQUAL_TO_COMPARABLE_TYPE  1L << 0x2B
+    #define __IS_CONSTANT_TYPE  1L << 0x2C
+    #define __IS_REFERENCE_TYPE  1L << 0x2D
+    #define __IS_POINTER_TYPE  1L << 0x2E
+    #define __IS_VOLATILE_TYPE  1L << 0x2F
+    #define __LVALUE_QUALIFIER   1L << 0x30
+    #define __RVALUE_QUALIFIER    1L << 0x31
+    #define __IS_MEMBER_TYPE  1L << 0x32
+    #define __TO_SLIMMED_TYPE  1L << 0x33
+    #define __IS_INSTANCE_OF_TYPE  1L << 0x34
+    #define __IS_RVALUE_TYPE  1L << 0x35
 
     //  Similarity
     template <class T>
@@ -324,6 +324,16 @@ namespace core::lang::spi
     {
     };
 
+    template <class T>
+    class __TypeTransform<__POINTER_QUALIFIER, T&> : public __AlwaysTrueType<T*>
+    {
+    };
+
+    template <class T>
+    class __TypeTransform<__POINTER_QUALIFIER, T&&> : public __AlwaysTrueType<T*>
+    {
+    };
+
     template <class T, glong dimension>
     class __TypeTransform<
             __POINTER_QUALIFIER, T, -1, dimension> : public __TypeTransform<__POINTER_QUALIFIER, T*, -1, dimension - 1>
@@ -349,6 +359,16 @@ namespace core::lang::spi
 
     template <class T>
     class __TypeTransform<__ARRAY_QUALIFIER, T> : public __AlwaysTrueType<T[]>
+    {
+    };
+
+    template <class T>
+    class __TypeTransform<__ARRAY_QUALIFIER, T&> : public __AlwaysTrueType<T[]>
+    {
+    };
+
+    template <class T>
+    class __TypeTransform<__ARRAY_QUALIFIER, T&&> : public __AlwaysTrueType<T[]>
     {
     };
 
@@ -433,12 +453,12 @@ namespace core::lang::spi
     {
     };
 
-#ifdef CORE_COMPILER_CLANG
+    #ifdef CORE_COMPILER_CLANG
     template <class T>
     class __TypeTesting<__IS_MEMBER_TYPE, T> : public __Always<__is_member_pointer(T)>
     {
     };
-#endif // CORE_COMPILER_CLANG
+    #endif // CORE_COMPILER_CLANG
 
     // Struct function member types
     template <class T, class U, class... V>
@@ -495,12 +515,12 @@ namespace core::lang::spi
     };
 
     // Implicit Convertible types
-#ifdef CORE_COMPILER_MSVC
+    #ifdef CORE_COMPILER_MSVC
     template <class T, class U>
     class __TypeTesting<__IS_CONVERTIBLE_TYPE, T, U> : public __Always<__is_convertible_to(T, U)>
     {
     };
-#else
+    #else
     template <class T, class U>
     class __TypeTesting<__IS_CONVERTIBLE_TYPE, T, U> : public __AlwaysFalse
     {
@@ -516,7 +536,7 @@ namespace core::lang::spi
     public:
         static CORE_FAST gboolean value = decltype(tryConvert<T, U>(0))::value;
     };
-#endif // CORE_COMPILER_MSVC
+    #endif // CORE_COMPILER_MSVC
 
     // Sizable types (Complete types)
     template <class T>
@@ -624,33 +644,33 @@ namespace core::lang::spi
     {
     };
 
-#ifdef __STDCPP_FLOAT16_T__
+    #ifdef __STDCPP_FLOAT16_T__
     template <>
     class __TypeTesting<__IS_FLOAT_TYPE, _Float16> : public __AlwaysTrue
     {
     };
-#endif // __STDCPP_FLOAT16_T__
+    #endif // __STDCPP_FLOAT16_T__
 
-#ifdef __STDCPP_FLOAT32_T__
+    #ifdef __STDCPP_FLOAT32_T__
     template <>
     class __TypeTesting<__IS_FLOAT_TYPE, _Float32> : public __AlwaysTrue
     {
     };
-#endif // __STDCPP_FLOAT32_T__
+    #endif // __STDCPP_FLOAT32_T__
 
-#ifdef __STDCPP_FLOAT64_T__
+    #ifdef __STDCPP_FLOAT64_T__
     template <>
     class __TypeTesting<__IS_FLOAT_TYPE, _Float64> : public __AlwaysTrue
     {
     };
-#endif // __STDCPP_FLOAT64_T__
+    #endif // __STDCPP_FLOAT64_T__
 
-#ifdef __STDCPP_FLOAT128_T__
+    #ifdef __STDCPP_FLOAT128_T__
     template <>
     class __TypeTesting<__IS_FLOAT_TYPE, _Float128> : public __AlwaysTrue
     {
     };
-#endif // __STDCPP_FLOAT128_T__
+    #endif // __STDCPP_FLOAT128_T__
 
 
     //  Character types
@@ -844,12 +864,12 @@ namespace core::lang::spi
     };
 
     // Destructible types
-#ifdef CORE_COMPILER_MSVC
+    #ifdef CORE_COMPILER_MSVC
     template <class T>
     class __TypeTesting<__IS_DESTRUCTIBLE_TYPE, T> : public __Always<__is_destructible(T)>
     {
     };
-#else
+    #else
     template <class T>
     class __TypeTesting<__IS_DESTRUCTIBLE_TYPE, T> : public __AlwaysFalse
     {
@@ -862,7 +882,7 @@ namespace core::lang::spi
     public:
         static CORE_FAST gboolean value = decltype(tryDestroy<T>(0))::value;
     };
-#endif // CORE_COMPILER_MSVC
+    #endif // CORE_COMPILER_MSVC
 
     // Primitive types
     template <>
@@ -976,19 +996,19 @@ namespace core::lang::spi
     {
     };
 
-#ifdef __STDCPP_FLOAT16_T__
+    #ifdef __STDCPP_FLOAT16_T__
     template <>
     class __TypeTransform<__TO_CLASS_TYPE, _Float16> : public __AlwaysTrueType<Float>
     {
     };
-#endif // __STDCPP_FLOAT16_T__
+    #endif // __STDCPP_FLOAT16_T__
 
-#ifdef __STDCPP_FLOAT32_T__
+    #ifdef __STDCPP_FLOAT32_T__
     template <>
     class __TypeTransform<__TO_CLASS_TYPE, _Float32> : public __AlwaysTrueType<Float>
     {
     };
-#endif // __STDCPP_FLOAT32_T__
+    #endif // __STDCPP_FLOAT32_T__
 
     template <>
     class __TypeTransform<__TO_CLASS_TYPE, __float64> : public __AlwaysTrueType<Double>
@@ -1000,19 +1020,19 @@ namespace core::lang::spi
     {
     };
 
-#ifdef __STDCPP_FLOAT64_T__
+    #ifdef __STDCPP_FLOAT64_T__
     template <>
     class __TypeTransform<__TO_CLASS_TYPE, _Float64> : public __AlwaysTrueType<Double>
     {
     };
-#endif // __STDCPP_FLOAT64_T__
+    #endif // __STDCPP_FLOAT64_T__
 
-#ifdef __STDCPP_FLOAT128_T__
+    #ifdef __STDCPP_FLOAT128_T__
     template <>
     class __TypeTransform<__TO_CLASS_TYPE, _Float128> : public __AlwaysTrueType<Double>
     {
     };
-#endif // __STDCPP_FLOAT128_T__
+    #endif // __STDCPP_FLOAT128_T__
 
     template <>
     class __TypeTransform<__TO_CLASS_TYPE, __literal_char8> : public __AlwaysTrueType<Character>
@@ -1039,7 +1059,7 @@ namespace core::lang::spi
     {
     };
 
-#ifndef CORE_COMPILER_MSVC
+    #ifndef CORE_COMPILER_MSVC
     template <>
     class __TypeTransform<__TO_CLASS_TYPE, __complex_int8> : public __AlwaysTrueType<Complex>
     {
@@ -1089,7 +1109,7 @@ namespace core::lang::spi
     class __TypeTransform<__TO_CLASS_TYPE, __complex_uvarint> : public __AlwaysTrueType<Complex>
     {
     };
-#endif // CORE_COMPILER_MSVC
+    #endif // CORE_COMPILER_MSVC
 
     template <>
     class __TypeTransform<__TO_CLASS_TYPE, _Fcomplex> : public __AlwaysTrueType<Complex>
@@ -1254,17 +1274,15 @@ namespace core::lang::spi
         class __TypeInstanceCheck<__T, __U, false, __V, __W, false>
         {
         public:
-            static CORE_FAST gboolean isInstanceOf(__U const& __value)
-            {
+            static CORE_FAST gboolean isInstanceOf(__U const& __value) {
                 $alias(__Target, typename __TypeTransform<__TO_SLIMMED_TYPE, __T>::type);
                 $alias(__Expected, typename __TypeTransform<__TO_SLIMMED_TYPE, __U>::type);
-                return $cast(__Target, (__Expected)__value);
+                return $cast(__Target*, (__Expected*)&__value);
             }
         };
 
     public:
-        static CORE_FAST gboolean checkInstance(U const& value)
-        {
+        static CORE_FAST gboolean checkInstance(U const& value) {
             return __TypeInstanceCheck<T, U>::isInstanceOf(value);
         }
     };

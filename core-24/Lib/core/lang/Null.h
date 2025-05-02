@@ -39,6 +39,11 @@ namespace core
 
     /// The unique instance of class @c Null
     extern lang::Null& null;
+
+    template <class T> CORE_FAST gboolean operator==(const lang::Null&, T* ptr) { return !ptr; }
+    template <class T> CORE_FAST gboolean operator!=(const lang::Null&, T* ptr) { return ptr; }
+    template <class T> CORE_FAST gboolean operator==(T* ptr,const lang::Null&) { return !ptr; }
+    template <class T> CORE_FAST gboolean operator!=(T* ptr,const lang::Null&) { return ptr; }
 } // core
 
 #endif //CORE_LANG_NULL_H

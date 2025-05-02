@@ -958,6 +958,7 @@
 #define CORE_ALIGNOF(x)        alignof(x)
 #define CORE_ALIGN(n)          alignas(n)
 #define CORE_NOTHROW           CORE_NOEXCEPT
+#define CORE_THROW                  CORE_XNOEXCEPT(false)
 #ifdef __cplusplus
 #define CORE_CONSTEXPR         constexpr
 #define CORE_XCONSTEXPR        constexpr
