@@ -626,6 +626,7 @@ namespace core { namespace lang
         return output;
     }
 
+<<<<<<< HEAD
     String String::replace(gchar oldCh, gchar newCh) const {
         gint index = 0;
         for (; index < count; ++index) if (oldCh == charAt(index)) break;
@@ -677,6 +678,8 @@ namespace core { namespace lang
         return *this;
     }
 
+=======
+>>>>>>> 3aa0f8c (???)
     String String::toString() const { return *this; }
 
     String String::valueOf(const Object& obj) { return obj.toString(); }

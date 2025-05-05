@@ -38,12 +38,17 @@
   <component name="ChangeListManager">
     <list default="true" id="c5a85a7e-6835-4457-963c-8b08f2b881fd" name="Changes" comment="">
 <<<<<<< HEAD
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/cm.core.lang.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dictionaries/brunshweeck.xml" beforeDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Preconditions.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Preconditions.h" afterDir="false" />
+>>>>>>> 3aa0f8c (???)
 =======
       <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Preconditions.cpp" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Preconditions.h" afterDir="false" />
@@ -59,10 +64,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Literals.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Literals.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Traits.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Traits.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Types.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Types.h" afterDir="false" />
 =======
+=======
+>>>>>>> 3aa0f8c (???)
       <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/String.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/String.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/String.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/String.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/TraceInfo.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/TraceInfo.cpp" afterDir="false" />
@@ -71,6 +79,9 @@
       <change beforePath="$PROJECT_DIR$/core-24/Lib/meta/lang/Strings.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/meta/lang/Strings.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Lib/meta/lang/Strings.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/meta/lang/Strings.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Src/CMakeLists.txt" afterDir="false" />
+<<<<<<< HEAD
+>>>>>>> 3aa0f8c (???)
+=======
 >>>>>>> 3aa0f8c (???)
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -213,12 +224,16 @@
     </key>
   </component>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <component name="RunManager" selected="CMake Application.SampleExecutable">
     <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
+=======
+  <component name="RunManager" selected="CMake Application.Core-24-0.0.1-SNAPSHOT">
+>>>>>>> 3aa0f8c (???)
 =======
   <component name="RunManager" selected="CMake Application.Core-24-0.0.1-SNAPSHOT">
 >>>>>>> 3aa0f8c (???)

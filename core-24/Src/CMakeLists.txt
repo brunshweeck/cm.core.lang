@@ -104,10 +104,14 @@ add_executable("SampleExecutable" "Main.cpp"
         ../Lib/meta/lang/Strings.cpp
         ../Lib/meta/lang/Strings.h
         ../Lib/core/lang/Preconditions.cpp
+<<<<<<< HEAD
         ../Lib/core/lang/Preconditions.h
         ../Lib/meta/lang/spi/ConcurrentQueue.cpp
         ../Lib/meta/lang/spi/ConcurrentQueue.h
         ../Lib/meta/lang/spi/TraceInfoProvider.cpp
         ../Lib/meta/lang/spi/TraceInfoProvider.h)
+=======
+        ../Lib/core/lang/Preconditions.h)
+>>>>>>> 3aa0f8c (???)
 
 include_directories("../Lib")
