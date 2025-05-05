@@ -7,9 +7,7 @@
 
 #include "String.h"
 
-namespace core
-{
-    namespace lang
+namespace core { namespace lang
     {
         /// The class @c TraceInfo represent the execution of the current program.
         /// Is used by class @c Throwable to view stack trace of program execution.
@@ -140,6 +138,14 @@ namespace core
                                                 const String& fileName, gint lineNumber);
 
             TraceInfo& clone() const override;
+
+        private:
+            static void checkModuleName(const String& moduleName);
+            static void checkModuleVersion(const String& moduleVersion);
+            static void checkName(const String& className);
+            static String resolveName(const String& className);
+            static void checkFunctionName(const String& functionName);
+            static void checkLineNumber(gint lineNumber);
         };
     } // lang
 } // core
