@@ -7,12 +7,56 @@
 #include <core/lang/Null.h>
 #include <core/lang/OutOfMemoryError.h>
 
+#include "StringIndexOutOfBoundsException.h"
 #include "core/lang/AssertionError.h"
+#include "core/lang/ByteArray.h"
 #include "core/lang/CharArray.h"
 #include "core/lang/IntArray.h"
 
 namespace core::lang
 {
+    gint Strings::checkIndex(gint index, gint length) {
+        if ((index | length) < 0 || index >= length)
+            StringIndexOutOfBoundsException(
+                u"Index "_Su + index + u" out of bounds for length "_Su + length
+            ).throws($ftrace());
+        return index;
+    }
+
+    gint Strings::checkIndexFromRange(gint start, gint end, gint length) {
+        if ((start | end | length) < 0 || end < start || length < end)
+            StringIndexOutOfBoundsException(
+                u"Range ["_Su + start + u" ... "_Su + end + u") out of bounds for length "_Su + length
+            ).throws($ftrace());
+        return start;
+    }
+
+    gint Strings::checkIndexFromSize(gint start, gint size, gint length) {
+        if ((start | size | length) < 0 || length < size + start) {
+            if (size < 0) {
+                size = -size;
+                StringIndexOutOfBoundsException(
+                    u"Range ["_Su + start + u" ... "_Su + start + u" - "_Su
+                    + size + u") out of bounds for length "_Su + length
+                ).throws($ftrace());
+            }
+            else
+                StringIndexOutOfBoundsException(
+                    u"Range ["_Su + start + u" ... "_Su + start + u" - "_Su
+                    + size + u") out of bounds for length "_Su + length
+                ).throws($ftrace());
+        }
+        return start;
+    }
+
+    gint Strings::checkIndexForAdding(gint index, gint length) {
+        if (index < 0 || index > length)
+            StringIndexOutOfBoundsException(
+                u"Index "_Su + index + u" out of adding bounds for length "_Su + length
+            ).throws($ftrace());
+        return index;
+    }
+
     Strings::Bytes Strings::newLatin1Bytes(gint count) {
         try {
             return newBytes(count, LATIN1);
@@ -40,7 +84,7 @@ namespace core::lang
         return dest;
     }
 
-    Strings::Bytes Strings::copyOfLatin1Bytes(Bytes bytes, gint start, gint count, gint newCount) {
+    Strings::Bytes Strings::copyOfLatn1Bytes(Bytes bytes, gint start, gint count, gint newCount) {
         try {
             Bytes copy = newLatin1Bytes(newCount);
             if (newCount < count) count = newCount;
@@ -66,6 +110,13 @@ namespace core::lang
 
     gchar Strings::getUtf16CharAt(Bytes bytes, gint index, gint count) {
         Chars input = (Chars)bytes;
+        if (input == null || index < 0 || count <= 0 || index >= count)
+            AssertionError(false).throws($ftrace());
+        return input[index];
+    }
+
+    gint Strings::getUtf32CharAt(Bytes bytes, gint index, gint count) {
+        Ints input = (Ints)bytes;
         if (input == null || index < 0 || count <= 0 || index >= count)
             AssertionError(false).throws($ftrace());
         return input[index];
@@ -120,7 +171,24 @@ namespace core::lang
         catch (const OutOfMemoryError& oome) { oome.throws($ftrace()); }
     }
 
-    Strings::Bytes Strings::tryConvertCharsToLatin1(const CharArray& chars, gint start, gint count) {
+    Strings::Bytes Strings::tryConvertUtf32BytesToLatin1(Bytes bytes, gint start, gint count) {
+        if ((bytes == null) || (start < 0) || (count <= 0)) return null;
+        try {
+            Bytes copy = newLatin1Bytes(count);
+            for (int i = 0; i < count; ++i) {
+                gint chr = getUtf32CharAt(bytes, start + i, count);
+                if (chr > 0xff) {
+                    deleteBytes(copy, count);
+                    return null;
+                }
+                copy[i] = (gbyte)chr;
+            }
+            return copy;
+        }
+        catch (const OutOfMemoryError& oome) { oome.throws($ftrace()); }
+    }
+
+    Strings::Bytes Strings::tryConvertCharsToLatn1(const CharArray& chars, gint start, gint count) {
         if (start < 0 || count <= 0) return null;
         try {
             Bytes copy = newLatin1Bytes(count);
@@ -132,6 +200,17 @@ namespace core::lang
                 }
                 copy[i] = (gbyte)chr;
             }
+            return copy;
+        }
+        catch (const OutOfMemoryError& oome) { oome.throws($ftrace()); }
+    }
+
+    Strings::Bytes Strings::convertCharsToUtf16(const CharArray& chars, gint start, gint count) {
+        if (start < 0 || count <= 0) return null;
+        try {
+            Bytes copy = newUtf16Bytes(count);
+            Chars output = (Chars)copy;
+            for (int i = 0; i < count; ++i) output[i] = chars[start + i];
             return copy;
         }
         catch (const OutOfMemoryError& oome) { oome.throws($ftrace()); }
@@ -154,7 +233,7 @@ namespace core::lang
         catch (const OutOfMemoryError& oome) { oome.throws($ftrace()); }
     }
 
-    gint Strings::putLatin1CharAt(Bytes bytes, gint index, gchar value, gint count) {
+    gint Strings::putLatn1CharAt(Bytes bytes, gint index, gchar value, gint count) {
         if ((bytes == null) || index < 0 || count <= 0 || index >= count) return -1;
         bytes[index] = (gbyte)value;
         return 1;
@@ -469,11 +548,48 @@ namespace core::lang
         return dest;
     }
 
+    Strings::Bytes Strings::copyUtf32ToUtf16Bytes(Bytes bytes, gint start1, Bytes dest, gint start2, gint count,
+                                                  gint count2) {
+        Chars output = (Chars)dest;
+        Ints input = (Ints)bytes;
+        if (bytes == null || output == null || count <= 0) return dest;
+        if (start1 < 0) start1 = 0;
+        if (start2 < 0) start2 = 0;
+        for (int i = 0, j = 0; i < count; ++i) {
+            gint chr = input[i + start1];
+            if (chr < 0 || chr > 0x10ffff) {
+                if (j > count2) break;
+                output[j++] = 0x3f;
+                continue;
+            }
+            if (chr > 0xffff) {
+                gchar chr1 = (chr >> 10) + 0xD800 - (0x10000 >> 10);
+                gchar chr2 = (chr & 0x3ff) + 0xDC00;
+                if (j + 2 > count2) break;
+                output[j++] = chr1;
+                output[j++] = chr2;
+                continue;
+            }
+            if (j > count2) break;
+            output[j++] = (gchar)chr;
+        }
+        return dest;
+    }
+
     Strings::Bytes Strings::copyOfLatin1ToUtf16Bytes(Bytes bytes, gint start, gint count, gint newCount) {
         try {
             Bytes output = newUtf16Bytes(newCount);
             if (newCount < count) count = newCount;
             copyLatin1ToUtf16Bytes(bytes, start, output, 0, count);
+            return output;
+        }
+        catch (const OutOfMemoryError& oome) { oome.throws($ftrace()); }
+    }
+
+    Strings::Bytes Strings::copyOfUtf32ToUtf16Bytes(Bytes bytes, gint start, gint count, gint newCount) {
+        try {
+            Bytes output = newUtf16Bytes(newCount);
+            copyUtf32ToUtf16Bytes(bytes, start, output, 0, count, newCount);
             return output;
         }
         catch (const OutOfMemoryError& oome) { oome.throws($ftrace()); }
@@ -527,7 +643,325 @@ namespace core::lang
 
     void Strings::deleteBytes(Bytes bytes, gint count) {
         if (bytes == null || count <= 0) return;
+        for (int i = count - 1; i >= 0; --i) bytes[i] = 0;
         delete []bytes;
+    }
+
+    gint Strings::decodeUtf8Chars(Bytes bytes, gint start, gint count, CharArray& dest, gint start2, gint count2) {
+        if (bytes == null || count <= 0) return 0;
+        if (start < 0) start = 0;
+        if (start2 < 0) start2 = 0;
+        CORE_FAST static gchar Repl = 0xfffd;
+        gint index = start;
+        gint index2 = start2;
+        for (; index < count && start2 < count2; ++index) {
+            gchar chr = bytes[index] & 0xff;
+            if (chr > 0x7f) break;
+            dest[index2++] = chr;
+        }
+        while (index < count) {
+            gint b1 = bytes[index];
+            if (b1 > 0) {
+                // 1 byte, 7 bits: 0xxxxxxx
+                if (start2 >= count2) break; // Overflow
+                dest[index2++] = b1 & 0xff;
+                ++index;
+                continue;
+            }
+            if ((b1 >> 5) == -2 && (b1 & 0x1e) != 0) {
+                // 2 bytes, 11 bits: 110xxxxx 10xxxxxx
+                //                          [C2..DF] [80..BF]
+                if (start2 >= count2) break; // Overflow
+                gint b2 = count - index < 2 ? 0 : bytes[index + 1];
+                if ((b2 & 0xc0) != 0x80) {
+                    // Malformed (number of bytes require is insufficient)
+                    dest[index2++] = Repl;
+                    ++index;
+                    continue;
+                }
+                dest[index2++] = (gchar)(b1 << 6 ^ b2 ^ ((gbyte)0xC0 << 6 ^ (gbyte)0x80 << 0));
+                ++++index;
+                continue;
+            }
+            if ((b1 >> 4) == -2) {
+                // 3 bytes, 16 bits: 1110xxxx 10xxxxxx 10xxxxxx
+                if (start2 >= count2) break; // Overflow
+                gint remaining = count - index;
+                gint b2 = remaining < 2 ? 0 : bytes[index + 1];
+                gint b3 = remaining < 3 ? 0 : bytes[index + 2];
+                if (remaining < 3) {
+                    // Malformed
+                    dest[index2++] = Repl;
+                    ++index;
+                    if (remaining > 1 && ((b1 == (gbyte)0xe0 && (b2 & 0xe0) == 0x80) || (b2 & 0xc0) != 0x80)) ++index;
+                    continue;
+                }
+                if ((b1 == (gbyte)0xe0 && (b2 & 0xe0) == 0x80) || (b2 & 0xc0) != 0x80 || (b3 & 0xc0) != 0x80) {
+                    // Malformed
+                    dest[index2++] = Repl;
+                    ++++++index;
+                    continue;
+                }
+                dest[index2++] = b1 << 12 ^ b2 << 6 ^ (b3 ^ ((gbyte)0xE0 << 12 ^ (gbyte)0x80 << 6 ^ (gbyte)0x80 << 0));
+                ++++++index;
+                continue;
+            }
+            if ((b1 >> 3) == -2) {
+                // 4 bytes, 21 bits: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+                if (count2 - start2 < 2) break; // Overflow
+                gint remaining = count - index;
+                gint b2 = remaining < 2 ? 0 : bytes[index + 1];
+                gint b3 = remaining < 3 ? 0 : bytes[index + 2];
+                gint b4 = remaining < 4 ? 0 : bytes[index + 3];
+                if (remaining < 4) {
+                    dest[index2++] = Repl;
+                    ++index;
+                    b1 = b1 & 0xff;
+                    if (b1 > 0xf4 || remaining > 1 && ((b1 == 0xf0 && (b2 < 0x90 || b2 > 0xbf))
+                        || (b1 == 0xf4 && (b2 & 0xf0) != 0x80) || (b2 & 0xc0) != 0x80))
+                        ++index;
+                    if (remaining > 2 && ((b3 & 0xc0) != 0x80)) ++++index;
+                }
+                if ((b2 & 0xc0) != 0x80 || (b3 & 0xc0) != 0x80 || (b4 & 0xc0) != 0x80) {
+                    dest[index2++] = Repl;
+                    ++++++++index;
+                    continue;
+                }
+                gint chr = b1 << 18 ^ b2 << 12 ^ b3 << 6 ^ (b4 ^
+                    ((gbyte)0xF0 << 18 ^ (gbyte)0x80 << 12 ^ (gbyte)0x80 << 6 ^ (gbyte)0x80));
+                dest[index2++] = (chr >> 10) + 0xD800 - (0x10000 >> 10);
+                dest[index2++] = (chr & 0x3ff) + 0xDC00;
+                ++++++++index;
+                continue;
+            }
+            // Malformed
+            if (start2 >= count2) break; // Overflow
+            dest[index2++] = Repl;
+            ++index;
+        }
+        return index2 - start2;
+    }
+
+    gint Strings::decodeUtf8Chars(const ByteArray& bytes, gint start, gint count, CharArray& dest, gint start2,
+                                  gint count2) {
+        if (bytes == null || count <= 0) return 0;
+        if (start < 0) start = 0;
+        if (start2 < 0) start2 = 0;
+        CORE_FAST static gchar Repl = 0xfffd;
+        gint index = start;
+        gint index2 = start2;
+        for (; index < count && start2 < count2; ++index) {
+            gchar chr = bytes[index] & 0xff;
+            if (chr > 0x7f) break;
+            dest[index2++] = chr;
+        }
+        while (index < count) {
+            gint b1 = bytes[index];
+            if (b1 > 0) {
+                // 1 byte, 7 bits: 0xxxxxxx
+                if (start2 >= count2) break; // Overflow
+                dest[index2++] = b1 & 0xff;
+                ++index;
+                continue;
+            }
+            if ((b1 >> 5) == -2 && (b1 & 0x1e) != 0) {
+                // 2 bytes, 11 bits: 110xxxxx 10xxxxxx
+                //                          [C2..DF] [80..BF]
+                if (start2 >= count2) break; // Overflow
+                gint b2 = count - index < 2 ? 0 : bytes[index + 1];
+                if ((b2 & 0xc0) != 0x80) {
+                    // Malformed (number of bytes require is insufficient)
+                    dest[index2++] = Repl;
+                    ++index;
+                    continue;
+                }
+                dest[index2++] = (gchar)(b1 << 6 ^ b2 ^ ((gbyte)0xC0 << 6 ^ (gbyte)0x80 << 0));
+                ++++index;
+                continue;
+            }
+            if ((b1 >> 4) == -2) {
+                // 3 bytes, 16 bits: 1110xxxx 10xxxxxx 10xxxxxx
+                if (start2 >= count2) break; // Overflow
+                gint remaining = count - index;
+                gint b2 = remaining < 2 ? 0 : bytes[index + 1];
+                gint b3 = remaining < 3 ? 0 : bytes[index + 2];
+                if (remaining < 3) {
+                    // Malformed
+                    dest[index2++] = Repl;
+                    ++index;
+                    if (remaining > 1 && ((b1 == (gbyte)0xe0 && (b2 & 0xe0) == 0x80) || (b2 & 0xc0) != 0x80)) ++index;
+                    continue;
+                }
+                if ((b1 == (gbyte)0xe0 && (b2 & 0xe0) == 0x80) || (b2 & 0xc0) != 0x80 || (b3 & 0xc0) != 0x80) {
+                    // Malformed
+                    dest[index2++] = Repl;
+                    ++++++index;
+                    continue;
+                }
+                dest[index2++] = b1 << 12 ^ b2 << 6 ^ (b3 ^ ((gbyte)0xE0 << 12 ^ (gbyte)0x80 << 6 ^ (gbyte)0x80 << 0));
+                ++++++index;
+                continue;
+            }
+            if ((b1 >> 3) == -2) {
+                // 4 bytes, 21 bits: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+                if (count2 - start2 < 2) break; // Overflow
+                gint remaining = count - index;
+                gint b2 = remaining < 2 ? 0 : bytes[index + 1];
+                gint b3 = remaining < 3 ? 0 : bytes[index + 2];
+                gint b4 = remaining < 4 ? 0 : bytes[index + 3];
+                if (remaining < 4) {
+                    dest[index2++] = Repl;
+                    ++index;
+                    b1 = b1 & 0xff;
+                    if (b1 > 0xf4 || remaining > 1 && ((b1 == 0xf0 && (b2 < 0x90 || b2 > 0xbf))
+                        || (b1 == 0xf4 && (b2 & 0xf0) != 0x80) || (b2 & 0xc0) != 0x80))
+                        ++index;
+                    if (remaining > 2 && ((b3 & 0xc0) != 0x80)) ++++index;
+                }
+                if ((b2 & 0xc0) != 0x80 || (b3 & 0xc0) != 0x80 || (b4 & 0xc0) != 0x80) {
+                    dest[index2++] = Repl;
+                    ++++++++index;
+                    continue;
+                }
+                gint chr = b1 << 18 ^ b2 << 12 ^ b3 << 6 ^ (b4 ^
+                    ((gbyte)0xF0 << 18 ^ (gbyte)0x80 << 12 ^ (gbyte)0x80 << 6 ^ (gbyte)0x80));
+                dest[index2++] = (chr >> 10) + 0xD800 - (0x10000 >> 10);
+                dest[index2++] = (chr & 0x3ff) + 0xDC00;
+                ++++++++index;
+                continue;
+            }
+            // Malformed
+            if (start2 >= count2) break; // Overflow
+            dest[index2++] = Repl;
+            ++index;
+        }
+        return index2 - start2;
+    }
+
+    ByteArray Strings::encodeLatn1ToUtf8Bytes(Bytes bytes, gint start, gint end) {
+        if (start < 0) start = 0;
+        if (end < 0) end = 0;
+        glong count = (end - start);
+        if (count < 0 || bytes == null) return ByteArray();
+        count = (glong)(count * 1.5f);
+        if (count > Integer::MAX_VALUE)
+            count = Integer::MAX_VALUE;
+        ByteArray output = ByteArray(count);
+        gint index = 0;
+        gint overflow = false;
+        while (start < end) {
+            gbyte b = bytes[start];
+            if (b < 0) goto Encoding;
+            output[index++] = b;
+            ++start;
+        }
+        goto Ending;
+    Overflow:
+        if (overflow) {
+            glong newCount = count + ((count >> 1) < 8 ? 8 : count >> 1);
+            if (newCount > Integer::MAX_VALUE)
+                newCount = count + ((count >> 1) >= 8 ? count >> 1 : 8);
+            if (newCount >= Integer::MAX_VALUE)
+                OutOfMemoryError($toString(Required length exceed implementation limit)).throws($ftrace());
+            count = newCount;
+            output = copyOfArray(output, newCount);
+        }
+    Encoding:
+        while (start < end) {
+            gchar chr = bytes[start] & 0xff;
+            if (chr < 0x80) {
+                if ((overflow = (index >= count))) goto Overflow;
+                output[index++] = (gbyte)chr;
+                ++start;
+                continue;
+            }
+            if ((overflow = (count - index < 2))) goto Overflow;
+            output[index++] = (gbyte)(0xc0 | chr >> 6);
+            output[index++] = (gbyte)(0x80 | chr & 0x3f);
+            ++start;
+        }
+    Ending:
+        return copyOfArray(output, index);
+    }
+
+    ByteArray Strings::encodeUtf16ToUtf8Bytes(Bytes bytes, gint start, gint end) {
+        if (start < 0) start = 0;
+        if (end < 0) end = 0;
+        glong count = (end - start);
+        if (count < 0 || bytes == null) return ByteArray();
+        count = (glong)(count * 1.5f);
+        if (count > Integer::MAX_VALUE)
+            count = Integer::MAX_VALUE;
+        ByteArray output = ByteArray(count);
+        gint index = 0;
+        gint overflow = false;
+        while (start < end) {
+            gchar chr = getUtf16CharAt(bytes, start, end);
+            if (chr > 0x7f) goto Encoding;
+            output[index++] = (gbyte)chr;
+            ++start;
+        }
+        goto Ending;
+    Overflow:
+        if (overflow) {
+            glong newCount = count + ((count >> 1) < 8 ? 8 : count >> 1);
+            if (newCount > Integer::MAX_VALUE)
+                newCount = count + ((count >> 1) >= 8 ? count >> 1 : 8);
+            if (newCount >= Integer::MAX_VALUE)
+                OutOfMemoryError($toString(Required length exceed implementation limit)).throws($ftrace());
+            count = newCount;
+            output = copyOfArray(output, newCount);
+        }
+    Encoding:
+        while (start < end) {
+            gchar chr = getUtf16CharAt(bytes, start, end);
+            if (chr < 0x80) {
+                if ((overflow = (index >= count))) goto Overflow;
+                output[index++] = (gbyte)chr;
+                ++start;
+                continue;
+            }
+            if (chr < 0x800) {
+                // 2 bytes, 11 bits
+                if ((overflow = (count - index < 2))) goto Overflow;
+                output[index++] = (gbyte)(0xc0 | chr >> 6);
+                output[index++] = (gbyte)(0x80 | chr & 0x3f);
+                ++start;
+                continue;
+            }
+            if (0xD800 <= chr && chr <= 0xDFFF) {
+                // Surrogate
+                gchar chr1 = chr;
+                gint ch = -1;
+                if (chr1 < 0xDC00) // High Surrogate
+                    if (end - start >= 2) {
+                        gchar chr2 = getUtf16CharAt(bytes, start + 1, end);
+                        if (0xDC00 <= chr2 && chr2 <= 0xDFFF)
+                            ch = ((chr1 - 0xD800) << 10) + (chr2 - 0xDC00) + 0x10000;
+                    }
+                if (ch < 0) {
+                    if ((overflow = (index >= count))) goto Overflow;
+                    output[index++] = 0x63;
+                    ++start;
+                    continue;
+                }
+                if ((overflow = (count - index < 4))) goto Overflow;
+                output[index++] = (gbyte)(0xf0 | ch >> 18);
+                output[index++] = (gbyte)(0x80 | ch >> 12 & 0x3f);
+                output[index++] = (gbyte)(0x80 | ch >> 6 & 0x3f);
+                output[index++] = (gbyte)(0x80 | ch & 0x3f);
+                ++++start;
+                continue;
+            }
+            // 3 bytes, 16 bits
+            if ((overflow = (count - index < 3))) goto Overflow;
+            output[index++] = (gbyte)(0xe0 | chr >> 12);
+            output[index++] = (gbyte)(0x80 | chr >> 6 & 0x3f);
+            output[index++] = (gbyte)(0x80 | chr & 0x3f);
+            ++start;
+        }
+    Ending:
+        return copyOfArray(output, index);
     }
 
     Strings::Bytes Strings::newBytes(gint count, gint coder) {
@@ -599,32 +1033,37 @@ namespace core::lang
     }
 
     void Strings::putByte(Bytes bytes, gint index, gbyte value, gint count) {
-        if (bytes == null || index < 0 || count <= 0 || index >= count)
-            AssertionError(false).throws($ftrace());
+        if (bytes == null || index < 0 || count <= 0 || index >= count) return;
         bytes[index] = value;
     }
 
     void Strings::putChar(Bytes bytes, gint index, gchar value, gint count) {
         count >>= 1;
         index >>= 1;
-        if (bytes == null || index < 0 || count <= 0 || index >= count)
-            AssertionError(false).throws($ftrace());
+        if (bytes == null || index < 0 || count <= 0 || index >= count) return;
         ((Chars)bytes)[index] = value;
     }
 
     void Strings::putInt(Bytes bytes, gint index, gint value, gint count) {
         count >>= 2;
         index >>= 2;
-        if (bytes == null || index < 0 || count <= 0 || index >= count)
-            AssertionError(false).throws($ftrace());
+        if (bytes == null || index < 0 || count <= 0 || index >= count) return;
         ((Ints)bytes)[index] = value;
     }
 
     void Strings::putLong(Bytes bytes, gint index, glong value, gint count) {
         count >>= 3;
         index >>= 3;
-        if (bytes == null || index < 0 || count <= 0 || index >= count)
-            AssertionError(false).throws($ftrace());
+        if (bytes == null || index < 0 || count <= 0 || index >= count) return;
         ((Longs)bytes)[index] = value;
+    }
+
+    ByteArray Strings::copyOfArray(const ByteArray& input, gint newCount) {
+        gint count = input.length();
+        if (newCount == count) return input;
+        if (count > newCount) count = newCount;
+        ByteArray output = ByteArray(newCount);
+        for (int i = 0; i < count; ++i) output[i] = input[i];
+        return output;
     }
 }
