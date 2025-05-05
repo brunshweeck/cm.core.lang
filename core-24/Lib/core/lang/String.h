@@ -83,7 +83,7 @@ namespace core
 
         /// Initializes a newly created @c String object so that it represents the same sequence of characters as the argument; in other words, the newly created string is a copy of the argument string.
         /// @param original A @c String
-        String(const String&& original) CORE_NOTHROW;
+        String(String&& original) CORE_NOTHROW;
 
         /// Allocates a new @c String so that it represents the sequence of characters currently contained in the character array argument.
         /// The contents of the character array are copied; subsequent modification of the character array does not affect the newly created string.
@@ -129,16 +129,6 @@ namespace core
         ///  @param hiByte The top 8 bits of each 16-bit Unicode code unit.
         CORE_EXPLICIT String(const ByteArray& ascii, gint hiByte);
 
-        /// Constructs a new @c String by decoding the specified array of bytes using the specified @em charset.
-        /// The length of the new @c String is a function of the charset, and hence may not be equal to the length of the byte array.
-        /// The behavior of this constructor when the given bytes are not valid in the given charset is unspecified.
-        /// The @b core.charset::CharsetDecoder class should be used when more control over the decoding process is required.
-        /// The contents of the string are unspecified if the byte array is modified during string construction.
-        /// @param bytes The bytes to be decoded into characters
-        /// @param charset The name of a supported @em charset
-        /// @throws  UnsupportedEncodingException If the named charset is not supported
-        CORE_EXPLICIT String(const ByteArray& bytes, const String& charset);
-
         /// Constructs a new @c String by decoding the specified subarray of bytes using the <em>default charset</em>.
         /// The length of the new @c String is a function of the charset, and hence may not be equal to the length of the subarray.
         /// The behavior of this constructor when the given bytes are not valid in the default charset is unspecified.
@@ -163,23 +153,20 @@ namespace core
         /// @param value The primitive string value
         /// @throws IllegalArgumentException
         template <class T, ClassOf(true)::OnlyIf<Class<T>::isString()>  = true>
-        String(const T& value)
-        {
-            if (Class<T>::isArray())
-            {
+        String(const T& value) {
+            if (Class<T>::isArray()) {
                 $alias(charT, typename Class<T>::NoArray);
                 static CORE_FAST gint coder = Class<charT>::SIZE >> 1;
                 glong length = Class<charT>::COUNT;
                 if (length > 0 && value && value[length - 1] == 0) length -= 1L;
-                initializeFromPrimalString((glong)value, length * coder, coder);
+                initializeFromPrimalString((glong)value, length, coder);
             }
-            else if (Class<T>::isPointer())
-            {
+            else if (Class<T>::isPointer()) {
                 $alias(charT, typename Class<T>::NoPointer);
                 static CORE_FAST gint coder = Class<charT>::SIZE >> 1;
                 glong length = -1;
                 if (value) while (value[++length] != 0) length += 1L;
-                initializeFromPrimalString((glong)value, length * coder, coder);
+                initializeFromPrimalString((glong)value, length, coder);
             }
         }
 
@@ -266,14 +253,6 @@ namespace core
         ///                 - The @c offset is negative;
         ///                 - The @code offset + (end - start) @endcode is larger than of @c dest.length() .
         void toBytes(gint start, gint end, ByteArray& dest, gint offset) const;
-
-        /// Encodes this @c String into a sequence of bytes using the named charset, storing the result into a new byte array.
-        /// The behavior of this method when this string cannot be encoded in the given charset is unspecified.
-        /// The @c core.charset::CharsetEncoder class should be used when more control over the encoding process is required.
-        /// @param charset The name of a supported @em charset.
-        /// @return The resultant byte array.
-        /// @throws  UnsupportedEncodingException If the named charset is not supported
-        ByteArray toBytes(const String& charset) const;
 
         /// Encodes this @c String into a sequence of bytes using the <em> default charset</em>, storing the result into a new byte array.
         /// The behavior of this method when this string cannot be encoded in the default charset is unspecified.
@@ -469,9 +448,16 @@ namespace core
         /// @return if the argument is @c null, then a string equal to @c "null"; otherwise, the value of @c obj.toString() is returned.
         static String valueOf(const Object& obj);
 
-        Object& clone() const override;
+        String& clone() const override;
+
+    protected:
+        gint encoding() const;
 
     private:
+        static gbyte CORE_FAST Latn1 = 0;
+        static gbyte CORE_FAST Utf16 = 1;
+        gint coder = UsingCompactString ? Latn1 : Utf16;
+
         /// Initialise this string with primal string (pointer).
         /// The @c coder value is used to decode the input string.
         ///  - If coder == 1, the primal string is considered as string encoded to Utf-8
@@ -482,17 +468,6 @@ namespace core
         /// @param coder The value that indicate the @c log2 of size of one character in input
         /// @throws IllegalArgumentException If the address of primal string invalid or null
         void initializeFromPrimalString(glong primalString, glong length, gint coder);
-
-        static Object& newFormatter();
-        static String doFormatting(Object& formatter);
-        static gint addFormatterArg(Object& formatter, const Object& arg);
-        static gint addFormatterArg(Object& formatter, gboolean arg);
-        static gint addFormatterArg(Object& formatter, gbyte arg);
-        static gint addFormatterArg(Object& formatter, gshort arg);
-        static gint addFormatterArg(Object& formatter, gint arg);
-        static gint addFormatterArg(Object& formatter, glong arg);
-        static gint addFormatterArg(Object& formatter, gfloat arg);
-        static gint addFormatterArg(Object& formatter, gdouble arg);
     };
 } // core
 

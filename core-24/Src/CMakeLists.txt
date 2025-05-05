@@ -102,6 +102,8 @@ add_executable("SampleExecutable" "Main.cpp"
         ../Lib/core/lang/LongArray.cpp
         ../Lib/core/lang/LongArray.h
         ../Lib/meta/lang/Strings.cpp
-        ../Lib/meta/lang/Strings.h)
+        ../Lib/meta/lang/Strings.h
+        ../Lib/core/lang/Preconditions.cpp
+        ../Lib/core/lang/Preconditions.h)
 
 include_directories("../Lib")
