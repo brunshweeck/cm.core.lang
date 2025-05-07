@@ -140,12 +140,12 @@ namespace core { namespace lang
             TraceInfo& clone() const override;
 
         private:
-            static void checkModuleName(const String& moduleName);
-            static void checkModuleVersion(const String& moduleVersion);
             static void checkName(const String& className);
-            static String resolveName(const String& className);
-            static void checkFunctionName(const String& functionName);
-            static void checkLineNumber(gint lineNumber);
+            static String resolveName(const String& inputName);
+            static String resolveClassName(const String& inputFunction);
+            static String resolveFunctionName(const String& inputClass, const String& inputFunction);
+            static String normalizeName(const String& inputName);
+            static gint checkLineNumber(gint inputLine);
         };
     } // lang
 } // core
