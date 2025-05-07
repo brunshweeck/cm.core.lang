@@ -45,6 +45,8 @@ namespace core
             /// Returns the value of the specified number as a @c short.
             /// @return The numeric value represented by this object after conversion to type @c gshort
             virtual gshort shortValue() const;
+
+            Number& clone() const override = 0;
         };
     } // lang
 } // core

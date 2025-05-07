@@ -49,7 +49,7 @@ namespace core
          * @note It is recommended that all subclasses override this method.
          * todo: uncomment and implement method toString
          */
-        // virtual String toString() const = 0;
+        virtual String toString() const;
 
         /**
          *  Create and return the shadow and dynamic copy of this object.
@@ -62,7 +62,7 @@ namespace core
          *  @throws CloneNotSupportedException If the object's class does not support the @c clone operation. Subclasses that override the @c clone method can also throw this exception to indicate that an instance cannot be cloned.
          *  todo: uncomment and implement method clone
          */
-        // virtual Object& clone() const = 0;
+        virtual Object& clone() const = 0;
     };
 } // core
 

@@ -68,6 +68,8 @@ namespace core
             ForLoopIterator end() { return ForLoopIterator(*this, -1); }
             // todo: adjust the code to const version support for method begin()
             // todo: adjust the code to const version support for method end()
+
+            Iterable& clone() const override;
         };
     } // lang
 } // core

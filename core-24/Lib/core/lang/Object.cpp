@@ -5,6 +5,7 @@
 #include "Object.h"
 
 #include "Null.h"
+#include "String.h"
 
 namespace core
 {
@@ -14,6 +15,15 @@ namespace core
     {
         glong identityHash = (glong)this;
         return (gint)(identityHash ^ (identityHash >> 16));
+    }
+
+    String Object::toString() const
+    {
+        if (*this == null)
+            return $toString(null);
+        // todo: complete this implementation while to have the form:
+        // typename@addressWithout0x
+        return $toString();
     }
 
     inline namespace literals
