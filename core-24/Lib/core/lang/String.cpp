@@ -626,6 +626,57 @@ namespace core { namespace lang
         return output;
     }
 
+    String String::replace(gchar oldCh, gchar newCh) const {
+        gint index = 0;
+        for (; index < count; ++index) if (oldCh == charAt(index)) break;
+        if (index < count) {
+            String output;
+            output.count = count;
+            if (coder == Latn1) {
+                if (newCh < 0x80) {
+                    output.coder = Latn1;
+                    output.value = Strings::copyOfLatn1Bytes(value, 0, count, count);
+                    for (; index < output.count; ++index) {
+                        gchar ch = Strings::getLatin1CharAt(value, index, count);
+                        if (oldCh == ch) Strings::putLatn1CharAt(output.value, index, ch, output.count);
+                    }
+                }
+                else {
+                    output.coder = Utf16;
+                    output.value = Strings::copyOfLatin1ToUtf16Bytes(value, 0, count, count);
+                    for (; index < output.count; ++index) {
+                        gchar ch = Strings::getLatin1CharAt(value, index, count);
+                        if (oldCh == ch) Strings::putUtf16CharAt(output.value, index, ch, output.count);
+                    }
+                }
+            }
+            else {
+                output.coder = Utf16;
+                output.value = Strings::copyOfUtf16Bytes(value, 0, count, count);
+                for (; index < output.count; ++index) {
+                    gchar ch = Strings::getUtf16CharAt(value, index, count);
+                    if (oldCh == ch) Strings::putUtf16CharAt(output.value, index, ch, output.count);
+                }
+            }
+            return output;
+        }
+        return *this;
+    }
+
+    String String::replace(const CharSequence& target, const CharSequence& replacement) const {
+        if (count == 0) return *this;
+        gint replCount = replacement.length();
+        gint targetCount = target.length();
+        if (targetCount == 0) {
+            glong newCount = (count + 1LL) * replCount + count;
+            if (newCount > Integer::MAX_VALUE)
+                OutOfMemoryError($toString(Required length exceed implementation limit)).throws($ftrace());
+            // todo: Finish this implementation
+        }
+
+        return *this;
+    }
+
     String String::toString() const { return *this; }
 
     String String::valueOf(const Object& obj) { return obj.toString(); }
