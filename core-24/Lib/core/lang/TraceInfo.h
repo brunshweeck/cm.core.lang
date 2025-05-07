@@ -141,6 +141,7 @@ namespace core { namespace lang
 
         private:
 <<<<<<< HEAD
+<<<<<<< HEAD
             static void checkName(const String& className);
             static String resolveName(const String& inputName);
             static String resolveClassName(const String& inputFunction);
@@ -155,6 +156,14 @@ namespace core { namespace lang
             static void checkFunctionName(const String& functionName);
             static void checkLineNumber(gint lineNumber);
 >>>>>>> 3aa0f8c (???)
+=======
+            static void checkName(const String& className);
+            static String resolveName(const String& inputName);
+            static String resolveClassName(const String& inputFunction);
+            static String resolveFunctionName(const String& inputClass, const String& inputFunction);
+            static String normalizeName(const String& inputName);
+            static gint checkLineNumber(gint inputLine);
+>>>>>>> 1dd40da (refactor(core-lang-19): unix adjustement)
         };
     } // lang
 } // core

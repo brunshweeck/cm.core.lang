@@ -627,6 +627,9 @@ namespace core { namespace lang
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1dd40da (refactor(core-lang-19): unix adjustement)
     String String::replace(gchar oldCh, gchar newCh) const {
         gint index = 0;
         for (; index < count; ++index) if (oldCh == charAt(index)) break;
@@ -678,8 +681,11 @@ namespace core { namespace lang
         return *this;
     }
 
+<<<<<<< HEAD
 =======
 >>>>>>> 3aa0f8c (???)
+=======
+>>>>>>> 1dd40da (refactor(core-lang-19): unix adjustement)
     String String::toString() const { return *this; }
 
     String String::valueOf(const Object& obj) { return obj.toString(); }
