@@ -152,60 +152,60 @@ namespace core::lang::spi
     template <class T>
     static decltype(tryDeclare0<T>(0)) tryDeclare() { CORE_UNREACHABLE(); }
 
-#define __DELETE_QUALIFIER                   1L << 0x00
-#define __CONST_QUALIFIER                      1L << 0x01
-#define __VOLATILE_QUALIFIER                   1L << 0x02
-#define __REFERENCE_QUALIFIER                1L << 0x03
-#define __POINTER_QUALIFIER                    1L << 0x04
-#define __ARRAY_QUALIFIER                       1L << 0x05
-#define __IS_FUNCTION_TYPE                    1L << 0x06
-#define __IS_CLASS_TYPE                        1L << 0x07
-#define __IS_ENUM_TYPE                          1L << 0x08
-#define __IS_UNION_TYPE                          1L << 0x09
-#define __IS_PRIMITIVE_TYPE                     1L << 0x0A
-#define __TO_CLASS_TYPE                            1L << 0x0B
-#define __TO_PRIMITIVE_TYPE                         1L << 0x0C
-#define __IS_SAME_TYPE                  1L << 0x0D
-#define __IS_TEMPLATE_TYPE         1L << 0x0E
-#define __IS_FUNCTION_MEMBER_TYPE   1L << 0x0F
-#define __IS_ABSTRACT_TYPE  1L << 0x10
-#define __IS_ARRAY_TYPE    1L << 0x11
-#define __IS_SUPER_TYPE   1L << 0x12
-#define __IS_FINAL_TYPE    1L << 0x13
-#define __IS_SIZEABLE_TYPE  1L << 0x14
-#define __IS_INTEGER_TYPE  1L << 0x15
-#define __IS_FLOAT_TYPE    1L << 0x16
-#define __IS_VOID_TYPE     1L << 0x17
-#define __IS_BOOLEAN_TYPE  1L << 0x18
-#define __IS_CHARACTER_TYPE  1L << 0x19
-#define __IS_STRING_TYPE    1L << 0x1A
-#define __IS_CALLABLE_TYPE  1L << 0x1B
-#define __IS_EMPTY_TYPE    1L << 0x1C
-#define __IS_TRIVIAL_TYPE  1L << 0x1D
-#define __IS_POLYMORPHIC_TYPE  1L << 0x1E
-#define __IS_LITERAL_TYPE    1L << 0x1F
-#define __IS_SLIMMED_TYPE    1L << 0x20
-#define __IS_CONVERTIBLE_TYPE  1L << 0x21
-#define __IS_CONSTRUCTIBLE_TYPE  1L << 0x22
-#define __IS_ASSIGNABLE_TYPE    1L << 0x23
-#define __IS_DESTRUCTIBLE_TYPE  1L << 0x24
-#define __IS_COPYABLE_TYPE       1L << 0x25
-#define __IS_LESS_THAN_COMPARABLE_TYPE  1L << 0x26
-#define __IS_EQUAL_TO_COMPARABLE_TYPE  1L << 0x27
-#define __IS_GREATER_THAN_COMPARABLE_TYPE  1L << 0x28
-#define __IS_GREATER_THAN_OR_EQUAL_TO_COMPARABLE_TYPE  1L << 0x29
-#define __IS_NOT_EQUAL_TO_COMPARABLE_TYPE  1L << 0x2A
-#define __IS_LESS_THAN_OR_EQUAL_TO_COMPARABLE_TYPE  1L << 0x2B
-#define __IS_CONSTANT_TYPE  1L << 0x2C
-#define __IS_REFERENCE_TYPE  1L << 0x2D
-#define __IS_POINTER_TYPE  1L << 0x2E
-#define __IS_VOLATILE_TYPE  1L << 0x2F
-#define __LVALUE_QUALIFIER   1L << 0x30
-#define __RVALUE_QUALIFIER    1L << 0x31
-#define __IS_MEMBER_TYPE  1L << 0x32
-#define __TO_SLIMMED_TYPE  1L << 0x33
-#define __IS_INSTANCE_OF_TYPE  1L << 0x34
-#define __IS_RVALUE_TYPE  1L << 0x35
+#define __DELETE_QUALIFIER                   1LL << 0x00
+#define __CONST_QUALIFIER                      1LL << 0x01
+#define __VOLATILE_QUALIFIER                   1LL << 0x02
+#define __REFERENCE_QUALIFIER                1LL << 0x03
+#define __POINTER_QUALIFIER                    1LL << 0x04
+#define __ARRAY_QUALIFIER                       1LL << 0x05
+#define __IS_FUNCTION_TYPE                    1LL << 0x06
+#define __IS_CLASS_TYPE                        1LL << 0x07
+#define __IS_ENUM_TYPE                          1LL << 0x08
+#define __IS_UNION_TYPE                          1LL << 0x09
+#define __IS_PRIMITIVE_TYPE                     1LL << 0x0A
+#define __TO_CLASS_TYPE                            1LL << 0x0B
+#define __TO_PRIMITIVE_TYPE                         1LL << 0x0C
+#define __IS_SAME_TYPE                  1LL << 0x0D
+#define __IS_TEMPLATE_TYPE         1LL << 0x0E
+#define __IS_FUNCTION_MEMBER_TYPE   1LL << 0x0F
+#define __IS_ABSTRACT_TYPE  1LL << 0x10
+#define __IS_ARRAY_TYPE    1LL << 0x11
+#define __IS_SUPER_TYPE   1LL << 0x12
+#define __IS_FINAL_TYPE    1LL << 0x13
+#define __IS_SIZEABLE_TYPE  1LL << 0x14
+#define __IS_INTEGER_TYPE  1LL << 0x15
+#define __IS_FLOAT_TYPE    1LL << 0x16
+#define __IS_VOID_TYPE     1LL << 0x17
+#define __IS_BOOLEAN_TYPE  1LL << 0x18
+#define __IS_CHARACTER_TYPE  1LL << 0x19
+#define __IS_STRING_TYPE    1LL << 0x1A
+#define __IS_CALLABLE_TYPE  1LL << 0x1B
+#define __IS_EMPTY_TYPE    1LL << 0x1C
+#define __IS_TRIVIAL_TYPE  1LL << 0x1D
+#define __IS_POLYMORPHIC_TYPE  1LL << 0x1E
+#define __IS_LITERAL_TYPE    1LL << 0x1F
+#define __IS_SLIMMED_TYPE    1LL << 0x20
+#define __IS_CONVERTIBLE_TYPE  1LL << 0x21
+#define __IS_CONSTRUCTIBLE_TYPE  1LL << 0x22
+#define __IS_ASSIGNABLE_TYPE    1LL << 0x23
+#define __IS_DESTRUCTIBLE_TYPE  1LL << 0x24
+#define __IS_COPYABLE_TYPE       1LL << 0x25
+#define __IS_LESS_THAN_COMPARABLE_TYPE  1LL << 0x26
+#define __IS_EQUAL_TO_COMPARABLE_TYPE  1LL << 0x27
+#define __IS_GREATER_THAN_COMPARABLE_TYPE  1LL << 0x28
+#define __IS_GREATER_THAN_OR_EQUAL_TO_COMPARABLE_TYPE  1LL << 0x29
+#define __IS_NOT_EQUAL_TO_COMPARABLE_TYPE  1LL << 0x2A
+#define __IS_LESS_THAN_OR_EQUAL_TO_COMPARABLE_TYPE  1LL << 0x2B
+#define __IS_CONSTANT_TYPE  1LL << 0x2C
+#define __IS_REFERENCE_TYPE  1LL << 0x2D
+#define __IS_POINTER_TYPE  1LL << 0x2E
+#define __IS_VOLATILE_TYPE  1LL << 0x2F
+#define __LVALUE_QUALIFIER   1LL << 0x30
+#define __RVALUE_QUALIFIER    1LL << 0x31
+#define __IS_MEMBER_TYPE  1LL << 0x32
+#define __TO_SLIMMED_TYPE  1LL << 0x33
+#define __IS_INSTANCE_OF_TYPE  1LL << 0x34
+#define __IS_RVALUE_TYPE  1LL << 0x35
 
     //  Similarity
     template <class T>
@@ -511,105 +511,105 @@ namespace core::lang::spi
 
     // Integer types
     template <>
-    class __TypeTesting<__IS_INTEGER_TYPE, __int8> : public __AlwaysTrue
+    class __TypeTesting<__IS_INTEGER_TYPE, __int8_t> : public __AlwaysTrue
     {
     };
 
     template <>
-    class __TypeTesting<__IS_INTEGER_TYPE, __uint8> : public __AlwaysTrue
+    class __TypeTesting<__IS_INTEGER_TYPE, __uint8_t> : public __AlwaysTrue
     {
     };
 
     template <>
-    class __TypeTesting<__IS_INTEGER_TYPE, __int16> : public __AlwaysTrue
+    class __TypeTesting<__IS_INTEGER_TYPE, __int16_t> : public __AlwaysTrue
     {
     };
 
     template <>
-    class __TypeTesting<__IS_INTEGER_TYPE, __uint16> : public __AlwaysTrue
+    class __TypeTesting<__IS_INTEGER_TYPE, __uint16_t> : public __AlwaysTrue
     {
     };
 
     template <>
-    class __TypeTesting<__IS_INTEGER_TYPE, __int32> : public __AlwaysTrue
+    class __TypeTesting<__IS_INTEGER_TYPE, __int32_t> : public __AlwaysTrue
     {
     };
 
     template <>
-    class __TypeTesting<__IS_INTEGER_TYPE, __uint32> : public __AlwaysTrue
+    class __TypeTesting<__IS_INTEGER_TYPE, __uint32_t> : public __AlwaysTrue
     {
     };
 
     template <>
-    class __TypeTesting<__IS_INTEGER_TYPE, __int64> : public __AlwaysTrue
+    class __TypeTesting<__IS_INTEGER_TYPE, __int64_t> : public __AlwaysTrue
     {
     };
 
     template <>
-    class __TypeTesting<__IS_INTEGER_TYPE, __uint64> : public __AlwaysTrue
+    class __TypeTesting<__IS_INTEGER_TYPE, __uint64_t> : public __AlwaysTrue
     {
     };
 
     template <>
-    class __TypeTesting<__IS_INTEGER_TYPE, __varint> : public __AlwaysTrue
+    class __TypeTesting<__IS_INTEGER_TYPE, __varint_t> : public __AlwaysTrue
     {
     };
 
     template <>
-    class __TypeTesting<__IS_INTEGER_TYPE, __uvarint> : public __AlwaysTrue
+    class __TypeTesting<__IS_INTEGER_TYPE, __uvarint_t> : public __AlwaysTrue
     {
     };
 
     // Floating types
     template <>
-    class __TypeTesting<__IS_FLOAT_TYPE, __float32> : public __AlwaysTrue
+    class __TypeTesting<__IS_FLOAT_TYPE, __float32_t> : public __AlwaysTrue
     {
     };
 
     template <>
-    class __TypeTesting<__IS_FLOAT_TYPE, __float64> : public __AlwaysTrue
+    class __TypeTesting<__IS_FLOAT_TYPE, __float64_t> : public __AlwaysTrue
     {
     };
 
     template <>
-    class __TypeTesting<__IS_FLOAT_TYPE, __literal_float64> : public __AlwaysTrue
+    class __TypeTesting<__IS_FLOAT_TYPE, __literal_float64_t> : public __AlwaysTrue
     {
     };
 
     //  Character types
     template <>
-    class __TypeTesting<__IS_CHARACTER_TYPE, __int8> : public __AlwaysTrue
+    class __TypeTesting<__IS_CHARACTER_TYPE, __int8_t> : public __AlwaysTrue
     {
     };
 
     template <>
-    class __TypeTesting<__IS_CHARACTER_TYPE, __uint8> : public __AlwaysTrue
+    class __TypeTesting<__IS_CHARACTER_TYPE, __uint8_t> : public __AlwaysTrue
     {
     };
 
     template <>
-    class __TypeTesting<__IS_CHARACTER_TYPE, __literal_char8> : public __AlwaysTrue
+    class __TypeTesting<__IS_CHARACTER_TYPE, __literal_char8_t> : public __AlwaysTrue
     {
     };
 
     template <>
-    class __TypeTesting<__IS_CHARACTER_TYPE, __literal_char16> : public __AlwaysTrue
+    class __TypeTesting<__IS_CHARACTER_TYPE, __literal_char16_t> : public __AlwaysTrue
     {
     };
 
     template <>
-    class __TypeTesting<__IS_CHARACTER_TYPE, __literal_char32> : public __AlwaysTrue
+    class __TypeTesting<__IS_CHARACTER_TYPE, __literal_char32_t> : public __AlwaysTrue
     {
     };
 
     template <>
-    class __TypeTesting<__IS_CHARACTER_TYPE, __literal_varchar> : public __AlwaysTrue
+    class __TypeTesting<__IS_CHARACTER_TYPE, __literal_varchar_t> : public __AlwaysTrue
     {
     };
 
     // Boolean types
     template <>
-    class __TypeTesting<__IS_BOOLEAN_TYPE, __literal_boolean> : public __AlwaysTrue
+    class __TypeTesting<__IS_BOOLEAN_TYPE, __literal_boolean_t> : public __AlwaysTrue
     {
     };
 
@@ -840,92 +840,92 @@ namespace core::lang::spi
 
     // Class types
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __literal_boolean> : public __AlwaysTrueType<Boolean>
+    class __TypeTransform<__TO_CLASS_TYPE, __literal_boolean_t> : public __AlwaysTrueType<Boolean>
     {
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __int8> : public __AlwaysTrueType<Byte>
+    class __TypeTransform<__TO_CLASS_TYPE, __int8_t> : public __AlwaysTrueType<Byte>
     {
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __uint8> : public __AlwaysTrueType<Byte>
+    class __TypeTransform<__TO_CLASS_TYPE, __uint8_t> : public __AlwaysTrueType<Byte>
     {
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __int16> : public __AlwaysTrueType<Short>
+    class __TypeTransform<__TO_CLASS_TYPE, __int16_t> : public __AlwaysTrueType<Short>
     {
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __uint16> : public __AlwaysTrueType<Short>
+    class __TypeTransform<__TO_CLASS_TYPE, __uint16_t> : public __AlwaysTrueType<Short>
     {
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __int32> : public __AlwaysTrueType<Integer>
+    class __TypeTransform<__TO_CLASS_TYPE, __int32_t> : public __AlwaysTrueType<Integer>
     {
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __uint32> : public __AlwaysTrueType<Integer>
+    class __TypeTransform<__TO_CLASS_TYPE, __uint32_t> : public __AlwaysTrueType<Integer>
     {
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __int64> : public __AlwaysTrueType<Long>
+    class __TypeTransform<__TO_CLASS_TYPE, __int64_t> : public __AlwaysTrueType<Long>
     {
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __uint64> : public __AlwaysTrueType<Long>
+    class __TypeTransform<__TO_CLASS_TYPE, __uint64_t> : public __AlwaysTrueType<Long>
     {
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __varint> : public __AlwaysTrueType<Long>
+    class __TypeTransform<__TO_CLASS_TYPE, __varint_t> : public __AlwaysTrueType<Long>
     {
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __uvarint> : public __AlwaysTrueType<Long>
+    class __TypeTransform<__TO_CLASS_TYPE, __uvarint_t> : public __AlwaysTrueType<Long>
     {
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __float32> : public __AlwaysTrueType<Float>
+    class __TypeTransform<__TO_CLASS_TYPE, __float32_t> : public __AlwaysTrueType<Float>
     {
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __float64> : public __AlwaysTrueType<Double>
+    class __TypeTransform<__TO_CLASS_TYPE, __float64_t> : public __AlwaysTrueType<Double>
     {
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __literal_float64> : public __AlwaysTrueType<Double>
+    class __TypeTransform<__TO_CLASS_TYPE, __literal_float64_t> : public __AlwaysTrueType<Double>
     {
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __literal_char8> : public __AlwaysTrueType<Character>
+    class __TypeTransform<__TO_CLASS_TYPE, __literal_char8_t> : public __AlwaysTrueType<Character>
     {
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __literal_char16> : public __AlwaysTrueType<Character>
+    class __TypeTransform<__TO_CLASS_TYPE, __literal_char16_t> : public __AlwaysTrueType<Character>
     {
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __literal_char32> : public __AlwaysTrueType<Character>
+    class __TypeTransform<__TO_CLASS_TYPE, __literal_char32_t> : public __AlwaysTrueType<Character>
     {
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __literal_varchar> : public __AlwaysTrueType<Character>
+    class __TypeTransform<__TO_CLASS_TYPE, __literal_varchar_t> : public __AlwaysTrueType<Character>
     {
     };
 
@@ -946,42 +946,42 @@ namespace core::lang::spi
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __complex_int16> : public __AlwaysTrueType<Complex>
+    class __TypeTransform<__TO_CLASS_TYPE, __complex_int16_t> : public __AlwaysTrueType<Complex>
     {
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __complex_uint16> : public __AlwaysTrueType<Complex>
+    class __TypeTransform<__TO_CLASS_TYPE, __complex_uint16_t> : public __AlwaysTrueType<Complex>
     {
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __complex_int32> : public __AlwaysTrueType<Complex>
+    class __TypeTransform<__TO_CLASS_TYPE, __complex_int32_t> : public __AlwaysTrueType<Complex>
     {
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __complex_uint32> : public __AlwaysTrueType<Complex>
+    class __TypeTransform<__TO_CLASS_TYPE, __complex_uint32_t> : public __AlwaysTrueType<Complex>
     {
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __complex_int64> : public __AlwaysTrueType<Complex>
+    class __TypeTransform<__TO_CLASS_TYPE, __complex_int64_t> : public __AlwaysTrueType<Complex>
     {
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __complex_uint64> : public __AlwaysTrueType<Complex>
+    class __TypeTransform<__TO_CLASS_TYPE, __complex_uint64_t> : public __AlwaysTrueType<Complex>
     {
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __complex_varint> : public __AlwaysTrueType<Complex>
+    class __TypeTransform<__TO_CLASS_TYPE, __complex_varint_t> : public __AlwaysTrueType<Complex>
     {
     };
 
     template <>
-    class __TypeTransform<__TO_CLASS_TYPE, __complex_uvarint> : public __AlwaysTrueType<Complex>
+    class __TypeTransform<__TO_CLASS_TYPE, __complex_uvarint_t> : public __AlwaysTrueType<Complex>
     {
     };
 #endif // CORE_COMPILER_MSVC
