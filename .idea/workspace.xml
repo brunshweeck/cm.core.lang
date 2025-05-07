@@ -37,56 +37,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c5a85a7e-6835-4457-963c-8b08f2b881fd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/BooleanArray.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/BooleanArray.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/ByteArray.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/ByteArray.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/CharArray.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/CharArray.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/DoubleArray.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/DoubleArray.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/FloatArray.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/FloatArray.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/IntArray.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/IntArray.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/LongArray.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/LongArray.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/ShortArray.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/ShortArray.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/meta/lang/ArrayIndexOutOfBoundsException.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/meta/lang/ArrayIndexOutOfBoundsException.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/meta/lang/Strings.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-24/Lib/meta/lang/Strings.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/cm.core.lang.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/brunshweeck.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/file.template.settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/fileTemplates/internal/C Header File.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/fileTemplates/internal/C++ Class Header.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/fileTemplates/internal/Python Script.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Settings.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Settings.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Array.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Array.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/AssertionError.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/AssertionError.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Byte.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Byte.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Class.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Class.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Double.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Double.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Float.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Float.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Integer.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Integer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Null.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Null.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Short.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Short.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/String.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/String.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/Throwable.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/Throwable.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/AbstractArray.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/AbstractArray.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/AbstractArray.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/AbstractArray.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/AbstractObjectArray.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/AbstractObjectArray.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/AbstractPrimitiveArray.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/AbstractPrimitiveArray.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/AbstractValueArray.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/AbstractValueArray.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Compiler.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Compiler.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Literals.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Literals.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Traits.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Traits.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Types.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/core/lang/spi/Types.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Lib/meta/lang/StringIndexOutOfBoundsException.h" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Lib/meta/lang/StringIndexOutOfBoundsException.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Src/Main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Src/Main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-24/Test/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/core-24/Test/CMakeLists.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,20 +74,34 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {}
-}</component>
-  <component name="GitHubPullRequestState">{
-  &quot;prStates&quot;: [
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "history": [
     {
-      &quot;id&quot;: {
-        &quot;id&quot;: &quot;PR_kwDOOQJr_c6SiGLg&quot;,
-        &quot;number&quot;: 1
+      "state": "OPEN"
+    }
+  ],
+  "lastFilter": {
+    "state": "OPEN"
+  }
+}]]></component>
+  <component name="GitHubPullRequestState"><![CDATA[{
+  "prStates": [
+    {
+      "id": {
+        "id": "PR_kwDOOQJr_c6SiGLg",
+        "number": 1
       },
-      &quot;lastSeen&quot;: 1744658923849
+      "lastSeen": 1744658923849
+    },
+    {
+      "id": {
+        "id": "PR_kwDOOQJr_c6U5WtD",
+        "number": 3
+      },
+      "lastSeen": 1746638802166
     }
   ]
-}</component>
+}]]></component>
   <component name="GitRewordedCommitMessages">
     <option name="commitMessagesMapping">
       <RewordedCommitMessageMapping>
@@ -158,37 +141,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;CMake Application.SampleExecutable.executor&quot;: &quot;Debug&quot;,
-    &quot;CMake Debug.Project.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;working/core-lang-18&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/brunshweeck/CLionProjects/cm.core.v24&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
-    &quot;settings.editor.splitter.proportion&quot;: &quot;0.18869829&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "CMake Application.SampleExecutable.executor": "Debug",
+    "CMake Debug.Project.executor": "Debug",
+    "RunOnceActivity.RadMigrateCodeStyle": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.west.config.association.type.startup.service": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "last_opened_file_path": "/home/brunshweeck/CLionProjects/cm.core.v24",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
+    "settings.editor.splitter.proportion": "0.18869829",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/core-24/Lib/core/lang" />
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.SampleExecutable">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Project" type="CMakeListConfigurationType" factoryName="CMakeListConfigurationFactory" temporary="true">
       <method v="2" />
     </configuration>

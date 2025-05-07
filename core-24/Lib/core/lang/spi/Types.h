@@ -119,32 +119,32 @@ namespace core
         namespace spi
         {
             extern "C" {
-            typedef signed char __int8;
-            typedef unsigned char __uint8;
-            typedef short int __int16;
-            typedef unsigned short int __uint16;
-            typedef int __int32;
-            typedef unsigned int __uint32;
+            typedef signed char __int8_t;
+            typedef unsigned char __uint8_t;
+            typedef short int __int16_t;
+            typedef unsigned short int __uint16_t;
+            typedef int __int32_t;
+            typedef unsigned int __uint32_t;
 #if __WORDSIZE == 64
-            typedef long __int64;
-            typedef unsigned long __uint64;
-            typedef long long __varint;
-            typedef unsigned long long __uvarint;
+            typedef long __int64_t;
+            typedef unsigned long __uint64_t;
+            typedef long long __varint_t;
+            typedef unsigned long long __uvarint_t;
 #else
-            typedef long long __int64;
-            typedef unsigned long long __uint64;
-            typedef long __varint;
-            typedef unsigned long __uvarint;
+            typedef long long __int64_t;
+            typedef unsigned long long __uint64_t;
+            typedef long __varint_t;
+            typedef unsigned long __uvarint_t;
 #endif
             typedef unsigned long long __literal_int64;
-            typedef float __float32;
-            typedef double __float64;
-            typedef long double __literal_float64;
-            typedef char __literal_char8;
-            typedef char16_t __literal_char16;
-            typedef char32_t __literal_char32;
-            typedef wchar_t __literal_varchar;
-            typedef bool __literal_boolean;
+            typedef float __float32_t;
+            typedef double __float64_t;
+            typedef long double __literal_float64_t;
+            typedef char __literal_char8_t;
+            typedef char16_t __literal_char16_t;
+            typedef char32_t __literal_char32_t;
+            typedef wchar_t __literal_varchar_t;
+            typedef bool __literal_boolean_t;
 #ifdef CORE_COMPILER_MSVC
 #ifndef CORE_LANG_COMPILER_H
 #error "For support of complex numbers the file Compiler.h is required!"
@@ -159,20 +159,20 @@ namespace core
             typedef _Complex long double _Lcomplex;
             typedef _Complex signed char __complex_int8;
             typedef _Complex unsigned char __complex_uint8;
-            typedef _Complex short __complex_int16;
-            typedef _Complex unsigned short __complex_uint16;
-            typedef _Complex int __complex_int32;
-            typedef _Complex unsigned int __complex_uint32;
+            typedef _Complex short __complex_int16_t;
+            typedef _Complex unsigned short __complex_uint16_t;
+            typedef _Complex int __complex_int32_t;
+            typedef _Complex unsigned int __complex_uint32_t;
 #if __WORDSIZE == 64
-            typedef _Complex long __complex_int64;
-            typedef _Complex unsigned long __complex_uint64;
-            typedef _Complex long long __complex_varint;
-            typedef _Complex unsigned long long __complex_uvarint;
+            typedef _Complex long __complex_int64_t;
+            typedef _Complex unsigned long __complex_uint64_t;
+            typedef _Complex long long __complex_varint_t;
+            typedef _Complex unsigned long long __complex_uvarint_t;
 #else
-            typedef _Complex long __complex_varint;
-            typedef _Complex unsigned long __complex_uvarint;
-            typedef _Complex long long __complex_int64;
-            typedef _Complex unsigned long long __complex_uint64;
+            typedef _Complex long __complex_varint_t;
+            typedef _Complex unsigned long __complex_uvarint_t;
+            typedef _Complex long long __complex_int64_t;
+            typedef _Complex unsigned long long __complex_uint64_t;
 #endif
 
 #endif // CORE_COMPILER_MSVC
@@ -229,21 +229,21 @@ namespace core
 } // namespace core
 
 // Generic Byte Primitive Type (1 byte)
-$alias(gbyte, core::lang::spi::__int8);
+$alias(gbyte, core::lang::spi::__int8_t);
 // Generic Short Integer Primitive Type (2 bytes)
-$alias(gshort, core::lang::spi::__int16);
+$alias(gshort, core::lang::spi::__int16_t);
 // Generic Integer Primitive Type (4 bytes)
-$alias(gint, core::lang::spi::__int32);
+$alias(gint, core::lang::spi::__int32_t);
 // Generic Long Integer Primitive Type (8 bytes)
-$alias(glong, core::lang::spi::__int64);
+$alias(glong, core::lang::spi::__int64_t);
 // Generic Float Primitive Type (4 bytes)
-$alias(gfloat, core::lang::spi::__float32);
+$alias(gfloat, core::lang::spi::__float32_t);
 // Generic Double Float Primitive Type (8 bytes)
-$alias(gdouble, core::lang::spi::__float64);
+$alias(gdouble, core::lang::spi::__float64_t);
 // Generic Character Primitive Type (2 bytes)
-$alias(gchar, core::lang::spi::__literal_char16);
+$alias(gchar, core::lang::spi::__literal_char16_t);
 // Generic Boolean Primitive Type (1 byte)
-$alias(gboolean, core::lang::spi::__literal_boolean);
+$alias(gboolean, core::lang::spi::__literal_boolean_t);
 
 /*
         Compiler type support checking
