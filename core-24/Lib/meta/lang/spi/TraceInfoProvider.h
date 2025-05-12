@@ -21,17 +21,29 @@ namespace core::lang
 
         struct Entry
         {
+            Node parent = {};
             Node left = {};
             Node right = {};
             Info info = {};
         };
 
         Node root = {};
-        gboolean volatile isLocked = false;
+        gint volatile isLocked = false;
         gint volatile count = 0;
 
     public:
         TraceInfoProvider() = default;
+
+        const Object &findByContext(const Context &context, Selector selector);
+
+        const TraceInfo &findOrCreateByContext(const Context &context, Selector selector, Creator creator);
+
+    private:
+        void lock();
+
+        void unlock();
+
+        static Node successor(Node node);
 
         struct Context
         {
@@ -50,15 +62,15 @@ namespace core::lang
         public:
             virtual ~Context() = default;
 
-            virtual const String& getModuleName() const = 0;
+            virtual const String &getModuleName() const = 0;
 
-            virtual const String& getModuleVersion() const = 0;
+            virtual const String &getModuleVersion() const = 0;
 
-            virtual const String& getClassName() const = 0;
+            virtual const String &getClassName() const = 0;
 
-            virtual const String& getFunctionName() const = 0;
+            virtual const String &getFunctionName() const = 0;
 
-            virtual const String& getFileName() const = 0;
+            virtual const String &getFileName() const = 0;
 
             virtual gint getLineNumber() const = 0;
 
@@ -75,16 +87,7 @@ namespace core::lang
             gboolean useLineNumber() const;
         };
 
-        const Object& findByContext(const Context& context, Selector selector);
-
-        const TraceInfo& findOrCreateByContext(const Context& context, Selector selector, Creator creator);
-
-    private:
-        void lock();
-
-        void unlock();
-
-        static Node successor(Node node);
+        friend TraceInfo;
     };
 } // core
 

@@ -9,7 +9,7 @@
 
 namespace core
 {
-    template <class T>
+    template<class T>
     class Class $final : public Object
     {
         CORE_FAST Class() = default;
@@ -64,7 +64,7 @@ namespace core
 
         /// Multi-Dimensional Pointer Version of T
         /// @tparam dimension The number of pointer layers
-        template <glong dimension>
+        template<glong dimension>
         $alias(MultiPointer, typename lang::spi::__TypeTransform<__POINTER_QUALIFIER, T, -1, dimension>::type);
 
         /// Unbound Array Version of T
@@ -72,12 +72,12 @@ namespace core
 
         /// Multi-Dimensional Unbound Array Version of T
         ///  @tparam dimension The number of array layers
-        template <glong dimension>
+        template<glong dimension>
         $alias(MultiUnboundArray, typename lang::spi::__TypeTransform<__ARRAY_QUALIFIER, T, -1, dimension>::type);
 
         /// Bounded Array Version of T
         /// @tparam numberOfElements The number of array elements
-        template <glong numberOfElements>
+        template<glong numberOfElements>
         $alias(Array, typename lang::spi::__TypeTransform<__ARRAY_QUALIFIER, T, numberOfElements>::type);
 
         ///  Non-Array Version of T
@@ -86,7 +86,7 @@ namespace core
         /// Multi-Dimensional Bounded Array Version of T
         ///  @tparam numberOfElements The number of elements per layer
         ///  @tparam dimension The number of array layers
-        template <glong numberOfElements, glong dimension>
+        template<glong numberOfElements, glong dimension>
         $alias(MultiArray,
                typename lang::spi::__TypeTransform<__ARRAY_QUALIFIER, T, numberOfElements, dimension>::type);
 
@@ -177,29 +177,29 @@ namespace core
         /// @see Class::NoVolatile
         /// @see Class::NoReference
         /// @see Class::NoConstVolatileRef
-        $alias(Slimmed, typename lang::spi::__TypeTransform<__TO_SLIMMED_TYPE, T>::type);
+        $alias(Slimmed, typename lang::spi::__TypeTransform<__TO_SLIMMED_TYPE, NoConstVolatileRef>::type);
 
         /// Strict Conditional version of T
         /// @tparam condition The condition of validity for T
-        template <gboolean condition>
+        template<gboolean condition>
         $alias(OnlyIf, typename lang::spi::__StrictCondition<condition, T>::type);
 
         /// Strict Multi-Conditional version of T
         /// @tparam conditions The conditions of validity for T
-        template <gboolean ... conditions>
+        template<gboolean ... conditions>
         $alias(OnlyIfAll, typename lang::spi::__StrictCondition<
                lang::spi::__All<lang::spi::__Always<conditions>...>::value, T>::type);
 
         /// Strict Multi-Conditional version of T
         /// @tparam conditions The conditions of validity for T
-        template <gboolean ... conditions>
+        template<gboolean ... conditions>
         $alias(OnlyIfAny, typename lang::spi::__StrictCondition<
                lang::spi::__Any<lang::spi::__Always<conditions>...>::value, T>::type);
 
         /// Conditional version of T
        /// @tparam condition The condition of validity for T
        /// @tparam FallbackType The type returned if condition is @c false
-        template <gboolean condition, class FallbackType>
+        template<gboolean condition, class FallbackType>
         $alias(IfOrElse, typename lang::spi::__Condition<condition, T, FallbackType>::type);
 
         /// This type
@@ -212,7 +212,7 @@ namespace core
         $alias(Primitive, typename lang::spi::__TypeTransform<__TO_PRIMITIVE_TYPE, Slimmed>::type);
 
         /// Return type of instance for T called with given arguments types
-        template <class... Args>
+        template<class... Args>
         $alias(ReturnType, typename lang::spi::__TypeTesting<__IS_CALLABLE_TYPE, T, Args...>::optionalType::type);
 
         /// Size of T in bytes
@@ -225,12 +225,11 @@ namespace core
               The Properties checker of T
          */
 
-        template <class U>
+        template<class U>
         static CORE_FAST gboolean isSameTo() { return lang::spi::__TypeTesting<__IS_SAME_TYPE, T, U>::value; }
 
-        template <class... U>
-        static CORE_FAST gboolean isSameToAny()
-        {
+        template<class... U>
+        static CORE_FAST gboolean isSameToAny() {
             return lang::spi::__Any<lang::spi::__TypeTesting<__IS_SAME_TYPE, T, U>...>::value;
         }
 
@@ -267,8 +266,7 @@ namespace core
         static CORE_FAST gboolean isMember() { return lang::spi::__TypeTesting<__IS_MEMBER_TYPE, T>::value; }
 
         /// Return @c true if T is a function member type
-        static CORE_FAST gboolean isFunctionMember()
-        {
+        static CORE_FAST gboolean isFunctionMember() {
             return lang::spi::__TypeTesting<__IS_FUNCTION_MEMBER_TYPE, T>::value;
         }
 
@@ -282,8 +280,7 @@ namespace core
         static CORE_FAST gboolean isClass() { return lang::spi::__TypeTesting<__IS_CLASS_TYPE, T>::value; }
 
         /// Return @c true if T is a class or struct type
-        static CORE_FAST gboolean isPrimitive()
-        {
+        static CORE_FAST gboolean isPrimitive() {
             return isVoid() || isBoolean() || isCharacter() || isNumber() || isFunction() || isEnum();
         }
 
@@ -330,101 +327,102 @@ namespace core
         static CORE_FAST gboolean isSlimmed() { return lang::spi::__TypeTesting<__IS_SLIMMED_TYPE, T>::value; }
 
         /// Return @c true if T support or implement @c operator==
-        static CORE_FAST gboolean isEqComparable()
-        {
+        static CORE_FAST gboolean isEqComparable() {
             return lang::spi::__TypeTesting<__IS_EQUAL_TO_COMPARABLE_TYPE, T>::value;
         }
 
         /// Return @c true if T support or implement @c operator!=
-        static CORE_FAST gboolean isNeComparable()
-        {
+        static CORE_FAST gboolean isNeComparable() {
             return lang::spi::__TypeTesting<__IS_NOT_EQUAL_TO_COMPARABLE_TYPE, T>::value;
         }
 
         /// Return @c true if T support or implement @c operator<
-        static CORE_FAST gboolean isLtComparable()
-        {
+        static CORE_FAST gboolean isLtComparable() {
             return lang::spi::__TypeTesting<__IS_LESS_THAN_COMPARABLE_TYPE, T>::value;
         }
 
         /// Return @c true if T support or implement @c operator<=
-        static CORE_FAST gboolean isLeComparable()
-        {
+        static CORE_FAST gboolean isLeComparable() {
             return lang::spi::__TypeTesting<__IS_LESS_THAN_OR_EQUAL_TO_COMPARABLE_TYPE, T>::value;
         }
 
         /// Return @c true if T support or implement @c operator>
-        static CORE_FAST gboolean isGtComparable()
-        {
+        static CORE_FAST gboolean isGtComparable() {
             return lang::spi::__TypeTesting<__IS_GREATER_THAN_COMPARABLE_TYPE, T>::value;
         }
 
         /// Return @c true if T support or implement @c operator>=
-        static CORE_FAST gboolean isGeComparable()
-        {
+        static CORE_FAST gboolean isGeComparable() {
             return lang::spi::__TypeTesting<__IS_GREATER_THAN_OR_EQUAL_TO_COMPARABLE_TYPE, T>::value;
         }
 
         /// Return @c true if T support natural comparison
-        static CORE_FAST gboolean isNaturallyComparable()
-        {
+        static CORE_FAST gboolean isNaturallyComparable() {
             return (
-                (isEqComparable() || isNeComparable())
-                && (isLtComparable() || isGtComparable() || isLeComparable() || isGeComparable())
-            ) || (isLeComparable() && isGeComparable());
+                       (isEqComparable() || isNeComparable())
+                       && (isLtComparable() || isGtComparable() || isLeComparable() || isGeComparable())
+                   ) || (isLeComparable() && isGeComparable());
         }
 
         /// Return @c true if instance  of typeT can be constructed with argument types
         ///  @tparam Args The arguments type
-        template <class... Args>
-        static CORE_FAST gboolean isConstructible()
-        {
+        template<class... Args>
+        static CORE_FAST gboolean isConstructible() {
             return lang::spi::__TypeTesting<__IS_CONSTRUCTIBLE_TYPE, T, Args...>::value;
         }
 
         /// Return @c true if instance of type T is assignable to instance of a given type
         /// @tparam U The target type for assignment
-        template <class U>
-        static CORE_FAST gboolean isAssignableTo()
-        {
+        template<class U>
+        static CORE_FAST gboolean isAssignableTo() {
             return lang::spi::__TypeTesting<__IS_ASSIGNABLE_TYPE, U, T>::value;
         }
 
         /// Return @c true if T is a base of a given type
         /// @tparam U the given Type
-        template <class U>
+        template<class U>
         static CORE_FAST gboolean isBaseOf() { return lang::spi::__TypeTesting<__IS_SUPER_TYPE, T, U>::value; }
 
         /// Return @c true if any instance of type T is convertible implicitly to given type
         /// @tparam U The target type
-        template <class U>
-        static CORE_FAST gboolean isConvertibleTo()
-        {
+        template<class U>
+        static CORE_FAST gboolean isConvertibleTo() {
             return lang::spi::__TypeTesting<__IS_CONVERTIBLE_TYPE, T, U>::value;
         }
 
         /// Return @c true if any instance of type T support or implement @c operator() with
         /// given arguments type
         /// @tparam Args The arguments type
-        template <class... Args>
-        static CORE_FAST gboolean isCallable()
-        {
+        template<class... Args>
+        static CORE_FAST gboolean isCallable() {
             return lang::spi::__TypeTesting<__IS_CALLABLE_TYPE, T, Args...>::value;
         }
 
         /// Return @c true if the given value is instance of type T
         /// @tparam U the type of given value
         /// @param value The value to test
-        template <class U>
-        static CORE_FAST gboolean hasInstance(U const& value)
-        {
+        template<class U>
+        static CORE_FAST gboolean hasInstance(U const &value) {
             return lang::spi::__TypeTesting<__IS_INSTANCE_OF_TYPE, T, U>::checkInstance(value);
         }
 
-        template <gboolean ... values>
+        template<class U>
+        static CORE_FAST gboolean isCompatible() {
+            $alias(PrimalArgs, typename Class<U>::Primitive);
+            $alias(ClassArgs, typename Class<U>::ClassType);
+
+            return Class<U>::template isConvertibleTo<T>() || (
+                       isPrimitive()
+                           ? isConstructible<PrimalArgs>() || Class<Primitive>::template isConvertibleTo<T>()
+                           : isBaseOf<ClassArgs>() || isConstructible<ClassArgs>() ||
+                             isConstructible<PrimalArgs>() && Class<Primitive>::template isConvertibleTo<ClassArgs>()
+                   );
+        }
+
+        template<gboolean ... values>
         static CORE_FAST gboolean ALL = lang::spi::__All<lang::spi::__Always<values>...>::value;
 
-        template <gboolean ... values>
+        template<gboolean ... values>
         static CORE_FAST gboolean ANY = lang::spi::__Any<lang::spi::__Always<values>...>::value;
     };
 } // core

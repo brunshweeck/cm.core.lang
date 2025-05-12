@@ -4,6 +4,7 @@
 
 #include "Object.h"
 
+#include "CloneNotSupportedException.h"
 #include "Null.h"
 #include "String.h"
 
@@ -24,6 +25,10 @@ namespace core
         // todo: complete this implementation while to have the form:
         // typename@addressWithout0x
         return $toString();
+    }
+
+    Object & Object::clone() const {
+        CloneNotSupportedException($toString()).throws($ftrace());
     }
 
     inline namespace literals

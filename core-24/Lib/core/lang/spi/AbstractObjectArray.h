@@ -7,17 +7,21 @@
 #include "AbstractArray.h"
 #include <core/lang/Class.h>
 
+#include "../Null.h"
+
 namespace core::lang::spi
 {
     class AbstractObjectArray : public AbstractArray
     {
-        $alias(Values, Class<Object>::Pointer);
+        friend misc::VarHandle;
+        $alias(Element, Class<Object>::Pointer);
+        $alias(Values, Class<Element>::VolatilePointer);
 
-        Values mutable values;
-        gint count;
+        Values values = {};
+        gint count = {};
 
     protected:
-        AbstractObjectArray(gint length, Object& initialRef);
+        CORE_EXPLICIT AbstractObjectArray(gint length = 0, Object& initialRef = null);
         Object& getObject(gint index);
         const Object& getObject(gint index) const;
         gboolean checkObject(gint index) const;

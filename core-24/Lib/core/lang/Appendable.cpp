@@ -4,9 +4,8 @@
 
 #include "Appendable.h"
 
-namespace core
+
+namespace core::lang
 {
-    namespace lang
-    {
-    } // lang
-} // core
+} // lang
+// core

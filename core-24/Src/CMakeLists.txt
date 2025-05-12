@@ -4,6 +4,12 @@ include("Settings.cmake")
 
 CreateExe("Main" "${SOURCE_CXX_OPTIONS}" " " "Main.cpp")
 
+if (WIN32)
+    set(PLATFORM_DIR "../win32")
+else ()
+    set(PLATFORM_DIR "../unix")
+endif ()
+
 add_executable("SampleExecutable" "Main.cpp"
         ../Lib/core/lang/Object.cpp
         ../Lib/core/lang/Object.h
@@ -108,6 +114,18 @@ add_executable("SampleExecutable" "Main.cpp"
         ../Lib/meta/lang/spi/ConcurrentQueue.cpp
         ../Lib/meta/lang/spi/ConcurrentQueue.h
         ../Lib/meta/lang/spi/TraceInfoProvider.cpp
-        ../Lib/meta/lang/spi/TraceInfoProvider.h)
+        ../Lib/meta/lang/spi/TraceInfoProvider.h
+        ../unix/core/lang/Intrinsic.cpp
+        ../unix/core/lang/Intrinsic.h
+        ../unix/core/lang/Memory.cpp
+        ../unix/core/lang/Memory.h
+        ../unix/core/lang/Cache.cpp
+        ../unix/core/lang/Cache.h
+        ../Lib/core/misc/VarHandle.cpp
+        ../Lib/core/misc/VarHandle.h
+        ../Lib/core/lang/XString.cpp
+        ../Lib/core/lang/XString.h)
+
 
 include_directories("../Lib")
+INCLUDE_DIRECTORIES("${PLATFORM_DIR}")

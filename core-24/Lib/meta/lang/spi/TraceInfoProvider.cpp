@@ -4,14 +4,14 @@
 
 #include "TraceInfoProvider.h"
 
+#include "../../../../unix/core/lang/Intrinsic.h"
 #include "core/lang/Null.h"
 
 namespace core::lang
 {
     TraceInfoProvider::Context::Context(gboolean moduleName, gboolean moduleVersion,
                                         gboolean className, gboolean functionName,
-                                        gboolean fileName, gboolean lineNumber):
-        MODULE_NAME(moduleName),
+                                        gboolean fileName, gboolean lineNumber): MODULE_NAME(moduleName),
         MODULE_VERSION(moduleVersion),
         CLASS_NAME(className),
         FUNCTION_NAME(functionName),
@@ -31,7 +31,7 @@ namespace core::lang
 
     gboolean TraceInfoProvider::Context::useLineNumber() const { return LINE_NUMBER; }
 
-    const Object& TraceInfoProvider::findByContext(const Context& context, Selector selector) {
+    const Object &TraceInfoProvider::findByContext(const Context &context, Selector selector) {
         lock();
         // 1 - Find First Node
         Node node = root;
@@ -47,22 +47,21 @@ namespace core::lang
             if (context.useFunctionName() && !context.getFunctionName().equals(info->getFunctionName())) continue;
             if (context.useFileName() && !context.getFileName().equals(info->getFileName())) continue;
             if (context.useLineNumber() && context.getLineNumber() != info->getLineNumber()) continue;
-            if (selector(*info)) break;
+            if (selector(*info, context)) break;
         }
         unlock();
-        return node && node->info ? *node->info : null;
+        return node && node->info ? *node->info : (Object &) null;
     }
 
-    const TraceInfo& TraceInfoProvider::findOrCreateByContext(const Context& context, Selector selector,
+    const TraceInfo &TraceInfoProvider::findOrCreateByContext(const Context &context, Selector selector,
                                                               Creator creator) {
-        const Object& trace = findByContext(context, selector);
+        const Object &trace = findByContext(context, selector);
         if (trace != null) return $cast(const TraceInfo&, trace);
         // Create new Instance
         lock();
         Node node = root;
         Node newNode = new Entry();
-        TraceInfo& newInfo = creator(context);
-        {
+        TraceInfo &newInfo = creator(context); {
             newNode->left = newNode->right = null;
             newNode->info = &newInfo;
         }
@@ -92,6 +91,7 @@ namespace core::lang
                             node = node->left;
                         else {
                             node->left = newNode;
+                            newNode->parent = node;
                             break;
                         }
                     }
@@ -100,6 +100,7 @@ namespace core::lang
                             node = node->right;
                         else {
                             node->right = newNode;
+                            newNode->parent = node;
                             break;
                         }
                     }
@@ -119,22 +120,32 @@ namespace core::lang
     }
 
     void TraceInfoProvider::lock() {
-        gboolean LOCKED = true;
-        gboolean UNLOCKED = false;
-        // todo: Using specific system api wrapper corresponding to this calling
-        while (!__atomic_compare_exchange_n(&isLocked, &UNLOCKED, LOCKED, true, __ATOMIC_ACQUIRE, __ATOMIC_ACQUIRE))
-            CORE_UNLIKELY(LOCKED);
+        while (!Intrinsic::compareAndExchangeByte((glong) &isLocked, 0, 1, true, Intrinsic::ACQUIRE)) {
+            Intrinsic::threadFence(Intrinsic::RELEASE);
+        }
+        Intrinsic::signalFence(Intrinsic::ACQUIRE);
     }
 
     void TraceInfoProvider::unlock() {
-        gboolean LOCKED = true;
-        gboolean UNLOCKED = false;
-        // todo: Using specific system api wrapper corresponding to this calling
-        while (!__atomic_compare_exchange_n(&isLocked, &LOCKED, UNLOCKED, true, __ATOMIC_RELEASE, __ATOMIC_RELAXED))
-            CORE_UNLIKELY(UNLOCKED);
+        while (!Intrinsic::compareAndExchangeByte((glong) &isLocked, 1, 0, true, Intrinsic::RELEASE)) {
+            Intrinsic::threadFence(Intrinsic::ACQUIRE);
+        }
+        Intrinsic::signalFence(Intrinsic::RELEASE);
     }
 
     TraceInfoProvider::Node TraceInfoProvider::successor(Node node) {
         if (!node) return node;
+        if (!node->right) {
+            node = node->right;
+            while (node->left)
+                node = node->left;
+            return node;
+        }
+        Node parent = node->parent;
+        while (!parent && node == parent->right) {
+            node = parent;
+            parent = node->parent;
+        }
+        return parent;
     }
 } // core

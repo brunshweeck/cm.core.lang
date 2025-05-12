@@ -1,86 +1,21 @@
 
 include("Settings.cmake")
 
+if (WIN32)
+    set(PLATFORM_DIR "../win32")
+else ()
+    set(PLATFORM_DIR "../unix")
+endif ()
+
 file(GLOB LIBRARY_FILES
-        core/lang/Object.cpp
-        core/lang/Object.h
-        core/lang/Null.cpp
-        core/lang/Null.h
-        core/lang/Appendable.cpp
-        core/lang/Appendable.h
-        core/lang/CharSequence.cpp
-        core/lang/CharSequence.h
-        core/lang/Comparable.cpp
-        core/lang/Comparable.h
-        core/lang/Iterable.cpp
-        core/lang/Iterable.h
-        core/lang/Number.cpp
-        core/lang/Number.h
-        core/lang/String.cpp
-        core/lang/String.h
-        core/lang/Boolean.cpp
-        core/lang/Boolean.h
-        core/lang/Byte.cpp
-        core/lang/Byte.h
-        core/lang/Short.cpp
-        core/lang/Short.h
-        core/lang/Integer.cpp
-        core/lang/Integer.h
-        core/lang/Long.cpp
-        core/lang/Long.h
-        core/lang/Float.cpp
-        core/lang/Float.h
-        core/lang/Double.cpp
-        core/lang/Double.h
-        core/lang/TraceInfo.cpp
-        core/lang/TraceInfo.h
-        core/lang/Throwable.cpp
-        core/lang/Throwable.h
-        core/lang/Exception.cpp
-        core/lang/Exception.h
-        core/lang/Error.cpp
-        core/lang/Error.h
-        core/lang/ArithmeticException.cpp
-        core/lang/ArithmeticException.h
-        core/lang/AssertionError.cpp
-        core/lang/AssertionError.h
-        core/lang/ClassCastException.cpp
-        core/lang/ClassCastException.h
-        core/lang/CloneNotSupportedException.cpp
-        core/lang/CloneNotSupportedException.h
-        core/lang/IllegalArgumentException.cpp
-        core/lang/IllegalArgumentException.h
-        core/lang/RuntimeException.cpp
-        core/lang/RuntimeException.h
-        core/lang/IllegalStateException.cpp
-        core/lang/IllegalStateException.h
-        core/lang/IndexOutOfBoundsException.cpp
-        core/lang/IndexOutOfBoundsException.h
-        meta/lang/StringIndexOutOfBoundsException.cpp
-        meta/lang/StringIndexOutOfBoundsException.h
-        core/lang/NumberFormatException.cpp
-        core/lang/NumberFormatException.h
-        core/lang/OutOfMemoryError.cpp
-        core/lang/OutOfMemoryError.h
-        core/lang/SecurityException.cpp
-        core/lang/SecurityException.h
-        core/lang/UnsupportedOperationException.cpp
-        core/lang/UnsupportedOperationException.h
-        core/lang/Void.cpp
-        core/lang/Void.h
-        core/lang/Character.cpp
-        core/lang/Character.h
-        core/lang/spi/AbstractArray.cpp
-        core/lang/spi/AbstractArray.h
-        core/lang/spi/AbstractPrimitiveArray.cpp
-        core/lang/spi/AbstractPrimitiveArray.h
-        core/lang/spi/AbstractObjectArray.cpp
-        core/lang/spi/AbstractObjectArray.h
-        core/lang/Array.cpp
-        core/lang/Array.h
-        core/lang/spi/AbstractValueArray.cpp
-        core/lang/spi/AbstractValueArray.h
+        "core/lang/spi/*.cpp"
+        "core/lang/spi/*.h"
+        "${PLATFORM_DIR}/core/lang/*.cpp"
+        "${PLATFORM_DIR}/core/lang/*.h"
+        "core/lang/*.cpp"
+        "core/lang/*.h"
 )
 
 CreateSharedLibrary("${LIBRARY_NAME}-${LIBRARY_FULL_VERSION}" " " ${LIBRARY_FILES})
 INCLUDE_DIRECTORIES(".")
+INCLUDE_DIRECTORIES("${PLATFORM_DIR}")

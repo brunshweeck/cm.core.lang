@@ -8,14 +8,26 @@
 
 namespace core
 {
+    /// Thrown by the security manager to indicate a security violation.
     class SecurityException $final : public lang::RuntimeException
     {
     public:
-        CORE_EXPLICIT SecurityException(const String& message);
-        CORE_EXPLICIT SecurityException(const String& message, const Throwable& cause);
-        CORE_EXPLICIT SecurityException(const Throwable& cause);
+        /// Constructs a @c SecurityException with the specified detail message.
+        /// @param message the detail message.
+        CORE_EXPLICIT SecurityException(const String &message);
+
+        /// Creates a @c SecurityException with the specified detail message and cause.
+        /// @param message the detail message
+        /// @param cause the cause
+        CORE_EXPLICIT SecurityException(const String &message, const Throwable &cause);
+
+        /// Creates a {@code SecurityException} with the specified cause and a detail message of @c cause.toString() (which typically contains the class and detail message of @c cause).
+        /// @param cause the cause
+        CORE_EXPLICIT SecurityException(const Throwable &cause);
+
         ~SecurityException() override = default;
-        Exception& clone() const override;
+
+        Exception &clone() const override;
 
     private:
         void selfThrow() const override;

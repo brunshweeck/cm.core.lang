@@ -9,46 +9,11 @@
 #include "CloneNotSupportedException.h"
 #include "IllegalArgumentException.h"
 
-namespace core::lang { namespace
-    {
-        class Context $final : public TraceInfoProvider::Context
-        {
-            const String& moduleName;
-            const String& moduleVersion;
-            const String& declaringClass;
-            const String& functionName;
-            const String& fileName;
-            gint lineNumber;
-
-        public:
-            Context(const String& moduleName, const String& moduleVersion,
-                    const String& className, const String& functionName,
-                    const String& fileName, gint lineNumber)
-                : TraceInfoProvider::Context(!moduleName.isEmpty(), !moduleVersion.isEmpty(),
-                                             !className.isEmpty(), !functionName.isEmpty(),
-                                             !fileName.isEmpty(), lineNumber < -2),
-                  moduleName(moduleName), moduleVersion(moduleVersion),
-                  declaringClass(className), functionName(functionName),
-                  fileName(fileName), lineNumber(lineNumber) {
-            }
-
-            const String& getModuleName() const override { return moduleName; }
-
-            const String& getModuleVersion() const override { return moduleVersion; }
-
-            const String& getClassName() const override { return declaringClass; }
-
-            const String& getFunctionName() const override { return functionName; }
-
-            const String& getFileName() const override { return fileName; }
-
-            gint getLineNumber() const override { return lineNumber; }
-        };
-    }
-
-    TraceInfo::TraceInfo(const String& moduleName, const String& moduleVersion,
-                         const String& declaringClass, const String& functionName,
-                         const String& fileName, gint lineNumber) {
+namespace core::lang
+{
+    TraceInfo::TraceInfo(const String &moduleName, const String &moduleVersion,
+                         const String &declaringClass, const String &functionName,
+                         const String &fileName, gint lineNumber) {
         TraceInfo::moduleName = moduleName;
         TraceInfo::moduleVersion = moduleVersion;
         TraceInfo::declaringClass = declaringClass;
@@ -57,8 +22,8 @@ namespace core::lang { namespace
         TraceInfo::lineNumber = lineNumber;
     }
 
-    TraceInfo::TraceInfo(const String& declaringClass, const String& functionName,
-                         const String& fileName, gint lineNumber) {
+    TraceInfo::TraceInfo(const String &declaringClass, const String &functionName,
+                         const String &fileName, gint lineNumber) {
         TraceInfo::declaringClass = declaringClass;
         TraceInfo::functionName = functionName;
         TraceInfo::fileName = fileName;
@@ -79,25 +44,25 @@ namespace core::lang { namespace
 
     gboolean TraceInfo::isNativeFunction() const { return lineNumber == -2; }
 
-    gboolean TraceInfo::equals(const Object& other) const {
+    gboolean TraceInfo::equals(const Object &other) const {
         if (this == &other) return true;
         if (!Class<TraceInfo>::hasInstance(other)) return false;
-        const TraceInfo& otherInfo = $cast(const TraceInfo&, other);
+        const TraceInfo &otherInfo = $cast(const TraceInfo&, other);
         return lineNumber == otherInfo.lineNumber &&
-            moduleName.equals(moduleName) &&
-            moduleVersion.equals(moduleVersion) &&
-            declaringClass.equals(declaringClass) &&
-            functionName.equals(functionName) &&
-            fileName.equals(fileName);
+               moduleName.equals(moduleName) &&
+               moduleVersion.equals(moduleVersion) &&
+               declaringClass.equals(declaringClass) &&
+               functionName.equals(functionName) &&
+               fileName.equals(fileName);
     }
 
     gint TraceInfo::hash() const {
         return moduleName.hash() * 31 +
-            moduleVersion.hash() * 31 +
-            declaringClass.hash() * 31 +
-            functionName.hash() * 31 +
-            fileName.hash() * 31 +
-            lineNumber;
+               moduleVersion.hash() * 31 +
+               declaringClass.hash() * 31 +
+               functionName.hash() * 31 +
+               fileName.hash() * 31 +
+               lineNumber;
     }
 
     String TraceInfo::toString() const {
@@ -128,9 +93,9 @@ namespace core::lang { namespace
         return output;
     }
 
-    TraceInfo const& TraceInfo::getInstance(const String& moduleName, const String& moduleVersion,
-                                            const String& declaringClass, const String& functionName,
-                                            const String& fileName, gint lineNumber) {
+    TraceInfo const &TraceInfo::getInstance(const String &moduleName, const String &moduleVersion,
+                                            const String &declaringClass, const String &functionName,
+                                            const String &fileName, gint lineNumber) {
         if (functionName.isEmpty())
             IllegalArgumentException($toString(Empty function signature)).throws($ftrace());
         String declaringStruct = resolveName(declaringClass);
@@ -144,21 +109,55 @@ namespace core::lang { namespace
         String location = fileName;
         gint position = checkLineNumber(lineNumber);
 
+        class Context $final : public TraceInfoProvider::Context
+        {
+            const String &moduleName;
+            const String &moduleVersion;
+            const String &declaringClass;
+            const String &functionName;
+            const String &fileName;
+            gint lineNumber;
+
+        public:
+            Context(const String &moduleName, const String &moduleVersion,
+                    const String &className, const String &functionName,
+                    const String &fileName, gint lineNumber)
+                : TraceInfoProvider::Context(!moduleName.isEmpty(), !moduleVersion.isEmpty(),
+                                             !className.isEmpty(), !functionName.isEmpty(),
+                                             !fileName.isEmpty(), lineNumber < -2),
+                  moduleName(moduleName), moduleVersion(moduleVersion),
+                  declaringClass(className), functionName(functionName),
+                  fileName(fileName), lineNumber(lineNumber) {
+            }
+
+            const String & getModuleName() const override { return moduleName; }
+
+            const String & getModuleVersion() const override { return moduleVersion; }
+
+            const String & getClassName() const override { return declaringClass; }
+
+            const String & getFunctionName() const override { return functionName; }
+
+            const String & getFileName() const override { return fileName; }
+
+            gint getLineNumber() const override { return lineNumber; }
+        };
+
 
         static TraceInfoProvider provider;
         Context context = Context(library, version, declaringStruct, function, fileName, position);
 
         return provider.findOrCreateByContext(
             context,
-            [](const TraceInfo& info, const TraceInfoProvider::Context& context) -> gboolean {
+            [](const TraceInfo &info, const TraceInfoProvider::Context &context) -> gboolean {
                 return (!info.moduleName.isEmpty() || context.getModuleName().isEmpty()) &&
-                    (!info.moduleVersion.isEmpty() || context.getModuleVersion().isEmpty()) &&
-                    (!info.declaringClass.isEmpty() || context.getClassName().isEmpty()) &&
-                    !info.functionName.isEmpty() &&
-                    (!info.fileName.isEmpty() || context.getFileName().isEmpty()) &&
-                    info.lineNumber >= -2;
+                       (!info.moduleVersion.isEmpty() || context.getModuleVersion().isEmpty()) &&
+                       (!info.declaringClass.isEmpty() || context.getClassName().isEmpty()) &&
+                       !info.functionName.isEmpty() &&
+                       (!info.fileName.isEmpty() || context.getFileName().isEmpty()) &&
+                       info.lineNumber >= -2;
             },
-            [](const TraceInfoProvider::Context& context) -> TraceInfo& {
+            [](const TraceInfoProvider::Context &context) -> TraceInfo & {
                 return *new TraceInfo(
                     context.getModuleName(), context.getModuleVersion(),
                     context.getClassName(), context.getFunctionName(),
@@ -168,11 +167,11 @@ namespace core::lang { namespace
         );
     }
 
-    TraceInfo& TraceInfo::clone() const {
+    TraceInfo &TraceInfo::clone() const {
         CloneNotSupportedException($toString()).throws($ftrace());
     }
 
-    void TraceInfo::checkName(const String& className) {
+    void TraceInfo::checkName(const String &className) {
         gint index = 0;
         gint n = className.length();
         gchar ch = -1;
@@ -248,7 +247,7 @@ namespace core::lang { namespace
             IllegalArgumentException($toString(Malformed name)).throws($ftrace());
     }
 
-    String TraceInfo::resolveName(const String& inputName) {
+    String TraceInfo::resolveName(const String &inputName) {
         checkName(inputName);
         gint index = 0;
         gboolean isOperator = false;
@@ -268,17 +267,17 @@ namespace core::lang { namespace
             // try Resolve operator < or << or <<=, <=, <=>
             // Pattern: ^operator\<(=(\>?)|\<(=?)\)$
             if (!isOperator && (
-                // operator<, operator<(...), operator<::...
-                nextChar == '(' || nextChar == 0 || nextChar == ':' ||
-                // operator<<, operator<<(...), operator<<::...
-                nextChar == '<' && (nextChar2 == 0 || nextChar2 == '(' || nextChar2 == ':') ||
-                // operator<=, operator<=(...), operator<=::...
-                nextChar == '=' && (nextChar2 == 0 || nextChar2 == '(' || nextChar2 == ':') ||
-                // operator<<=, operator<<=(...), operator<<=::...
-                nextChar == '<' && nextChar2 == '=' && (nextChar3 == 0 || nextChar3 == '(' || nextChar3 == ':') ||
-                // operator<=>, operator<=>(...), operator<=>::...
-                nextChar == '=' && nextChar2 == '>' && (nextChar3 == 0 || nextChar3 == '(' || nextChar3 == ':')
-            )) {
+                    // operator<, operator<(...), operator<::...
+                    nextChar == '(' || nextChar == 0 || nextChar == ':' ||
+                    // operator<<, operator<<(...), operator<<::...
+                    nextChar == '<' && (nextChar2 == 0 || nextChar2 == '(' || nextChar2 == ':') ||
+                    // operator<=, operator<=(...), operator<=::...
+                    nextChar == '=' && (nextChar2 == 0 || nextChar2 == '(' || nextChar2 == ':') ||
+                    // operator<<=, operator<<=(...), operator<<=::...
+                    nextChar == '<' && nextChar2 == '=' && (nextChar3 == 0 || nextChar3 == '(' || nextChar3 == ':') ||
+                    // operator<=>, operator<=>(...), operator<=>::...
+                    nextChar == '=' && nextChar2 == '>' && (nextChar3 == 0 || nextChar3 == '(' || nextChar3 == ':')
+                )) {
                 k = inputName.lastIndexOf($toString(operator), start);
                 if (start - k == 8) {
                     isOperator = true;
@@ -435,7 +434,7 @@ namespace core::lang { namespace
         return normalizeName(output);
     }
 
-    String TraceInfo::resolveClassName(const String& inputFunction) {
+    String TraceInfo::resolveClassName(const String &inputFunction) {
         checkName(inputFunction);
         gint index = 0;
         gboolean isOperator = false;
@@ -455,17 +454,17 @@ namespace core::lang { namespace
             // try Resolve operator < or << or <<=, <=, <=>
             // Pattern: ^operator\<(=(\>?)|\<(=?)\)$
             if (!isOperator && (
-                // operator<, operator<(...), operator<::...
-                nextChar == '(' || nextChar == 0 || nextChar == ':' ||
-                // operator<<, operator<<(...), operator<<::...
-                nextChar == '<' && (nextChar2 == 0 || nextChar2 == '(' || nextChar2 == ':') ||
-                // operator<=, operator<=(...), operator<=::...
-                nextChar == '=' && (nextChar2 == 0 || nextChar2 == '(' || nextChar2 == ':') ||
-                // operator<<=, operator<<=(...), operator<<=::...
-                nextChar == '<' && nextChar2 == '=' && (nextChar3 == 0 || nextChar3 == '(' || nextChar3 == ':') ||
-                // operator<=>, operator<=>(...), operator<=>::...
-                nextChar == '=' && nextChar2 == '>' && (nextChar3 == 0 || nextChar3 == '(' || nextChar3 == ':')
-            )) {
+                    // operator<, operator<(...), operator<::...
+                    nextChar == '(' || nextChar == 0 || nextChar == ':' ||
+                    // operator<<, operator<<(...), operator<<::...
+                    nextChar == '<' && (nextChar2 == 0 || nextChar2 == '(' || nextChar2 == ':') ||
+                    // operator<=, operator<=(...), operator<=::...
+                    nextChar == '=' && (nextChar2 == 0 || nextChar2 == '(' || nextChar2 == ':') ||
+                    // operator<<=, operator<<=(...), operator<<=::...
+                    nextChar == '<' && nextChar2 == '=' && (nextChar3 == 0 || nextChar3 == '(' || nextChar3 == ':') ||
+                    // operator<=>, operator<=>(...), operator<=>::...
+                    nextChar == '=' && nextChar2 == '>' && (nextChar3 == 0 || nextChar3 == '(' || nextChar3 == ':')
+                )) {
                 k = inputFunction.lastIndexOf($toString(operator), start);
                 if (start - k == 8) {
                     isOperator = true;
@@ -638,12 +637,12 @@ namespace core::lang { namespace
         return normalizeName(output);
     }
 
-    String TraceInfo::resolveFunctionName(const String& inputClass, const String& inputFunction) {
+    String TraceInfo::resolveFunctionName(const String &inputClass, const String &inputFunction) {
         if (inputClass.isEmpty() || !inputFunction.startsWith(inputClass)) return inputFunction;
         return inputFunction.substring(inputClass.length());
     }
 
-    String TraceInfo::normalizeName(const String& inputName) {
+    String TraceInfo::normalizeName(const String &inputName) {
         String outputName;
         // Remove function decorators (attributes, return type, qualifiers, etc.)
         for (gint index0 = 0, n0 = inputName.length(), last0 = 0; index0 < n0; last0 = ++index0) {
