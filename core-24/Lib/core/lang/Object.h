@@ -9,10 +9,12 @@
 
 namespace core
 {
-    /// The class @c Object is base of all class hierarchy.
+    /// The class @c Object is base of all class hierarchies.
     class Object
     {
     protected:
+        $alias(VH, misc::VarHandle);
+
         /// The constructor, only accessible with inherited class
         CORE_FAST Object() = default;
 
@@ -62,7 +64,7 @@ namespace core
          *  @throws CloneNotSupportedException If the object's class does not support the @c clone operation. Subclasses that override the @c clone method can also throw this exception to indicate that an instance cannot be cloned.
          *  todo: uncomment and implement method clone
          */
-        virtual Object& clone() const = 0;
+        virtual Object& clone() const;
     };
 } // core
 

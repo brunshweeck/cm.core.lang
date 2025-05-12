@@ -9,12 +9,18 @@
 
 namespace core
 {
+    /// Thrown to indicate that the code has attempted to cast an object to a subclass of which it is not an instance.
+    /// For example, the following code generates a @c ClassCastException
     class ClassCastException $final : public lang::RuntimeException
     {
     public:
-        CORE_EXPLICIT ClassCastException(const String& message);
+        /// Construct a new instance of @c ClassCastException with given details message.
+        /// @param message the details message
+        CORE_EXPLICIT ClassCastException(const String &message);
+
         ~ClassCastException() override = default;
-        Exception& clone() const override;
+
+        Exception &clone() const override;
 
     private:
         void selfThrow() const override;

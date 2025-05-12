@@ -9,12 +9,18 @@
 
 namespace core
 {
+    /// Thrown to indicate that the @c clone method in class @c Object has been called to clone an object, but that the object's class does not support this operation.
+    /// Applications that override the @c clone method can also throw this exception to indicate that an object could not or should not be cloned.
     class CloneNotSupportedException $final : public lang::RuntimeException
     {
     public:
-        CORE_EXPLICIT CloneNotSupportedException(const String& message);
+        /// Constructs a @c CloneNotSupportedException with the specified detail message.
+        /// @param message the detail message.
+        CORE_EXPLICIT CloneNotSupportedException(const String &message);
+
         ~CloneNotSupportedException() override = default;
-        Exception& clone() const override;
+
+        Exception &clone() const override;
 
     private:
         void selfThrow() const override;

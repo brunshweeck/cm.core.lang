@@ -21,70 +21,122 @@ namespace core::lang
         $alias(Ints, Class<gint>::Pointer);
         $alias(Longs, Class<glong>::Pointer);
 
+        static gint checkIndex(gint index, gint length);
+        static gint checkIndexFromRange(gint start, gint end, gint length);
+        static gint checkIndexFromSize(gint start, gint size, gint length);
+        static gint checkIndexForAdding(gint index, gint length);
+
         enum Coder: gbyte { LATIN1 = 0, UTF16 = 1 };
 
         static Bytes newLatin1Bytes(gint count);
+
         static Bytes newUtf16Bytes(gint count);
 
         static Bytes copyLatin1Bytes(Bytes bytes, gint start1, Bytes dest, gint start2, gint count);
+
         static Bytes copyUtf16Bytes(Bytes bytes, gint start1, Bytes dest, gint start2, gint count);
 
-        static Bytes copyOfLatin1Bytes(Bytes bytes, gint start, gint count, gint newCount);
+        static Bytes copyOfLatn1Bytes(Bytes bytes, gint start, gint count, gint newCount);
+
         static Bytes copyOfUtf16Bytes(Bytes bytes, gint start, gint count, gint newCount);
 
         static gchar getLatin1CharAt(Bytes bytes, gint index, gint count);
+
         static gchar getUtf16CharAt(Bytes bytes, gint index, gint count);
 
+        static gint getUtf32CharAt(Bytes bytes, gint index, gint count);
+
         static gint getLatin1CodePointAt(Bytes bytes, gint index, gint count);
+
         static gint getUtf16CodePointAt(Bytes bytes, gint index, gint count);
 
         static Bytes fillLatin1Bytes(Bytes bytes, gint start, gbyte value, gint count);
+
         static Bytes fillUtf16Bytes(Bytes bytes, gint start, gchar value, gint count);
 
         static Bytes tryConvertUtf16BytesToLatin1(Bytes bytes, gint start, gint count);
 
-        static Bytes tryConvertCharsToLatin1(const CharArray& chars, gint start, gint count);
+        static Bytes tryConvertUtf32BytesToLatin1(Bytes bytes, gint start, gint count);
+
+        static Bytes tryConvertCharsToLatn1(const CharArray& chars, gint start, gint count);
+
+        static Bytes convertCharsToUtf16(const CharArray& chars, gint start, gint count);
 
         static Bytes tryConvertCodePointsToLatin1(const IntArray& codePoints, gint start, gint count);
 
-        static gint putLatin1CharAt(Bytes bytes, gint index, gchar value, gint count);
+        static gint putLatn1CharAt(Bytes bytes, gint index, gchar value, gint count);
+
         static gint putUtf16CharAt(Bytes bytes, gint index, gchar value, gint count);
 
         static gint putLatin1CodePoint(Bytes bytes, gint index, gint value, gint count);
+
         static gint putUtf16CodePoint(Bytes bytes, gint index, gint value, gint count);
 
         static gint findLatin1Char(Bytes bytes, gint start, gint count, gchar value, gboolean reversedSearch);
+
         static gint findUtf16Char(Bytes bytes, gint start, gint count, gchar value, gboolean reversedSearch);
 
         static gint findLatin1CodePoint(Bytes bytes, gint start, gint count, gint value, gboolean reversedSearch);
+
         static gint findUtf16CodePoint(Bytes bytes, gint start, gint count, gint value, gboolean reversedSearch);
 
-        static gint findLatin1Bytes(Bytes bytes, gint start, gint count,Bytes bytes2, gint count2, gboolean reversedSearch);
-        static gint findUtf16Bytes(Bytes bytes, gint start, gint count,Bytes bytes2, gint count2, gboolean reversedSearch);
+        static gint findLatin1Bytes(Bytes bytes, gint start, gint count, Bytes bytes2, gint count2,
+                                    gboolean reversedSearch);
+
+        static gint findUtf16Bytes(Bytes bytes, gint start, gint count, Bytes bytes2, gint count2,
+                                   gboolean reversedSearch);
 
         static gint countLatin1Chars(Bytes bytes, gint start, gint count);
+
         static gint countUtf16Chars(Bytes bytes, gint start, gint count);
 
         static gint countLatin1CodePoint(Bytes bytes, gint start, gint count);
+
         static gint countUtf16CodePoint(Bytes bytes, gint start, gint count);
 
         static gint hashLatin1Bytes(Bytes bytes, gint start, gint count);
+
         static gint hashUtf16Bytes(Bytes bytes, gint start, gint count);
 
         static gint shiftLatin1Bytes(Bytes bytes, gint start, gint count, gint shift);
+
         static gint shiftUtf16Bytes(Bytes bytes, gint start, gint count, gint shift);
 
         static gint mismatchLatin1Bytes(Bytes bytes1, gint start1, Bytes bytes2, gint start2, gint count);
+
         static gint mismatchUtf16Bytes(Bytes bytes1, gint start1, Bytes bytes2, gint start2, gint count);
 
         // Latn1 -- Utf-16
         static Bytes copyLatin1ToUtf16Bytes(Bytes bytes, gint start1, Bytes dest, gint start2, gint count);
+
+        static Bytes copyUtf32ToUtf16Bytes(Bytes bytes, gint start1, Bytes dest, gint start2, gint count, gint count2);
+
         static Bytes copyOfLatin1ToUtf16Bytes(Bytes bytes, gint start, gint count, gint newCount);
-        static gint findLatin1IntoUtf16Bytes(Bytes bytes, gint start, gint count,Bytes bytes2, gint count2, gboolean reversedSearch);
+
+        static Bytes copyOfUtf32ToUtf16Bytes(Bytes bytes, gint start, gint count, gint newCount);
+
+        static gint findLatin1IntoUtf16Bytes(Bytes bytes, gint start, gint count, Bytes bytes2, gint count2,
+                                             gboolean reversedSearch);
+
         static gint mismatchLatin1AndUtf16Bytes(Bytes bytes1, gint start1, Bytes bytes2, gint start2, gint count);
 
         // Any
         static void deleteBytes(Bytes bytes, gint count);
+
+        static gint decodeUtf8Chars(Bytes bytes, gint start, gint end, CharArray& dest, gint start2, gint end2);
+
+        static gint decodeUtf8Chars(const ByteArray& bytes, gint start, gint end, CharArray& dest, gint start2,
+                                    gint end2);
+
+        static ByteArray encodeLatn1ToUtf8Bytes(Bytes bytes, gint start, gint end);
+        static ByteArray encodeUtf16ToUtf8Bytes(Bytes bytes, gint start, gint end);
+
+        template <class T, class U>
+        static CORE_FASTCALL void swap(T& a, U& b) {
+            T c = a;
+            a = b;
+            b = c;
+        }
 
     private:
         static Bytes newBytes(gint count, gint coder);
@@ -92,18 +144,26 @@ namespace core::lang
         static gbyte getByte(Bytes bytes, gint index, gint count);
 
         static gchar getChar(Bytes bytes, gint index, gint count);
+
         static gchar getChar(Chars chars, gint index, gint count);
 
         static gint getInt(Bytes bytes, gint index, gint count);
+
         static gint getInt(Chars chars, gint index, gint count);
 
         static glong getLong(Bytes bytes, gint index, gint count);
+
         static glong getLong(Chars chars, gint index, gint count);
 
         static void putByte(Bytes bytes, gint index, gbyte value, gint count);
+
         static void putChar(Bytes bytes, gint index, gchar value, gint count);
+
         static void putInt(Bytes bytes, gint index, gint value, gint count);
+
         static void putLong(Bytes bytes, gint index, glong value, gint count);
+
+        static ByteArray copyOfArray(const ByteArray& input, gint newCount);
     };
 }
 

@@ -39,70 +39,135 @@ namespace core
         };
 
         Character(gchar value = u'\0');
+
         ~Character() override = default;
+
         gchar charValue() const;
+
         String toString() const override;
+
         static String toString(gchar value);
+
         static String toString(gint value);
+
         static Character valueOf(gchar value);
+
         gint hash() const override;
+
         static gint hash(gchar value);
-        gboolean equals(const Object& other) const override;
-        gint compareTo(const Character& other) const override;
+
+        gboolean equals(const Object &other) const override;
+
+        gint compareTo(const Character &other) const override;
+
         static gint compare(gchar a, gchar b);
-        Character& clone() const override;
+
+        Character &clone() const override;
+
         static gboolean isValidCodePoint(gint value);
+
         static gboolean isBmpCodePoint(gint value);
+
         static gboolean isSupplementary(gint value);
+
         static gboolean isHighSurrogate(gint value);
+
         static gboolean isLowSurrogate(gint value);
+
         static gboolean isSurrogate(gint value);
+
         static gboolean isSurrogatePair(gint high, gint low);
+
         static gint charCount(gint value);
+
         static gint toCodePoint(gint high, gint low);
-        static gint codePointAt(const lang::CharSequence& csq, gint index);
-        static gint codePointAt(const CharArray& a, gint index);
-        static gint codePointAt(const CharArray& a, gint index, gint limit);
-        static gint codePointBefore(const lang::CharSequence& csq, gint index);
-        static gint codePointBefore(const CharArray& a, gint index);
-        static gint codePointBefore(const CharArray& a, gint index, gint start);
+
+        static gint codePointAt(const lang::CharSequence &csq, gint index);
+
+        static gint codePointAt(const CharArray &a, gint index);
+
+        static gint codePointAt(const CharArray &a, gint index, gint limit);
+
+        static gint codePointBefore(const lang::CharSequence &csq, gint index);
+
+        static gint codePointBefore(const CharArray &a, gint index);
+
+        static gint codePointBefore(const CharArray &a, gint index, gint start);
+
         static gint highSurrogate(gint value);
+
         static gint lowSurrogate(gint value);
-        static gint toChars(gint value, CharArray& dst, gint offset);
+
+        static gint toChars(gint value, CharArray &dst, gint offset);
+
         static CharArray toChars(gint value);
-        static gint codePointCount(const lang::CharSequence& csq, gint start, gint end);
-        static gint codePointCount(const CharArray& a, gint offset, gint count);
-        static gint offsetByCodePoint(const lang::CharSequence& csq, gint index, gint valueOffset);
-        static gint offsetByCodePoint(const CharArray& a, gint start, gint count, gint index, gint valueOffset);
+
+        static gint codePointCount(const lang::CharSequence &csq, gint start, gint end);
+
+        static gint codePointCount(const CharArray &a, gint offset, gint count);
+
+        static gint offsetByCodePoint(const lang::CharSequence &csq, gint index, gint valueOffset);
+
+        static gint offsetByCodePoint(const CharArray &a, gint start, gint count, gint index, gint valueOffset);
+
         static gboolean isLowerCase(gint value);
+
         static gboolean isUpperCase(gint value);
+
         static gboolean isTitleCase(gint value);
+
         static gboolean isDigit(gint value);
+
         static gboolean isDefined(gint value);
+
         static gboolean isLetter(gint value);
+
         static gboolean isLetterOrDigit(gint value);
+
         static gboolean isAlphabetic(gint value);
+
         static gboolean isIdeographic(gint value);
+
         static gboolean isEmoji(gint value);
+
         static gboolean isEmojiPresentation(gint value);
+
         static gboolean isEmojiModifier(gint value);
+
         static gboolean isEmojiModifierBase(gint value);
+
         static gboolean isEmojiComponent(gint value);
+
         static gboolean isExtendedPictographic(gint value);
+
         static gboolean isWhiteSpace(gint value);
+
         static gboolean isUnicodeSpace(gint value);
+
         static gboolean isISOControl(gint value);
+
         static gboolean isMirrored(gint value);
+
         static gint toLowerCase(gint value);
+
         static gint toUpperCase(gint value);
+
         static gint toTitleCase(gint value);
+
         static gint toDigit(gint value, gint radix = 10);
+
         static gint toNumber(gint value);
+
         static gint fromDigit(gint value, gint radix = 10);
+
         static Category getCategory(gint value);
+
         static Directionality getDirectionality(gint value);
+
         static String getName(gint value);
-        static gint forName(const String& name);
+
+        static gint forName(const String &name);
+
         static gchar reverseBytes(gchar value);
     };
 } // core

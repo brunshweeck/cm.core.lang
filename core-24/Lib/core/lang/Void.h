@@ -14,6 +14,7 @@ namespace core
 
     public:
         ~Void() override = default;
+
         CORE_SET_AS_NON_COPYABLE_CLASS(Void);
     };
 } // core

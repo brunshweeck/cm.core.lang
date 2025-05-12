@@ -37,3 +37,5 @@
 */CMake
 */cmake-build-*
 .idea/
+*/.idea/
+/.idea/

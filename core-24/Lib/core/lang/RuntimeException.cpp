@@ -4,9 +4,24 @@
 
 #include "RuntimeException.h"
 
-namespace core
+#include <core/misc/VarHandle.h>
+
+
+namespace core::lang
 {
-    namespace lang
-    {
-    } // lang
-} // core
+    RuntimeException::RuntimeException(const String &message): Exception(message) {
+    }
+
+    RuntimeException::RuntimeException(const String &message, const Throwable &cause): Exception(message, cause) {
+    }
+
+    RuntimeException::RuntimeException(const Throwable &cause): Exception(cause) {
+    }
+
+    Exception &RuntimeException::clone() const {
+        return VH::newObject<RuntimeException>(*this);
+    }
+
+    void RuntimeException::selfThrow() const { throw *this; }
+} // lang
+// core

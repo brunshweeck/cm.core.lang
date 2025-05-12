@@ -1340,13 +1340,13 @@ CORE_WARNING_DISABLE_MSVC(4530)
 
 #ifndef CORE_FIELD_OFFSET
 #if __has_builtin(__builtin_offsetof)
-#define CORE_FIELD_OFFSET(T, x) CORE_CAST(glong, __builtin_offsetof(T, x))
+#define CORE_FIELD_OFFSET(T, x) (glong) __builtin_offsetof(T, x)
 
 #elif defined(offsetof)
-#define CORE_FIELD_OFFSET(T, x) CORE_CAST(glong, offsetof(T, x))
+#define CORE_FIELD_OFFSET(T, x) (glong) offsetof(T, x)
 
 #else
-#define CORE_FIELD_OFFSET(T, x) CORE_CAST(glong, &(((typename Class<T>::Pointer) null)->x))
+#define CORE_FIELD_OFFSET(T, x) (glong) &(((typename Class<T>::Pointer) null)->x))
 #endif
 
 #endif

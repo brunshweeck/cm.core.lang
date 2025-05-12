@@ -195,6 +195,13 @@ namespace core
         class Error;
     } // namespace lang
 
+    namespace misc
+    {
+        class VarHandle;
+
+        using namespace core::lang;
+    } // namespace lang
+
     class Object;
     class Boolean;
     class Byte;

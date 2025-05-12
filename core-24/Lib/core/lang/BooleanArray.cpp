@@ -8,7 +8,7 @@
 #include "IllegalArgumentException.h"
 #include "IllegalStateException.h"
 #include "Null.h"
-#include "meta/lang/ArrayIndexOutOfBoundsException.h"
+#include <meta/lang/ArrayIndexOutOfBoundsException.h>
 
 namespace core
 {

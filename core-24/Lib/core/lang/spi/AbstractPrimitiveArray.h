@@ -14,6 +14,7 @@ namespace core::lang::spi
     class AbstractPrimitiveArray : public AbstractArray
     {
         friend Array;
+        friend misc::VarHandle;
         $alias(Value, typename Class<Element>::Primitive);
         $alias(Values, typename Class<Value>::Pointer);
         $alias(VarArgs, std::initializer_list<Value>);
