@@ -5,7 +5,7 @@ pipeline {
 	agent any
 
 	environment {
-		BUILD_DIR = "jenkins-cmake-build"
+		BUILD_DIR = "${WORKSPACE}/jenkins-cmake-build"
 	}
 
 	stages {
@@ -14,11 +14,6 @@ pipeline {
 			steps {
 				checkout scm
 			}
-			steps {
-				sh """
-				 echo 'Recuperation du code depuis github'
-				"""
-			}
 		}
 
 		stage("CONFIG") {
@@ -26,7 +21,7 @@ pipeline {
 				sh """
 					mkdir -p ${BUILD_DIR};
 					cd ${BUILD_DIR};
-					cmake -G Ninja ..;
+					cmake -G Ninja '../core-24/';
 				"""
 			}
 		}
@@ -40,17 +35,15 @@ pipeline {
 			}
 		}
 
-		stage("TESTS") {
-			steps {
+		// stage("TESTS") {
+		//	steps {
+		//	}
+		// }
 
-			}
-		}
-
-		stage("SAMPLES") {
-			steps {
-
-			}
-		}
+		// stage("SAMPLES") {
+		// 	steps {
+		//	}
+		//}
 
 	}
 	post {
