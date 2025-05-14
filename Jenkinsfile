@@ -1,33 +1,62 @@
-pipeline {
-    agent any
 
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-        stage('CONFIGURATION') {
-            steps {
-              sh 'mkdir cmake-build-debug'
-              sh 'cd cmake-build-debug'
-              sh 'cmake -DCMAKE_BUILD_TYPE=Debug ..'
-            }
-        }
-        stage('BUILD') {
-            steps {
-                sh 'cmake --build .'
-            }
-        }
-        // stage('TESTS') {
-        //     steps {
-        //         sh './test.sh' // Remplace par ta commande de test (si tu en as)
-        //     }
-        // }
-      stage('CLEARNING') {
-        steps {
-          deleteDir()
-        }
-      }
-    }
+
+
+pipeline {
+	agent any
+
+	environment {
+		BUILD_DIR = "jenkins-cmake-build"
+	}
+
+	stages {
+
+		stage("SCM CHECKOUT") {
+			steps {
+				checkout scm
+			}
+			steps {
+				sh """
+				 echo 'Recuperation du code depuis github'
+				"""
+			}
+		}
+
+		stage("CONFIG") {
+			steps {
+				sh """
+					mkdir -p ${BUILD_DIR};
+					cd ${BUILD_DIR};
+					cmake -G Ninja ..;
+				"""
+			}
+		}
+
+		stage("BUILDING") {
+			steps {
+				sh """
+					cd ${BUILD_DIR};
+					ninja;
+				"""
+			}
+		}
+
+		stage("TESTS") {
+			steps {
+
+			}
+		}
+
+		stage("SAMPLES") {
+			steps {
+
+			}
+		}
+
+	}
+	post {
+		always {
+			cleanWs()
+		}
+	}
 }
+
